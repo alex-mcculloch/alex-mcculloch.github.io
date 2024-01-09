@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Alexandar McCulloch"
+  search: 
+    location: navbar
+    type: textbox
+  
+  navbar:
+    background: "#0c7767"
+    foreground: "#f8f5f0"
+    collapse: true
+    left:
+      - href: index.qmd
+        text: Home
+      - posts.qmd 
+    right: 
+      - text: LinkedIn
+        icon: linkedin
+        href: https://www.linkedin.com/in/alexandar-mcculloch/
+      - text: Email
+        icon: envelope
+        href: mailto:asmcculloch46@gmail.com
+      - text: Resume
+        icon: file-text
+        href: Resume.pdf
+      - text: Substack
+       # icon: Substack
+        href: https://alexandarmcculloch.substack.com/
+
+format:
+  html:
+    toc: true
+    theme: 
+      light: sandstone
+      #dark: darkly
+    backgroundcolor: "#f8f5f0"
+    linkcolor: "#0c7767"
+    css: styles.css
+
+editor: visual

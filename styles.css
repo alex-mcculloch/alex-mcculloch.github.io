@@ -1,0 +1,11 @@
+/* styles.css */
+/* Customize the color of links in the table of contents */
+#toc a {
+  color: #0c7767;
+}
+
+/* Customize the color of links in the table of contents when highlighted */
+#toc a:hover,
+#toc a:focus {
+  color: #0c7767;  /* Adjust this color to your preference */
+}

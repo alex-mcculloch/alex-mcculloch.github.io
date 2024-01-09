@@ -1,0 +1,41 @@
+---
+title: "Alexandar McCulloch"
+image: DSC07677(2).jpg
+resources: Resume.pdf
+about:
+  template: trestles
+  image-shape: round
+  image-width: 20em
+  links:
+      - text: LinkedIn
+        icon: linkedin
+        href: https://www.linkedin.com/in/alexandar-mcculloch/
+      - text: Email
+        icon: envelope
+        href: mailto:asmcculloch46@gmail.com
+      - text: Resume
+        icon: file-text
+        href: Resume.pdf
+      - text: Substack
+       # icon: <i class="bi bi-substack"></i>
+        href: https://alexandarmcculloch.substack.com/
+  id: ppc
+---
+
+::: {#ppc}
+### Hi There!
+
+Thanks for visiting! Here you can find some of my personal projects and interests. This site is still new so check back frequently for updates.
+
+### **Education**:
+
+**MA in Political Science** (2023) \| University of Wisconsin - Milwaukee
+
+**BS in Psychology** (2018) \| University of Wisconsin - La Crosse
+
+### Experience
+
+**Data Analyst** (2023) \| Connecticut Veterans Legal Center, New Haven, CT
+
+**Case Manager** (2019)\| Family and Children Center Winona, MN
+:::
