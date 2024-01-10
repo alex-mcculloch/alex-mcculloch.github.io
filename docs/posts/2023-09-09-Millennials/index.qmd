@@ -1,0 +1,303 @@
+---
+title: "Millennials: Steadfast Liberals"
+description: "Ideology Across American Generations"
+bibliography: millennials.bib
+author:
+  - name: Alexandar McCulloch
+    url: https://alex-mcculloch.github.io/
+    affiliation: Data Analyst @ the Connecticut Veterans Legal Center
+    affiliation-url: https://ctveteranslegal.org/
+date: 09-09-2023
+categories: [US Politics, Public Opinion, Generations, Ideology] # self-defined categories
+citation: 
+  url: https://alex-mcculloch.github.io/posts/2023-09-09-Millennials/
+image: "generations_preview.png"
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+execute: 
+  echo: false
+  warning: false
+  message: false
+---
+
+For those seeking to understand the idiosyncrasies of young voters, ideology becomes an irresistible topic. Most Millennials have likely heard their parents tell them that they too will shed their liberal skin in favor of a conservative one. While conventional wisdom posits that individuals become more conservative as they age, the impact of aging on political ideology remains inconclusive. Despite this uncertainty, this aphorism remains a pervasive cultural narrative.
+
+### What is Ideology?
+
+Ideology is a complex and contentious term. It serves as a language through which politicians and citizens discuss and make sense of their political realities. Both groups have conversations about who is too liberal or not liberal enough and politicians may even endorse judges running in non-partisan elections all due to their shared ideology.
+
+Consider ideology as a structure of attitudes and beliefs. These attitudes often encompass facets of life such as religion, economics, education, and the relationship between matters that are usually deemed apolitical. There are clusters of attitudes that are related, which implies an ordering of attitudes. Thus, as one attitude changes, so does another. In other words, ideology can be considered to be a hierarchy of beliefs where some beliefs serve as a foundation for others [@Campbell1960].
+
+This towering structure of attitudes is dualistic, reflecting both individual and collective dimensions. Individuals construct their own interpretations of the term, imbuing it with their own meanings and connotations. Although individual preferences are used to formulate one's ideology, those preferences accommodate beliefs and attitudes from external sources. For example, party leaders are often held as the arbiters of their party's respective ideology. Republicans have long held Ronald Reagan as the standard for conservative thought, and Democrats deferred to Barack Obama to define liberalism. At the individual level, intimate relationships, such as parent-child and spousal kinship influence the development and transformation of one's attitudinal structure [@Jennings2009; @Kaufmann1999; @Stoker1989].
+
+In summary, ideology can be likened to a tower of interconnected beliefs and attitudes, formed through one's internal interpretations and external influences.
+
+### How is Ideology Measured?
+
+One of the challenges in studying the extent to which individuals subscribe to a particular ideology is distinguishing between its psychological and practical components. For example, identifying as a conservative does not require acting in accordance with conservative principles. Indeed, Ellis and Stimson [-@Ellis2012] have identified the presence of what they termed conflicted-conservatives.
+
+These voters hold conservative attitudes on some issues but not all. Ellis and Stimson measured these attitudes across social and economic dimensions, meaning conflicted-conservatives may hold socially conservative or economically conservative attitudes, but not both. These authors report that 80% of self identified conservatives are conflicted-conservatives.
+
+Therefore, two measurements of ideology are common. The first is self-identification---how individuals personally categorize their political leanings. The second measurement consists of combining several policy preferences to formulate a score that reflects the individual's position on the ideological spectrum. These two measurements are referred to as '**Symbolic**' (self-reported) and '**Operational**' (aggregate of policy positions) ideology.
+
+As we'll see below, individuals often adopt conflicting beliefs.
+
+### Ideology Across Generations
+
+The data I use here is gathered by the American National Election Study ([ANES](https://electionstudies.org/)) which conducts national surveys annually. The symbolic ideology measurement is captured by asking respondents to place themselves on a scale from 1 (Extremely Liberal) to 7 (Extremely Conservative). I collapse this measurement so that -1 indicates extremely liberal, 1 indicates extremely conservative, and 0 represents moderate. Symbolic ideology is reported in the graph below.
+
+Before assessing the graphs, there are two notes to be aware of. First, these graphs don't track the aging process of individuals over time. Instead, they present average scores for each age group. For example, the average score of a 30-year-old Baby Boomer is the mean of all 30-year-old Boomers questioned between the years 1976 and 1994, as these are the first and last years any Boomer was the age of 30.
+
+```{r load data}
+#### Data ####
+library(tidyverse)
+
+anes <- read_csv("anes_48_20.csv")
+
+anes_20 <- anes %>% 
+  select(year = VCF0004, age = VCF0101, race = VCF0105b, sex = VCF0104, # race: 1 white, 2 black, 3 hispanic, 4 other or multiple races, non-hispanic
+         region = VCF0112, 
+         south = VCF0113, district = VCF0900, dis_fips = VCF0900b,
+         work = VCF0116, homeowner = VCF0146, rural_urb = VCF0111, #1. central city 2. suburban 3. rural, small towns
+         state_interview = VCF0901a, # uses FIPS state codes. 
+         vote_gov = VCF9025, #1. dem. 2. rep
+         vote_pres = VCF0704, # 1. dem, 2. Rep., 3. third party
+         ideo_7 = VCF0803, 
+         ideo_3 = VCF0804,
+         pid_7 = VCF0301, pid_3 = VCF0303) %>% # 1. dem, 2. ind. 3. rep
+  mutate(age = na_if(age,0),
+         birth_year = year-age,
+         generation = case_when(birth_year >= 1880 & birth_year <= 1900 ~
+                                  "Lost",
+                                birth_year >= 1910 & birth_year <= 1927 ~
+                                  "Greatest",
+                                birth_year >= 1928 & birth_year <= 1945 ~ 
+                                  "Silent",
+                                birth_year >= 1946 & birth_year <= 1964 ~
+                                  "Baby Boomer",
+                                birth_year >= 1965 & birth_year <= 1980 ~
+                                  "Gen X",
+                                birth_year >= 1981 & birth_year <= 1996 ~ 
+                                  "Millennial",
+                                birth_year >= 1997 & birth_year <= 2012 ~ 
+                                  "Gen Z"),
+         fact_gen = factor(generation, levels = c("Lost", "Silent","Baby Boomer",
+                                       "Gen X","Millennial", "Gen Z", "NA")))
+
+# anes_nona <- anes_20 %>% 
+#   filter(!is.na(generation)) %>% 
+#   mutate(generation = factor(generation, levels = c("Lost", "Silent","Baby Boomer",
+#                                                     "Gen X","Millennial", "Gen Z", "NA")))
+
+```
+
+```{r symbolic ideo, fig.width=10}
+theme_custom <- function(){
+  theme_classic() %+replace%
+    theme(
+      plot.title = element_text(face = 'bold', size = 18, color = '#53483a', hjust = 0), 
+      plot.subtitle = element_text(face = 'italic', color = '#53483a', size = 13, hjust = 0),
+      legend.background = element_blank(), 
+      legend.key = element_blank(),
+      legend.title = element_blank(),
+      legend.text = element_text(size = 11),
+      
+      plot.caption = element_text(hjust = 0, color = "#53483a",
+                                  size = 11),
+      panel.grid.major.y = element_line(linetype = 'dotted', color = "grey"),
+      axis.text = element_text(size = 12), axis.title = element_text(size = 12),
+      axis.line.x = element_blank(),
+      plot.background = element_rect(fill = "#f8f5f0", color = "#f8f5f0"),
+      panel.background = element_rect(fill = "#f8f5f0", color = "#f8f5f0")
+    )
+  
+}
+anes_20 %>% 
+  filter(age > 17,
+         fact_gen %in% c("Silent", "Baby Boomer", "Gen X", "Millennial"),
+         ideo_7 %in% c(1,2,3,4,5,6,7)) %>% 
+         mutate(ideo = case_match(ideo_7,
+                           c(1,2,3) ~ -1,
+                           c(4) ~ 0,
+                           c(5,6,7) ~ 1)) %>% 
+  ggplot(.,aes(age, ideo)) +
+  geom_smooth(se=F, aes(linetype = fact_gen, color = fact_gen), method = "gam") +
+  ylab("Ideology") +
+  xlab("Age") +
+ scale_linetype_manual(values = c('solid','dashed','dotted','dotdash')) +
+  scale_color_manual(values = c('#2c4c6c',"red4","#0c7767","#fab000")) +
+  labs(linetype = "Generations", color = "Generations",
+  caption = "Source: American National Election Studies. 2021. ANES Time Series Cumulative Data File [dataset and documentation].
+November 18, 2021 version. www.electionstudies.org
+Alexandar McCulloch / alex-mcculloch.github.io", title = "Reported Ideology per Generation", subtitle = "Range from Liberal (-1) to Conservative (+1)") +
+  theme_custom() +
+  theme(legend.position = 'bottom', plot.caption = element_text(size = 10))
+```
+
+Second, it's worth highlighting the overall similarity in the averages across generations. The average for each generation ranges from -0.1 to 0.2 on a scale spanning from -1 to 1. However, the purpose here is to identify key differences between each generation, specifically how each age group within the generations identifies.
+
+The three generations preceding the Millennial generation all exhibit an increasing conservative preference within older cohorts. The Silent and Baby Boom generations follow a plateau effect between the ages of 45 and 55. The Baby Boom generation reports a slight decline in conservative identity as these respondents approach retirement. This shift could be linked to increasing dependency on social programs like Social Security and Medicare.
+
+A notable outlier in these findings is the Millennial generation, whose average remains constant across age cohorts. This consistency holds true for both genders and across racial backgrounds. Predictably, female and non-white respondents report to be more liberal than their male and white counterparts. Still, Millennials as a whole exhibit a slightly left-of-center identity and seem to maintain this position consistently.
+
+```{r ideo by sex, fig.height=7,fig.width=10}
+anes_20 %>% 
+  filter(age > 17,
+         sex %in% c(1,2),
+         fact_gen %in% c("Silent", "Baby Boomer", "Gen X", "Millennial"),
+         ideo_7 %in% c(1,2,3,4,5,6,7)) %>% 
+         mutate(ideo = case_match(ideo_7,
+                           c(1,2,3) ~ -1,
+                           c(4) ~ 0,
+                           c(5,6,7) ~ 1)) %>% 
+  mutate(sex = case_when(sex == 1 ~ "Male",
+                         sex == 2 ~ "Female")) %>% 
+  ggplot(.,aes(age, ideo)) +
+  geom_smooth(se=F, aes(linetype = fact_gen, color = fact_gen), method = "gam") +
+  ylab("Ideology") +
+  xlab("Age") +
+ scale_linetype_manual(values = c('solid','dashed','dotted','dotdash')) +
+  scale_color_manual(values = c('#2c4c6c',"red4","#0c7767","#fab000")) +
+  labs(linetype = "Generations", color = "Generations",
+  caption = "Source: American National Election Studies. 2021. ANES Time Series Cumulative Data File [dataset and documentation]. 
+November 18, 2021 version. www.electionstudies.org
+Alexandar McCulloch / alex-mcculloch.github.io", title = "Reported Ideology per Generation", subtitle = "Range from Liberal (-1) to Conservative (+1)") +
+  theme_custom() +
+  facet_wrap(~sex, ncol = 1) +
+  theme(legend.position = 'bottom',
+        strip.background = element_rect(color = "#53483a", fill = "#f8f5f0"),
+        plot.caption = element_text(size = 10))  
+```
+
+```{r ideo by race, fig.height=7, fig.width=10}
+anes_20 %>% 
+  filter(age > 17,
+         race %in% c(1:4),
+         fact_gen %in% c("Silent", "Baby Boomer", "Gen X", "Millennial"),
+         ideo_7 %in% c(1,2,3,4,5,6,7)) %>% 
+         mutate(ideo = case_match(ideo_7,
+                           c(1,2,3) ~ -1,
+                           c(4) ~ 0,
+                           c(5,6,7) ~ 1)) %>% 
+  mutate(race = if_else(race==1, "White", "Non-White")) %>% 
+  ggplot(.,aes(age, ideo)) +
+  geom_smooth(se=F, aes(linetype = fact_gen, color = fact_gen), method = "gam") +
+  ylab("Ideology") +
+  xlab("Age") +
+ scale_linetype_manual(values = c('solid','dashed','dotted','dotdash')) +
+  scale_color_manual(values = c('#2c4c6c',"red4","#0c7767","#fab000")) +
+  labs(linetype = "Generations", color = "Generations",
+  caption = "Source: American National Election Studies. 2021. ANES Time Series Cumulative Data File [dataset and documentation]. 
+November 18, 2021 version. www.electionstudies.org
+Alexandar McCulloch / alex-mcculloch.github.io", title = "Reported Ideology per Generation", subtitle = "Range from Liberal (-1) to Conservative (+1)") +
+  theme_custom() +
+  facet_wrap(~race, ncol = 1) +
+  theme(legend.position = 'bottom',
+        strip.background = element_rect(color = "#53483a", fill = "#f8f5f0"),
+        plot.caption = element_text(size = 10))  
+```
+
+When we define ideology based on policy preferences, we observe distinct identity formations. In operational terms, Americans tend to align left of center. This means that, on average, across different generations, Americans hold policy preferences that are more liberal than their self-identified political labels.
+
+Furthermore, an interesting trend has emerged among the generations. Millennials stand out as the only generation that hasn't shifted towards conservative policy preferences over time. While preceding generations show some oscillation between liberal and conservative positions, Millennials have, by and large, maintained a consistently liberal stance on policy issues. This suggests a unique and enduring ideological identity among Millennials.
+
+```{r operational, fig.width=10}
+anes_20 <- anes_20 %>% 
+mutate(women = case_match(anes$VCF0834,
+                          c(1:3) ~ -1,
+                          c(5:7) ~ 1,
+                          c(4,9) ~ 0),
+       rights_accsd = case_match(anes$VCF0832,
+                                 c(1:3) ~ -1,
+                                 c(5:7) ~ 1,
+                                 c(4,9) ~ 0),
+       abortion = case_match(anes$VCF0838,
+                             c(4,3) ~ -1,
+                             c(2,9) ~ 0,
+                             1 ~ 1),
+       integrate = case_match(anes$VCF0816,
+                              1 ~ -1,
+                              2 ~ 1,
+                              9 ~ 0),
+       aid_min = case_match(anes$VCF0830,
+                            c(1:3) ~ -1,
+                            c(5:7) ~ 1,
+                            c(4,9) ~ 0))
+anes_op_items <- c("women","rights_accsd","abortion", "integrate", "aid_min")
+anes_20$ideo_op <- rowMeans(select(anes_20, women, rights_accsd,abortion,integrate,aid_min), na.rm = T)
+
+
+anes_20 %>% 
+  filter(age > 17,
+         fact_gen %in% c("Silent", "Baby Boomer", "Gen X", "Millennial"),
+         ideo_7 %in% c(1,2,3,4,5,6,7)) %>% 
+  mutate(ideo = case_match(ideo_7,
+                           c(1,2,3) ~ -1,
+                           c(4) ~ 0,
+                           c(5,6,7) ~ 1)) %>% 
+  ggplot(.,aes(age, ideo_op)) +
+  geom_smooth(se=F, aes(linetype = fact_gen, color = fact_gen), method = "gam") +
+  scale_color_manual(values = c('Silent' = '#2c4c6c', 'Baby Boomer' = 'red4', 
+                                'Gen X' = '#0c7767', 'Millennial' = '#fab000')) +
+  ylab("Ideology") +
+  xlab("Age") +
+  scale_linetype_manual(values = c('solid','dashed','dotted','dotdash')) +
+  labs(linetype = "Generations", color = "Generations", 
+  caption = "Source: American National Election Studies. 2021. ANES Time Series 
+Cumulative Data File [dataset and documentation]. November 18, 2021 version. 
+www.electionstudies.org", 
+  title = "Operational Ideology per Generation", 
+  subtitle = "Range from Liberal (-1) to Conservative (+1)") +
+  theme_custom() +
+  theme(legend.position = 'bottom')
+```
+
+Throughout history, the pendulum of voter ideology has often swung back and forth between left and right, reflecting changing political preferences. However, when we look at Millennials, it seems they have removed this pendulum entirely, opting for a more consistently liberal stance. In older generations, race and gender often contributed to determining whether a voter leaned liberal or conservative. However, for Millennials, these factors seem to answer a different question---not whether someone is liberal or conservative, but rather, how liberal they are.
+
+```{r operational sex, fig.width=10, fig.height=7}
+anes_20 %>% 
+  filter(age > 17,
+         sex %in% c(1,2),
+         fact_gen %in% c("Silent", "Baby Boomer", "Gen X", "Millennial")) %>% 
+  mutate(sex = case_when(sex == 1 ~ "Male",
+                         sex == 2 ~ "Female")) %>% 
+  ggplot(.,aes(age, ideo_op)) +
+  geom_smooth(se=F, aes(linetype = fact_gen, color = fact_gen), method = "gam") +
+  ylab("Ideology") +
+  xlab("Age") +
+ scale_linetype_manual(values = c('solid','dashed','dotted','dotdash')) +
+  scale_color_manual(values = c('#2c4c6c',"red4","#0c7767","#fab000")) +
+  labs(linetype = "Generations", color = "Generations",
+  caption = "Source: American National Election Studies. 2021. ANES Time Series Cumulative Data File [dataset and documentation]. 
+November 18, 2021 version. www.electionstudies.org
+Alexandar McCulloch / alex-mcculloch.github.io", title = "Operational Ideology per Generation", subtitle = "Range from Liberal (-1) to Conservative (+1)") +
+  theme_custom() +
+  facet_wrap(~sex, ncol = 1) +
+  theme(legend.position = 'bottom',
+        strip.background = element_rect(color = "#53483a", fill = "#f8f5f0"),
+        plot.caption = element_text(size = 10))  
+```
+
+```{r operational by race, fig.width=10, fig.height=7}
+anes_20 %>% 
+  filter(age > 17,
+         race %in% c(1:4),
+         fact_gen %in% c("Silent", "Baby Boomer", "Gen X", "Millennial")) %>% 
+  mutate(race = if_else(race == 1, "White", "Non-White")) %>% 
+  ggplot(.,aes(age, ideo_op)) +
+  geom_smooth(se=F, aes(linetype = fact_gen, color = fact_gen), method = "gam") +
+  ylab("Ideology") +
+  xlab("Age") +
+ scale_linetype_manual(values = c('solid','dashed','dotted','dotdash')) +
+  scale_color_manual(values = c('#2c4c6c',"red4","#0c7767","#fab000")) +
+  labs(linetype = "Generations", color = "Generations",
+  caption = "Source: American National Election Studies. 2021. ANES Time Series Cumulative Data File [dataset and documentation]. 
+November 18, 2021 version. www.electionstudies.org
+Alexandar McCulloch / alex-mcculloch.github.io", title = "Operational Ideology per Generation", subtitle = "Range from Liberal (-1) to Conservative (+1)") +
+  theme_custom() +
+  facet_wrap(~race, ncol = 1) +
+  theme(legend.position = 'bottom',
+        strip.background = element_rect(color = "#53483a", fill = "#f8f5f0"),
+        plot.caption = element_text(size = 10))  
+```
+
+These findings provide interesting questions about the future relevancy of the Republican party. As the Republican base continues to age well into retirement, can the GOP expect a healthy level of generational replacement? Millennials have proven their commitment to liberalism, bucking a multigenerational trend where conservative leaders could afford to wait for liberal voters to transition into conservative ones. Perhaps now is the time for the Republican party to engage in a period of introspection and critically evaluate its long-term strategy.
