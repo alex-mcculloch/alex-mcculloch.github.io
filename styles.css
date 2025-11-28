@@ -1,0 +1,222 @@
+/* GLOBAL SITE STYLE */
+body {
+  margin: 0;
+  padding: 0;
+  background: #faf8f6;
+  color: #000;
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3 {
+  color: #3ea291;
+  margin-bottom: 0.5rem;
+}
+
+/* NAVBAR */
+.navbar {
+  background: #faf8f6 !important; /* Changed from transparent to match page background */
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; /* Optional: adds subtle shadow */
+  position: fixed !important; /* Changed from absolute to fixed */
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000; /* Ensures navbar stays on top of content */
+  padding: 10px 30px;
+}
+.navbar-nav .nav-link {
+  color: #000 !important;
+  font-size: 1.1rem;
+  margin-left: 20px;
+}
+.navbar-nav .nav-link:hover {
+  color: #3ea291 !important;
+}
+
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 200px 20px 80px 20px;
+}
+
+.name-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-name {
+  font-size: 3rem;
+  margin: 0 auto 10px auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+.hero-underline {
+  width: 120px;
+  margin: auto;
+  border: 1px solid #3ea291; 
+}
+
+.social-icons {
+  margin: 15px 0;
+}
+
+.icon {
+  width: 32px;
+  margin: 0 10px;
+  opacity: 0.85;
+}
+
+.icon:hover {
+  opacity: 1;
+}
+
+.hero-summary {
+  max-width: 600px;
+  margin: auto;
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  border: 1px solid #3ea291;
+  padding: 10px 18px;
+  margin: 0 8px;
+  text-decoration: none;
+  color: #3ea291;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.github-btn {
+  border-color: #D3D3D3;
+  color: #000;
+}
+
+.github-btn:hover {
+  background: #faf8f6;
+  color: #000;
+}
+
+.contact-btn {
+  background: #3ea291;
+  color: #faf8f6;
+}
+
+.contact-btn:hover {
+  opacity: 0.9;
+}
+
+
+/* INTRO SECTION */
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 10%;
+  background-color: #d8ece9;
+}
+
+.intro-pic {
+  width: 180px;
+  border-radius: 8px;
+  margin-right: 40px;
+}
+
+.intro-text {
+  max-width: 600px;
+}
+
+
+/* PORTFOLIO CARDS */
+.portfolio-preview {
+  padding: 60px 10%;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  background: #faf8f6;
+  padding: 20px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #3ea291;
+}
+
+
+/* SKILLS BUBBLES */
+.skills-section {
+  padding: 60px 10%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #3ea291;
+}
+
+.bubble-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  position: relative;
+  min-height: 400px;
+}
+
+.bubble {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+}
+
+/* Category colors - vibrant and coordinated with #3ea291 */
+.bubble[data-category="programming"] { background: linear-gradient(135deg, #3ea291, #2a7d6b); }
+.bubble[data-category="vis"]         { background: linear-gradient(135deg, #4a90e2, #2e5f9e); }
+.bubble[data-category="ml"]          { background: linear-gradient(135deg, #9b59b6, #7d3c98); }
+.bubble[data-category="comm"]        { background: linear-gradient(135deg, #f39c12, #d68910); }
+.bubble[data-category="research"]    { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+
+.bubble:hover {
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  z-index: 10;
+} 

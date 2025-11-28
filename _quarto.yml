@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Alex McCulloch"
+  navbar:
+    background: "transparent"
+    foreground: "black"
+    right:
+      - text: "For Non-Profits"
+        href: nonprofits.qmd
+      - text: "Portfolio"
+        href: portfolio.qmd
+      - text: "Skills"
+        href: skills.qmd
+      - text: "Contact"
+        href: contact.qmd
+
+format:
+  html:
+    theme: default 
+    css: styles.css
+    include-after-body: 
+      - text: |
+          <script src="scripts.js"></script>
+    toc: false
+
+editor: visual

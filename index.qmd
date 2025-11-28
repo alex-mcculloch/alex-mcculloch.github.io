@@ -1,0 +1,94 @@
+---
+title: ""
+format: html
+---
+```{=html}
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="name-block">
+    <div class="hero-name">Alexandar McCulloch</div>
+    <hr class="hero-underline">
+    <div class="social-icons">
+      <a href="https://bsky.app/profile/politicalexplorer.bsky.social" target="_blank">
+        <img src="images/bluesky.png" class="icon">
+      </a>
+      <a href="https://linkedin.com/in/amcculloch" target="_blank">
+        <img src="images/linkedin.png" class="icon">
+      </a>
+    </div>
+    <p class="hero-summary">
+      Data analyst specializing in political data, nonprofit insights, 
+      and interactive R-based tools that make information meaningful.
+    </p>
+    <div class="hero-buttons">
+      <a class="btn github-btn" href="https://github.com/alex-mcculloch" target="_blank">GitHub</a>
+      <a class="btn contact-btn" href="contact.qmd">Contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO SECTION -->
+<div class="column-screen">
+<section class="intro" id="about">
+  <img src="images/profile_pic.jpg" class="intro-pic">
+  <div class="intro-text">
+    <h2>Hello, I'm Alex</h2>
+    <p>
+    I'm a data analyst with a background in political science, research design,
+    and nonprofit analytics. I build interactive tools, forecasting models, and 
+    data products that empower decision-makers in both civic and private sectors.
+    </p>
+  </div>
+</section>
+</div>
+
+<!-- PORTFOLIO CARDS -->
+<div class="column-screen">
+<section class="portfolio-preview" id="portfolio">
+  <h2 class="section-title">Selected Projects</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Congress Vote Alignment Tool</h3>
+      <p>An interactive Shiny app aligning users with House members based on bill preferences.</p>
+      <a class="card-link" href="project1.qmd">View Project →</a>
+    </div>
+    <div class="card">
+      <h3>Veteran Needs Dashboard</h3>
+      <p>ACS and Salesforce-based analysis of veteran needs for nonprofit program design.</p>
+      <a class="card-link" href="project2.qmd">View Project →</a>
+    </div>
+    <div class="card">
+      <h3>Trump Approval Weighted Model</h3>
+      <p>Weighted rolling average using poll quality and sample-size corrections.</p>
+      <a class="card-link" href="project3.qmd">View Project →</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- SKILLS BUBBLES -->
+<section class="skills-section" id="skills">
+  <h2 class="section-title">Skills</h2>
+  <div class="bubble-container">
+    <!-- Programming - top left cluster -->
+    <div class="bubble" data-category="programming" style="--size:90px; --x:10%; --y:20px;">R</div>
+    <div class="bubble" data-category="programming" style="--size:75px; --x:25%; --y:80px;">Python</div>
+    
+    <!-- Data Visualization - top right cluster -->
+    <div class="bubble" data-category="vis" style="--size:85px; --x:60%; --y:10px;">ggplot2</div>
+    <div class="bubble" data-category="vis" style="--size:70px; --x:75%; --y:65px;">D3.js</div>
+    
+    <!-- Statistics & ML - center cluster -->
+    <div class="bubble" data-category="ml" style="--size:95px; --x:35%; --y:140px;">Modeling</div>
+    <div class="bubble" data-category="ml" style="--size:100px; --x:15%; --y:200px;">Forecasting</div>
+    
+    <!-- Communication - right side -->
+    <div class="bubble" data-category="comm" style="--size:80px; --x:70%; --y:150px;">Writing</div>
+    <div class="bubble" data-category="comm" style="--size:105px; --x:55%; --y:230px;">Data Stories</div>
+    
+    <!-- Research - bottom cluster -->
+    <div class="bubble" data-category="research" style="--size:110px; --x:25%; --y:290px;">Research Design</div>
+    <div class="bubble" data-category="research" style="--size:95px; --x:60%; --y:320px;">Regression</div>
+  </div>
+</section>
+```
