@@ -1,3 +1,281 @@
 ---
-title: "nonprofits"
+title: ""
+format: html
 ---
+```{=html}
+<div class="column-screen">
+  <!-- Hero Section -->
+  <section class="nonprofit-hero">
+    <div class="hero-title">Data Resources for Non-Profits</div>
+    <p class="nonprofit-intro">
+      Welcome! This resource hub is designed to help non-profit organizations harness the power of data 
+      to better understand their communities, measure impact, and make informed decisions. Whether you're 
+      just starting with data analysis or looking to deepen your analytical capabilities, these modules 
+      will guide you through practical, actionable approaches to working with data in the non-profit sector.
+    </p>
+  </section>
+</div>
+
+<div class="column-screen">
+  <!-- Search and Filter -->
+  <section class="search-filter-section">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search modules by keyword...">
+    </div>
+    
+    <div class="topic-filters">
+      <button class="filter-btn active" data-topic="all">All Topics</button>
+      <button class="filter-btn" data-topic="data-basics">Data Basics</button>
+      <button class="filter-btn" data-topic="impact">Impact Measurement</button>
+      <button class="filter-btn" data-topic="fundraising">Fundraising</button>
+      <button class="filter-btn" data-topic="demographics">Demographics</button>
+      <button class="filter-btn" data-topic="visualization">Visualization</button>
+      <button class="filter-btn" data-topic="tools">Tools & Software</button>
+    </div>
+  </section>
+</div>
+
+<div class="column-screen">
+  <!-- Start Here Section -->
+  <section class="start-here-section">
+    <div class="section-header">
+      <h2>Start Here</h2>
+      <p>New to data analysis? Begin with these foundational modules.</p>
+    </div>
+    
+    <div class="module-grid" id="startHereGrid">
+      <div class="module-card start-here" data-topics="data-basics tools">
+        <h3>Getting Started with Data</h3>
+        <div>
+          <span class="module-tag">Data Basics</span>
+          <span class="module-tag">Tools</span>
+        </div>
+        <p class="module-description">
+          Learn the fundamentals of data collection, organization, and storage. Perfect for organizations 
+          taking their first steps into data-driven decision making.
+        </p>
+        <a href="modules/getting_started.qmd" class="module-link">Start Module →</a>
+      </div>
+      
+      <div class="module-card start-here" data-topics="data-basics">
+        <h3>Understanding Your Data</h3>
+        <div>
+          <span class="module-tag">Data Basics</span>
+        </div>
+        <p class="module-description">
+          Discover how to ask the right questions of your data and interpret basic statistics to 
+          understand trends and patterns in your programs.
+        </p>
+        <a href="#" class="module-link">Start Module →</a>
+      </div>
+      
+      <div class="module-card start-here" data-topics="visualization data-basics">
+        <h3>Telling Stories with Data</h3>
+        <div>
+          <span class="module-tag">Visualization</span>
+          <span class="module-tag">Data Basics</span>
+        </div>
+        <p class="module-description">
+          Learn how to create compelling visualizations and narratives that communicate your 
+          organization's impact to stakeholders and funders.
+        </p>
+        <a href="modules/stories.qmd" class="module-link">Start Module →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="column-screen">
+  <!-- All Modules Section -->
+  <section class="all-modules-section">
+    <div class="section-header">
+      <h2>All Modules</h2>
+      <p>Explore my complete library of data resources.</p>
+    </div>
+    
+    <div class="module-grid" id="allModulesGrid">
+      <!-- Impact Measurement -->
+      <div class="module-card" data-topics="impact">
+        <h3>Measuring Program Impact</h3>
+        <div>
+          <span class="module-tag">Impact Measurement</span>
+        </div>
+        <p class="module-description">
+          Develop frameworks for measuring and evaluating the effectiveness of your programs 
+          using quantitative and qualitative data.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <div class="module-card" data-topics="impact data-basics">
+        <h3>Creating Evaluation Surveys</h3>
+        <div>
+          <span class="module-tag">Impact Measurement</span>
+          <span class="module-tag">Data Basics</span>
+        </div>
+        <p class="module-description">
+          Design effective surveys that capture meaningful feedback from beneficiaries, 
+          volunteers, and stakeholders.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <!-- Fundraising -->
+      <div class="module-card" data-topics="fundraising">
+        <h3>Donor Data Analysis</h3>
+        <div>
+          <span class="module-tag">Fundraising</span>
+        </div>
+        <p class="module-description">
+          Analyze donor patterns, retention rates, and giving trends to optimize your 
+          fundraising strategies and strengthen relationships.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <div class="module-card" data-topics="fundraising visualization">
+        <h3>Grant Reporting Dashboards</h3>
+        <div>
+          <span class="module-tag">Fundraising</span>
+          <span class="module-tag">Visualization</span>
+        </div>
+        <p class="module-description">
+          Create compelling visual reports that demonstrate program outcomes and impact 
+          to current and prospective funders.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <!-- Demographics -->
+      <div class="module-card" data-topics="demographics">
+        <h3>Community Needs Assessment</h3>
+        <div>
+          <span class="module-tag">Demographics</span>
+        </div>
+        <p class="module-description">
+          Use census data and local statistics to understand the demographics and needs 
+          of the communities you serve.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <div class="module-card" data-topics="demographics impact">
+        <h3>Equity Analysis</h3>
+        <div>
+          <span class="module-tag">Demographics</span>
+          <span class="module-tag">Impact Measurement</span>
+        </div>
+        <p class="module-description">
+          Ensure your programs reach and serve all community members equitably by 
+          analyzing participation and outcomes across demographic groups.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <!-- Visualization -->
+      <div class="module-card" data-topics="visualization">
+        <h3>Dashboard Design for Non-Profits</h3>
+        <div>
+          <span class="module-tag">Visualization</span>
+        </div>
+        <p class="module-description">
+          Build interactive dashboards that help your team track key metrics and 
+          make data-driven decisions in real-time.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <!-- Tools -->
+      <div class="module-card" data-topics="tools">
+        <h3>Free Tools for Non-Profit Data</h3>
+        <div>
+          <span class="module-tag">Tools & Software</span>
+        </div>
+        <p class="module-description">
+          Discover free and low-cost software tools perfect for non-profit organizations, 
+          including spreadsheets, databases, and visualization platforms.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+      
+      <div class="module-card" data-topics="tools data-basics">
+        <h3>Data Security & Privacy</h3>
+        <div>
+          <span class="module-tag">Tools & Software</span>
+          <span class="module-tag">Data Basics</span>
+        </div>
+        <p class="module-description">
+          Protect sensitive beneficiary and donor information with best practices for 
+          data security, privacy compliance, and ethical data use.
+        </p>
+        <a href="#" class="module-link">View Module →</a>
+      </div>
+    </div>
+    
+    <div class="no-results" id="noResults">
+      No modules found matching your search. Try different keywords or reset filters.
+    </div>
+  </section>
+</div>
+
+<script>
+// Search and Filter Functionality
+const searchInput = document.getElementById('searchInput');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const allCards = document.querySelectorAll('.module-card');
+const noResults = document.getElementById('noResults');
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+// Search functionality
+searchInput.addEventListener('input', (e) => {
+  currentSearch = e.target.value.toLowerCase();
+  filterModules();
+});
+
+// Filter buttons
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Update active state
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Update current filter
+    currentFilter = btn.getAttribute('data-topic');
+    filterModules();
+  });
+});
+
+// Main filter function
+function filterModules() {
+  let visibleCount = 0;
+  
+  allCards.forEach(card => {
+    const cardTopics = card.getAttribute('data-topics') || '';
+    const cardText = card.textContent.toLowerCase();
+    
+    // Check topic filter
+    const topicMatch = currentFilter === 'all' || cardTopics.includes(currentFilter);
+    
+    // Check search filter
+    const searchMatch = currentSearch === '' || cardText.includes(currentSearch);
+    
+    // Show/hide card
+    if (topicMatch && searchMatch) {
+      card.style.display = 'block';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Show/hide no results message
+  if (visibleCount === 0) {
+    noResults.classList.add('show');
+  } else {
+    noResults.classList.remove('show');
+  }
+}
+</script>
+```

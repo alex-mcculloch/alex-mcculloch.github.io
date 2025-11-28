@@ -34,7 +34,7 @@ format: html
   <div class="intro-text">
     <h2>Hello, I'm Alex</h2>
     <p>
-    I'm a data analyst with a background in political science, research design,
+    I'm a data analyst with a background in psycholog, political science, research design,
     and nonprofit analytics. I build interactive tools, forecasting models, and 
     data products that empower decision-makers in both civic and private sectors.
     </p>
