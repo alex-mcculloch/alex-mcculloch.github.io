@@ -1,0 +1,358 @@
+---
+title: "Foundations of Data Visualization"
+date: today
+toc: true
+---
+
+# Introduction
+
+A picture is worth a thousand words—but only if it's the right picture, designed well. Data visualization is one of the most powerful tools non-profits have for communicating impact, telling compelling stories, and making complex information accessible to diverse audiences.
+
+Poor visualizations can confuse, mislead, or simply fail to communicate your message. Great visualizations can transform raw numbers into compelling narratives that inspire action, secure funding, and drive organizational decisions.
+
+This module will teach you the fundamental principles of effective data visualization, show you common mistakes to avoid, and provide practical guidance for creating visuals that truly communicate.
+
+# Why Data Visualization Matters
+
+**Data visualizations help you:**
+
+-   **Communicate impact quickly**: Donors and funders often have limited time—a well-designed chart can convey your impact in seconds
+
+-   **Make data accessible**: Not everyone is comfortable with tables and statistics; visuals bridge that gap
+
+-   **Tell compelling stories**: Numbers become narratives when paired with effective visuals
+
+-   **Identify patterns and trends**: Visualizations help you and your team spot insights that might be hidden in spreadsheets
+
+-   **Support decision-making**: Clear visuals help boards and leadership understand options and implications
+
+**Common non-profit use cases:**
+
+-   Annual reports and impact statements
+
+-   Grant proposals and funder reports
+
+-   Board presentations
+
+-   Social media and marketing materials
+
+-   Program evaluation reports
+
+-   Internal dashboards for monitoring progress
+
+# The Anatomy of Bad Visuals
+
+The data visuals we may deem as "bad" typically have at least one of three things in common:
+
+1.  Aesthetic Problems: Simply a visual that is harsh on the eyes
+2.  Substantive Problems: The visual has a problem due to the data presented
+3.  Perceptual: The visual is confusing or misleading
+
+## Commons Mistakes
+
+### Using 3D
+
+*Problem:* 3D effects distort proportions, making it nearly impossible to accurately compare values. The perspective makes slices at the "front" appear larger than slices at the "back" even when they represent the same value.
+
+*Example of what NOT to do:*
+
+-   Using 3D pie charts to show budget allocation
+
+-   Tilting charts at angles that distort perception
+
+-   Using explosion effects that separate slices
+
+Below is an example of what not to do. Even with the ability to rotate the image, it is still extremely difficult to identify the value of a point on the third dimension, especially in relation to other points on the same scales.
+
+❌
+
+```{r message=FALSE, echo=FALSE}
+library(plotly)
+plot_ly(mtcars, x = ~mpg, y = ~disp, z = ~hp, type = "scatter3d", mode = "markers",
+        marker = list(size = 3), color = factor(mtcars$cyl)) %>% 
+  layout(title = "",
+         legend = list(title = list(text = "Cylinders"))) 
+```
+
+*Why it's bad:* The human eye cannot accurately judge angles and depths in 3D space, especially on a 2D screen. A slice representing 25% might look larger or smaller depending on its position.
+
+**Better alternative:** Plot the points on a 2D plane, but adjust the size of the points to share the third variable. Now it is much easier to identify trends in the data. For example, we can see below that there is a positive correlation between horsepower and displacement, and the size of the points tells us that this correlation holds true for cylinders as well (lower cylinders correlate with lower displacement and horsepower).
+
+✅
+
+```{r echo=FALSE, message=FALSE}
+ggplot(mtcars, aes(x = disp, y = hp, size = mpg, color = factor(cyl))) +
+  geom_point(alpha = 0.6) +   # <--- transparency controls overlap visibility
+  labs(color = "Cylinder", y = "Horsepower", x = "Displacement",
+       caption = "Source: Motor Trend, 1974") +
+    # plotly default colors
+  scale_color_manual(values = c(
+    "4" = "#1f77b4",   # blue
+    "6" = "#ff7f0e",   # orange
+    "8" = "#2ca02c"    # green
+  )) +
+  guides(color = guide_legend(override.aes = list(size = 6))) +
+  theme_minimal() +
+  theme(
+    plot.title = ggtext::element_markdown(size = 18), 
+    plot.subtitle = ggtext::element_markdown(size = 16),
+    legend.position = 'right',
+    text = element_text(size = 12),
+    panel.grid = element_blank(),
+    panel.grid.major.y = element_line(colour = "#e3e1e1", linetype = 2),
+    plot.title.position = 'plot',
+    axis.text = element_text(face = "bold"),
+    plot.caption = element_text(colour = 'grey50')
+  )
+
+
+
+  
+```
+
+### Too Many Colors and Categories
+
+*Problem:* Using a rainbow of colors with no clear purpose, or trying to show 15+ categories in a single visualization.
+
+*Example of what NOT to do:*
+
+-   A pie chart with 12 thin slices in different colors
+
+-   Line graphs with 8+ overlapping lines
+
+-   Maps where every county is a different color
+
+*Why it's bad:* Beyond 6-7 colors, the visualization becomes visually overwhelming and the audience spends more time decoding the legend than understanding the data.
+
+**Better alternative:** Group smaller categories into "Other," focus on the top 5-6 categories, or create multiple simpler charts.
+
+### Misleading Axes
+
+*Problem:* Manipulating axis scales to exaggerate or minimize differences.
+
+*Example of what NOT to do:*
+
+-   Starting a y-axis at 95 instead of 0 to make a 2% increase look dramatic
+
+-   Using inconsistent intervals on axes
+
+-   Truncating axes to make small changes appear large
+
+❌
+
+![](/images/bad_yaxis_torries.jpeg){width="426"}
+
+*Why it's bad:* This distorts the true magnitude of change and can mislead audiences—intentionally or not. It damages credibility and trust. The graph above exaggerates the difference between the Conservative and Labour columns. If you look closely, you'll notice the difference is rather small, approximately 13,000.
+
+**Better alternative:** Start axes at zero for bar charts, or clearly label when you're zooming in on a specific range. Always use consistent intervals. Adjusting the y-axis below, we can see the difference between years is not nearly as dramatic as the original graph portrays it to be.
+
+✅
+
+```{r echo=FALSE, message=FALSE}
+library(tidyverse)
+df <- data.frame(party = c("Conservative", "Labour"),
+                 date = c("2023/24*", "2024/25"),
+                 housing = c(221409, 208600)
+                 )
+df %>% 
+  ggplot(aes(date, housing, fill = party)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("Conservative" = "#00adef",
+                               "Labour" = "#e5003b")) +
+  labs(title = "<span style='color:#2ca02c; font-weight:900;'>GOOD</span><br><span style='font-weight:600;'>Net additional housing built, England</span>",
+       subtitle = "<span style='color:#00adef;'>Conservative</span> vs <span style='color:#e5003b;'>Labour</span> Majority",
+       x = "", y = "",
+       caption = "Source: MHCLG, Live tables on housing supply, Table 118\nNote: *2023/24 estimates are subject to revision / Data as of 20 November 2025") +
+  scale_y_continuous(labels = scales::comma_format()) +
+  theme_minimal() +
+  theme(
+    plot.title = ggtext::element_markdown(face = "bold",
+      size = 18), 
+    plot.subtitle = ggtext::element_markdown(size = 16),
+    legend.position = 'none',
+    text = element_text(size = 12),
+    panel.grid = element_blank(),
+    panel.grid.major.y = element_line(colour = "#e3e1e1", linetype = 2),
+    plot.title.position = 'plot',
+    axis.text = element_text(face = "bold"),
+    plot.caption = element_text(colour = 'grey50')
+  ) 
+```
+
+### **Chartjunk and Clutter**
+
+*Problem:* Excessive decorative elements, gridlines, borders, shadows, and unnecessary visual effects.
+
+*Example of what NOT to do:*
+
+-   
+
+-   Adding clip art or images to bars in a bar chart
+
+-   
+
+-   Heavy gridlines on every axis
+
+-   
+
+-   Drop shadows, gradients, and textures
+
+-   
+
+-   Decorative backgrounds that compete with data
+
+-   
+
+*Why it's bad:* Every non-essential element distracts from your message. The data should be the star, not the decoration.
+
+**Better alternative:** Embrace white space. Use minimal, light gridlines only if they help reading. Remove all decorative elements.
+
+### **Wrong Chart Type for the Data**
+
+*Problem:* Using a chart type that doesn't match the data structure or story.
+
+*Examples of what NOT to do:*
+
+-   
+
+-   Using a line chart for categorical data (like program types)
+
+-   
+
+-   Using a pie chart to show change over time
+
+-   
+
+-   Using a bar chart when the story is about trends over time
+
+-   
+
+*Why it's bad:* Different chart types communicate different relationships. Using the wrong type makes patterns harder to see and can confuse your audience.
+
+**Better alternative:** Match chart type to data type (we'll cover this in detail below).
+
+# The CRAP Principles of Design
+
+CRAP principles of design:
+
+-   Contrast
+
+-   Repetition
+
+-   Alignment
+
+-   Proximity
+
+# The Gestalt Principles of Perception
+
+While CRAP principles help with layout and design, Gestalt principles explain how the human brain perceives and organizes visual information. Understanding these helps you design visualizations that work *with* natural human perception.
+
+[![Credit: Lindsay Betzendahl](/images/gestalt_princ.png){fig-align="center"}](https://vizzendata.com)
+
+Gestalt Rules:
+
+-   Proximity: Things that are near to one another seem to be related
+
+-   Similarity: Things that look alike seem to be related
+
+-   Connections: Visually tied are related
+
+-   Continuity: Partially hidden shapes are perceived as completed into familiar shapes
+
+-   Closure: incomplete shapes are perceived as complete
+
+-   Figure-Ground: People automatically separate a visual field into a "figure" (the main subject) and a "ground" (the background)
+
+-   Common Fate: Elements sharing a direction of movement are perceived as a unit
+
+# Understand What You Share
+
+The best visuals start with a clear understanding of your data. When you know the full context, you can tell a more complete and compelling story. This includes not only citing the data source properly but also communicating essential details about the data itself.
+
+Consider the bar chart ([Misleading Axes]) comparing newly built homes in England. The original version never specified which months the 2023/24 and 2024/25 figures covered. Are we comparing two full twelve-month periods, or one full year and one partial one? By checking the source, you’d see that MHCLG figures are frequently revised—and that the 2023/24 estimates have not yet been updated. You'll also see that the numbers represent only England and not the rest of the United Kingdom. If Scotland, Wales, and Northern Ireland were to have been included, would we see the same pattern? By contextualizing your data, you'll earn greater trust from the audience you're communicating with.
+
+# Choosing the Right Chart Type
+
+One of the most critical decisions in data visualization is selecting the appropriate chart type for your data and message. Here's a practical guide:
+
+# Colors
+
+Colors should enhance figures and not make them more difficult to read. Less is typically more. A good rule of thumb is to follow the **60-30-10 rule**.
+
+Palettes should be colorblind friendly.
+
+## Best Practices
+
+### Use Color Purposefully
+
+-   Every color should have a meaning
+
+-   Don't add color just for decoration
+
+-   Limit your palette to 3-5 colors maximum
+
+**Choose Accessible Colors**
+
+-   Ensure sufficient contrast (use online contrast checkers)
+
+-   Avoid red-green combinations (colorblind-friendly)
+
+-   Test your visualizations in grayscale
+
+**Use Sequential Colors for Ordered Data**
+
+-   Light to dark for low to high values
+
+-   Single-hue gradients (light blue → dark blue)
+
+# Typography 
+
+Text is often overlooked but critical to effective visualizations.
+
+## Font Best Practices
+
+### **Choose Readable Fonts** 
+
+-   Sans-serif fonts (Arial, Helvetica, Calibri) for digital displays
+
+-   Avoid decorative or script fonts for data
+
+**Create Hierarchy Through Size**
+
+-   Chart title: Largest (18-24pt)
+
+-   Axis titles: Medium (12-14pt)
+
+-   Axis labels: Smaller (10-12pt)
+
+-   Annotations: Same as axis labels or slightly smaller
+
+**Use Font Weight Strategically**
+
+-   Bold for titles and key numbers
+
+-   Regular weight for most text
+
+-   Avoid italics (harder to read)
+
+**Ensure Legibility**
+
+-   Minimum font size: 10pt for print, 12pt for screens
+
+-   Avoid all caps for body text
+
+-   Use sufficient line spacing
+
+**Align Text Thoughtfully**
+
+-   Left-align most text (easiest to read)
+
+-   Center-align titles when appropriate
+
+-   Right-align numbers in tables
+
+# Tools
+
+## Datawrapper (Free for basic use)
+
+## Flourish (Free for basic use)

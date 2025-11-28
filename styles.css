@@ -7,7 +7,7 @@ body {
   font-family: 'Inter', sans-serif; 
 }
  
-h1, h2, h3 {
+h1, h2, h3 { 
   color: #3ea291;
   margin-bottom: 0.5rem;
 }
@@ -16,11 +16,10 @@ h1, h2, h3 {
 #quarto-content {
   padding-top: 20px;
 } 
-
+  
 .quarto-title-block {
   padding-top: 40px;
-}
-
+} 
 
 /* NAVBAR */
 .navbar {
@@ -426,15 +425,15 @@ h1, h2, h3 {
 .all-modules-section {
   padding: 60px 10%;
 }
-
+ 
 /* Self-Assessment Styling */ 
-.self-assessment {
+.self-assessment { 
   background: #f9f9f9;
   border: 2px solid #3ea291;
   border-radius: 12px;
   padding: 30px;
   margin: 30px 0;
-}
+}  
 
 .assessment-question {
   background: white;

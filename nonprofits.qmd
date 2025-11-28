@@ -70,7 +70,7 @@ format: html
       </div>
       
       <div class="module-card start-here" data-topics="visualization data-basics">
-        <h3>Telling Stories with Data</h3>
+        <h3>Foundations of Data Visualization</h3>
         <div>
           <span class="module-tag">Visualization</span>
           <span class="module-tag">Data Basics</span>
@@ -79,7 +79,7 @@ format: html
           Learn how to create compelling visualizations and narratives that communicate your 
           organization's impact to stakeholders and funders.
         </p>
-        <a href="modules/stories.qmd" class="module-link">Start Module →</a>
+        <a href="modules/found_visuals.qmd" class="module-link">Start Module →</a>
       </div>
     </div>
   </section>
