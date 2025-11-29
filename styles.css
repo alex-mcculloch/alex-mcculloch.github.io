@@ -5,18 +5,18 @@ body {
   background: #faf8f6;
   color: #000;
   font-family: 'Inter', sans-serif; 
-}
+} 
  
 h1, h2, h3 { 
   color: #3ea291;
   margin-bottom: 0.5rem;
 }
-
+ 
 /* Fix for navbar covering content */ 
 #quarto-content {
   padding-top: 20px;
 } 
-  
+   
 .quarto-title-block {
   padding-top: 40px;
 } 
@@ -84,7 +84,7 @@ h1, h2, h3 {
 .hero-summary {
   max-width: 600px;
   margin: auto;
-  color: #ccc;
+  color: #555;
   font-size: 1.1rem;
 }
 
@@ -171,6 +171,45 @@ h1, h2, h3 {
   color: #3ea291;
 }
 
+/* NON-PROFITS PREVIEW SECTION */
+.nonprofits-preview {
+  background-color: #d8ece9;
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.nonprofits-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.nonprofits-description {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 20px auto 30px auto;
+}
+
+.nonprofits-btn {
+  display: inline-block;
+  background: #3ea291;
+  color: white;
+  border: 2px solid #3ea291;
+  padding: 12px 30px;
+  margin-top: 10px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.nonprofits-btn:hover {
+  background: #2a7d6b;
+  border-color: #2a7d6b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(62, 162, 145, 0.3);
+} 
 
 /* SKILLS BUBBLES */
 .skills-section {

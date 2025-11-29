@@ -185,23 +185,13 @@ df %>%
 
 *Example of what NOT to do:*
 
--   
-
 -   Adding clip art or images to bars in a bar chart
-
--   
 
 -   Heavy gridlines on every axis
 
--   
-
 -   Drop shadows, gradients, and textures
 
--   
-
 -   Decorative backgrounds that compete with data
-
--   
 
 *Why it's bad:* Every non-essential element distracts from your message. The data should be the star, not the decoration.
 
@@ -213,19 +203,11 @@ df %>%
 
 *Examples of what NOT to do:*
 
--   
-
 -   Using a line chart for categorical data (like program types)
-
--   
 
 -   Using a pie chart to show change over time
 
--   
-
 -   Using a bar chart when the story is about trends over time
-
--   
 
 *Why it's bad:* Different chart types communicate different relationships. Using the wrong type makes patterns harder to see and can confuse your audience.
 
@@ -233,15 +215,101 @@ df %>%
 
 # The CRAP Principles of Design
 
-CRAP principles of design:
+The CRAP principles (Contrast, Repetition, Alignment, Proximity) are fundamental design concepts that apply directly to data visualization. Originally from Robin Williams' "The Non-Designer's Design Book," these principles help create visually organized and professional-looking materials.
 
--   Contrast
+## Contrast
 
--   Repetition
+**Definition:** Elements that are different should look *very* different, not just slightly different.
 
--   Alignment
+**In data visualization:**
 
--   Proximity
+-   Use strong color contrast between data and background
+
+-   Make important numbers or insights visually prominent through size, color, or weight
+
+-   Ensure text is readable (dark text on light background, or vice versa)
+
+-   Differentiate between categories clearly
+
+**Good practices:**
+
+-   Highlighting one data series in color while others are gray
+
+-   Using bold, larger fonts for titles and key numbers
+
+-   Creating clear visual hierarchy (titles → subtitles → labels → annotations)
+
+Below is an example of poor contrast. The graph displays the dropout rates for students who enrolled in different programs. The coloring of the text and columns make it difficult to know where first to look and how to scan the image. Because of this, the story is lost.
+
+❌
+
+```{r echo=FALSE, message=FALSE}
+student <- read_csv("Data/Foundation of Visuals/students_dropout_academic_success.csv")
+
+student %>%
+     filter(target %in% c("Dropout", "Graduate")) %>%
+     group_by(Course) %>%
+     summarise(
+         total = n(),
+         dropout_rate = sum(target == "Dropout") / n() * 100) %>%
+     filter(total >= 50) %>%  # Only programs with decent sample size
+     arrange(desc(dropout_rate)) %>%
+     head(8) %>% 
+  ggplot(aes(dropout_rate, as.factor(Course))) +
+  geom_col(fill = "#a5c4d4") +
+  labs(title = "Student Outcomes by Program Enrollment",
+         subtitle = "Comparison of dropout and graduate rates",
+         x = "Dropout Rate",
+         y = "Course") +
+    theme_minimal() +
+    theme(legend.position = "top",
+          plot.title = element_text(size = 11, color = "gray50"),
+          plot.subtitle = element_text(size = 9, color = "gray60"),
+          axis.text = element_text(size = 9, color = "gray60"),
+          axis.title = element_text(size = 10, color = "gray50"),
+          legend.text = element_text(size = 9, color = "gray60"))
+
+```
+
+The graph below does a much better job with managing contrast, which allows the audience to quickly scan the image left to right and top down, and identify the important finding.
+
+✅
+
+```{r echo=FALSE}
+student %>%
+  filter(target %in% c("Dropout", "Graduate")) %>%
+  group_by(Course) %>%
+  summarise(
+    total = n(),
+    dropout_rate = sum(target == "Dropout") / n() * 100,
+    .groups = "drop"
+  ) %>%
+  filter(total >= 50) %>%
+  arrange(desc(dropout_rate)) %>%
+  head(8) %>%
+  mutate(highlight = Course == 9119) %>%  # Create highlighting variable
+  ggplot(aes(x = dropout_rate, y = reorder(as.factor(Course), dropout_rate), fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("FALSE" = "grey80", "TRUE" = "#e74c3c"), guide = "none") +
+  labs(title = "8 in 10 Students Enrolled in Program 9119 <span style='color:#e74c3c;'>Fail to Graduate</span>",
+       subtitle = "Dropout rate by program",
+       caption = "Realinho, Valentim, Mónica Vieira Martins, Jorge Machado, and Luís Baptista. 2021.\nPredict Students' Dropout and Academic Success.\nUCI Machine Learning Repository. https://doi.org/10.24432/C5MC89.",
+       x = "Dropout Rate (%)",
+       y = "Program") +
+   theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = ggtext::element_markdown(size = 16, face = "bold", 
+                                              color = "black"),
+        plot.subtitle = element_text(size = 12, color = "gray30"),
+        axis.text = element_text(size = 12, face = "bold", color = "black"),
+        axis.title = element_text(size = 13, face = "bold", color = "black"),
+        axis.title.x = element_text(margin = margin(t = 10)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.margin = margin(20, 20, 20, 20))
+
+
+```
 
 # The Gestalt Principles of Perception
 
@@ -305,13 +373,13 @@ Palettes should be colorblind friendly.
 
 -   Single-hue gradients (light blue → dark blue)
 
-# Typography 
+# Typography
 
 Text is often overlooked but critical to effective visualizations.
 
 ## Font Best Practices
 
-### **Choose Readable Fonts** 
+### **Choose Readable Fonts**
 
 -   Sans-serif fonts (Arial, Helvetica, Calibri) for digital displays
 
@@ -350,6 +418,60 @@ Text is often overlooked but critical to effective visualizations.
 -   Center-align titles when appropriate
 
 -   Right-align numbers in tables
+
+# A Simple Visualization Checklist
+
+Before sharing any visualization, ask yourself:
+
+## **Clarity**
+
+-   Can someone understand the main message in 5 seconds?
+
+-   Is the chart type appropriate for the data?
+
+-   Are axes clearly labeled?
+
+-   Is there a clear title that tells the story?
+
+## **Design**
+
+-   Is there sufficient contrast between elements?
+
+-   Are colors used purposefully and consistently?
+
+-   Is text readable (size, font, contrast)?
+
+-   Have I removed all unnecessary elements (chartjunk)?
+
+-   Is there adequate white space?
+
+## **Accuracy**
+
+-   Are axes scaled appropriately?
+
+-   Are data sources cited?
+
+-   Are numbers accurate and up-to-date?
+
+-   Have I avoided misleading representations?
+
+## **Accessibility**
+
+-   Is this colorblind-friendly?
+
+-   Can it be understood in grayscale?
+
+-   Is text large enough to read?
+
+-   If digital, is it screen-reader compatible?
+
+## **Context**
+
+-   Is there enough context for the audience to understand?
+
+-   Have I explained any necessary terms or abbreviations?
+
+-   Does this visualization support my overall narrative?
 
 # Tools
 
