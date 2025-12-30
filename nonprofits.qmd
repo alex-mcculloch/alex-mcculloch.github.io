@@ -2,6 +2,7 @@
 title: ""
 format: html
 ---
+
 ```{=html}
 <div class="column-screen">
   <!-- Hero Section -->
@@ -66,7 +67,7 @@ format: html
           Discover how to ask the right questions of your data and interpret basic statistics to 
           understand trends and patterns in your programs.
         </p>
-        <a href="#" class="module-link">Start Module →</a>
+        <a href="modules/understand_data.qmd" class="module-link">Start Module →</a>
       </div>
       
       <div class="module-card start-here" data-topics="visualization data-basics">

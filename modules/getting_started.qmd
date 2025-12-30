@@ -86,7 +86,7 @@ This is where **logic models** can become invaluable. Logic models are a visual 
 Below is a simplified table to help build your first logic model.
 
 | Goal           | Activities  | Outcomes       | Indicators                       |
-|----------------|-------------|----------------|----------------------------------|
+|---------------|---------------|---------------|---------------------------|
 | *Your purpose* | *Your work* | *Achievements* | *How you know you found success* |
 
 Note, it's important to distinguish **outputs** from **outcomes**. **Outputs** are the direct, tangible, and immediate results of your program activities. **Outcomes** are the changes or benefits that occur because of those outputs - they answer the "so what?" question.
@@ -275,25 +275,25 @@ Once you've collected data, you need to organize it in a way that makes analysis
 
 ### Common Organizational Mistakes
 
-❌ **Multiple pieces of information in one cell**
+**Multiple pieces of information in one cell**
 
 -   Bad: "Maria Garcia, 34, Hartford"
 
 -   Good: Separate columns for FirstName, LastName, Age, City
 
-❌ **Inconsistent formatting**
+**Inconsistent formatting**
 
 -   Bad: Mixing "Yes/No", "Y/N", "1/0" for the same type of question
 
 -   Good: Choose one format and stick with it
 
-❌ **Merged cells or complex layouts**
+**Merged cells or complex layouts**
 
 -   Bad: Creating "pretty" tables with merged headers
 
 -   Good: Simple, flat structure with clear column headers
 
-❌ **Colors or formatting as data**
+**Colors or formatting as data**
 
 -   Bad: Using red text to indicate "needs follow-up"
 

@@ -58,9 +58,9 @@ format: html
       <a class="card-link" href="project2.qmd">View Project →</a>
     </div>
     <div class="card">
-      <h3>Trump Approval Weighted Model</h3>
-      <p>Weighted rolling average using poll quality and sample-size corrections.</p>
-      <a class="card-link" href="project3.qmd">View Project →</a>
+      <h3>Identifying Donors with Machine Learning</h3>
+      <p>Use machine learning and Census data to identify high and low income donors.</p>
+      <a class="card-link" href="https://4blh4z-alex-mcculloch.shinyapps.io/charityml/">View Project →</a>
     </div>
   </div>
 </section>

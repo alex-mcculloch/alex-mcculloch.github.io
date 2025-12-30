@@ -159,7 +159,7 @@ df %>%
   geom_bar(stat = "identity") +
   scale_fill_manual(values = c("Conservative" = "#00adef",
                                "Labour" = "#e5003b")) +
-  labs(title = "<span style='color:#2ca02c; font-weight:900;'>GOOD</span><br><span style='font-weight:600;'>Net additional housing built, England</span>",
+  labs(title = "Net additional housing built, England</span>",
        subtitle = "<span style='color:#00adef;'>Conservative</span> vs <span style='color:#e5003b;'>Labour</span> Majority",
        x = "", y = "",
        caption = "Source: MHCLG, Live tables on housing supply, Table 118\nNote: *2023/24 estimates are subject to revision / Data as of 20 November 2025") +
@@ -287,20 +287,33 @@ student %>%
   filter(total >= 50) %>%
   arrange(desc(dropout_rate)) %>%
   head(8) %>%
+  mutate(program = case_match(Course,
+                              9119 ~ "Informatics Engineering",
+                              9130 ~ "Equinculture",
+                              9991 ~ "Management (Evening)",
+                              9853 ~ "Basic Education",
+                              9003 ~ "Agronomy",
+                              9147 ~ "Management",
+                              9556 ~ "Oral Hygiene",
+                              171 ~ "Animation and\nMultimedia Design")) %>% 
   mutate(highlight = Course == 9119) %>%  # Create highlighting variable
-  ggplot(aes(x = dropout_rate, y = reorder(as.factor(Course), dropout_rate), fill = highlight)) +
+  ggplot(aes(x = dropout_rate, y = reorder(program, dropout_rate), 
+             fill = highlight)) +
   geom_col() +
-  scale_fill_manual(values = c("FALSE" = "grey80", "TRUE" = "#e74c3c"), guide = "none") +
-  labs(title = "8 in 10 Students Enrolled in Program 9119 <span style='color:#e74c3c;'>Fail to Graduate</span>",
+  scale_fill_manual(values = c("FALSE" = "grey80", "TRUE" = "#e74c3c"), 
+                    guide = "none") +
+  labs(title = "8 in 10 Informatics Engineering Students <span style='color:#e74c3c;'>Fail to Graduate</span>",
        subtitle = "Dropout rate by program",
-       caption = "Realinho, Valentim, Mónica Vieira Martins, Jorge Machado, and Luís Baptista. 2021.\nPredict Students' Dropout and Academic Success.\nUCI Machine Learning Repository. https://doi.org/10.24432/C5MC89.",
+       caption = "Source: UCI Machine Learning Repository.2021.",
        x = "Dropout Rate (%)",
-       y = "Program") +
+       y = "") +
    theme_minimal() +
   theme(legend.position = "none",
         plot.title = ggtext::element_markdown(size = 16, face = "bold", 
                                               color = "black"),
+        plot.title.position = "plot",
         plot.subtitle = element_text(size = 12, color = "gray30"),
+        plot.caption = element_text(color = "grey30"),
         axis.text = element_text(size = 12, face = "bold", color = "black"),
         axis.title = element_text(size = 13, face = "bold", color = "black"),
         axis.title.x = element_text(margin = margin(t = 10)),
@@ -345,13 +358,49 @@ One of the most critical decisions in data visualization is selecting the approp
 
 # Colors
 
-Colors should enhance figures and not make them more difficult to read. Less is typically more. A good rule of thumb is to follow the **60-30-10 rule**.
+When used well, color can guide attention, show relationships, and make complex data intuitive. Colors should enhance figures and not make them more difficult to read. Less is typically more. A good rule of thumb is to follow the **60-30-10 rule**: 60% dominate color, 30% secondary color, 10% accent color.
 
-Palettes should be colorblind friendly.
+Remember to consider accessibility of your audience. Choose colorblind-friendly palettes. Approximately [1 in 12 men (8%) and 1 in 200 women](https://www.colourblindawareness.org/colour-blindness/) have some form of color blindness, the most common being red/green blindness which can affect the person even if the color only contains some red or green, such as purple. Use sites like [Color Codes color picker](https://htmlcolorcodes.com/color-picker/) and David Nichols' [Coloring for Colorblindness](https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40) which have built-in color blindness simulators, contrast checker, and more to help you select the best color palette. If you are matching colors from an existing brand or image, [imagecolorpicker.com](https://imagecolorpicker.com/) can identify the exact color code from any uploaded image.
+
+```{r message=FALSE, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+
+# Create data for 60-30-10 rule visualization
+color_rule <- data.frame(
+  section = factor(c("Dominant", "Secondary", "Accent"),
+                   levels = c("Dominant", "Secondary", "Accent")),
+  percentage = c(60, 30, 10),
+  color = c("#f8f9fa","#2c3e50","#3ea291")  # Light gray, your teal, complementary orange
+)
+
+#| fig-width: 20
+#| fig-height: 8
+
+ggplot(color_rule, aes(x = 1, y = percentage, fill = section)) +
+  geom_col(width = 1, color = "white") +
+  geom_text(aes(label = paste0(section, "\n", percentage, "%")),
+            position = position_stack(vjust = 0.5),
+            color = c("black", "white", "white"),
+            size = 6,
+            fontface = "bold",
+            lineheight = 0.9) +
+  labs(title = "The 60-30-10 Rule") + 
+  scale_fill_manual(values = color_rule$color) +
+  scale_x_continuous(expand = expansion(mult = c(0.02, 0.1))) +
+  coord_flip(clip = "off") +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.margin = margin(20, 30, 20, 30),
+    plot.title = element_text(face = "bold", size = 28, color = "#2c3e50",
+                              hjust = 0.5)
+  )
+```
 
 ## Best Practices
 
-### Use Color Purposefully
+**Use Color Purposefully**
 
 -   Every color should have a meaning
 
@@ -379,7 +428,7 @@ Text is often overlooked but critical to effective visualizations.
 
 ## Font Best Practices
 
-### **Choose Readable Fonts**
+**Choose Readable Fonts**
 
 -   Sans-serif fonts (Arial, Helvetica, Calibri) for digital displays
 
@@ -423,7 +472,7 @@ Text is often overlooked but critical to effective visualizations.
 
 Before sharing any visualization, ask yourself:
 
-## **Clarity**
+**Clarity**
 
 -   Can someone understand the main message in 5 seconds?
 
@@ -433,7 +482,7 @@ Before sharing any visualization, ask yourself:
 
 -   Is there a clear title that tells the story?
 
-## **Design**
+**Design**
 
 -   Is there sufficient contrast between elements?
 
@@ -445,7 +494,7 @@ Before sharing any visualization, ask yourself:
 
 -   Is there adequate white space?
 
-## **Accuracy**
+**Accuracy**
 
 -   Are axes scaled appropriately?
 
@@ -455,7 +504,7 @@ Before sharing any visualization, ask yourself:
 
 -   Have I avoided misleading representations?
 
-## **Accessibility**
+**Accessibility**
 
 -   Is this colorblind-friendly?
 
@@ -465,7 +514,7 @@ Before sharing any visualization, ask yourself:
 
 -   If digital, is it screen-reader compatible?
 
-## **Context**
+**Context**
 
 -   Is there enough context for the audience to understand?
 
@@ -475,6 +524,20 @@ Before sharing any visualization, ask yourself:
 
 # Tools
 
-## Datawrapper (Free for basic use)
+-   Datawrapper (Free for basic use)
 
-## Flourish (Free for basic use)
+-   Flourish (Free for basic use)
+
+-   Tableau
+
+-   Power BI
+
+------------------------------------------------------------------------
+
+**Further Reading**
+
+-   [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/introduction.html)
+
+-   [Contrast: One of the 3Cs for Better Charts](https://www.nngroup.com/articles/contrast-charts/)
+
+**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](http://localhost:7548/modules/contact.qmd) me.
