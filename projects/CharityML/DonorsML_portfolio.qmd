@@ -1,0 +1,267 @@
+---
+title: "Identifying High Income Earners with Machine Learning"
+format: html
+editor: visual
+css: stylesML.css
+toc: true
+---
+
+::: tldr
+**TL;DR** This project uses a random forest model to predict the likelihood that an individual earns more than \$50K and translates those predictions into actionable donor priority tiers. Model evaluation shows performance well above chance and a substantial lift over random outreach, making it a useful tool for targeted fundraising. These results are implemented in an interactive Shiny application that allows users to score individual donors or explore sample data to see how prioritization works in practice; a link to this demo app can be found [here](https://4blh4z-alex-mcculloch.shinyapps.io/charityml/).
+:::
+
+# Introduction
+
+Identifying potential donors is a constant challenge for small non-profits. With limited staff time and outreach budgets, organizations need better ways to decide who to prioritize and how to engage them.
+
+This project demonstrates how machine learning can support donor targeting by estimating the likelihood that an individual earns more than \$50,000 annually. This income level is selected due to the restraints in the data. The goal is not to replace human judgment, but to provide data-informed guidance that helps nonprofits allocate their resources more effectively.
+
+# The Data
+
+The data used here is from the 1994 Census, which explicitly labels individuals with incomes as either above or below \$50,000. The data originates from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/20/census+income) to be used for learning purposes. Each row represents an individual donor profile, containing demographic, employment, and economic characteristics.
+
+```{r download and clean, echo=TRUE, message=FALSE}
+library(tidyverse)
+donations <- read_csv("Data/CharityML.csv")
+
+# basics ----
+summary(donations)
+
+# Check NAs
+colSums(is.na(donations))
+
+# convert categorical to factors
+donations <- donations %>% 
+  mutate(across(where(is.character), as.factor))
+
+# convert income to binary
+donations <- donations %>% 
+  mutate(income = if_else(income == ">50K",1,0))
+
+prop.table(table(donations$income))
+```
+
+```{r echo=FALSE, message = FALSE}
+library(randomForest)
+donations <- donations %>% 
+  mutate(across(where(is.factor), ~ fct_expand(.x, "Unknown")))
+```
+
+The outcome variable, `income`, is converted into a binary classification problem:
+
+-   `1` → earns \$50,000 or more
+
+-   `0` → earns less than \$50,000
+
+We can also see that the dataset is imbalanced, with 75% of individuals earning less than \$50,000 annually. Remember this imbalance when we move onto evaluating the model.
+
+# The Model
+
+## Model Choice: Random Forest
+
+We'll be using Random Forest classifier, which is well-suited for this task because it:
+
+-   Handles nonlinear relationships and interactions naturally
+
+-   Performs well with mixed numeric and categorical predictors
+
+-   Is robust to noise and missing information
+
+## Train Model
+
+We split the data into training and testing sets, using 80% of the data for training and 20% for evaluation. This ensures the model is assessed on data it has not seen before.
+
+```{r train, message=FALSE}
+set.seed(123)
+library(caret)
+
+train_index <- createDataPartition(donations$income, p = 0.8, list = F)
+train <- donations[train_index, ]
+train <- train %>% select(-`education-num`,-relationship)
+train <- train %>% rename(marital_status = `marital-status`,
+                          native_country = `native-country`,
+                          capital_gain = `capital-gain`,
+                          capital_loss = `capital-loss`,
+                          hours_per_week = `hours-per-week`)
+test <- donations[-train_index, ]
+test <- test %>% rename(marital_status = `marital-status`,
+                        native_country = `native-country`,
+                        capital_gain = `capital-gain`,
+                        capital_loss = `capital-loss`,
+                        hours_per_week = `hours-per-week`)
+
+```
+
+```{r load model RDS, echo=FALSE}
+model_rf <- readRDS("Data/charityml_rf_model.rds")
+test <- readRDS("Data/testML.rds")
+```
+
+```{r eval=FALSE}
+library(randomForest)
+model_rf <- randomForest(as.factor(income) ~ ., data = train, importance = T)
+```
+
+## Initial Model Performance
+
+```{r}
+pred_rf <- predict(model_rf, newdata = test)
+
+confusionMatrix(pred_rf, as.factor(test$income))
+
+```
+
+We can see that this model achieves 86% overall accuracy, which may seem high at first glance. However, accuracy alone can be misleading, especially when the underlying data are imbalanced.
+
+In this dataset, the majority (75%) of individuals earn less than \$50,000, meaning a model could achieve relatively high accuracy simply by predicting the most common outcome. To account for this, we use Cohen’s Kappa, a statistic that measures how much better the model performs compared to random chance. Specifically, it measures agreement between two raters or classifiers correcting for agreement that would happen by chance. It ranges from -1 (complete disagreement) to 1 (perfect agreement) with 0 indicating agreement no better than random chance.
+
+This is calculated using the following formula:
+
+$$
+\begin{align*}
+K &= \frac{P_o - P_e}{1 - P_e} \\[4mm]
+P_o &: \text{Observed Accuracy} \\
+P_e &: \text{Expected Accuracy}
+\end{align*}
+$$
+
+```{r calc kappa}
+# True outcomes: 
+under_50 <- 6330 + 462
+over_50 <- 768 + 1484
+
+# predicted outcomes:
+pred_under50 <- 6330+768
+pred_over50 <- 462+1484
+
+# total observations
+total <- as.numeric(nrow(tibble(pred_rf)))
+
+# Observed Accuracy:
+P_o <- (6330+1484)/total
+P_o
+
+# Expected Accuracy
+P_e <- (((under_50 * pred_under50)/total) + ((over_50 * pred_over50)/total))/total
+# or can use
+# Expected Accuracy
+((under_50 * pred_under50) + (over_50 * pred_over50)) / (total^2)
+
+# Kappa:
+(P_o-P_e) / (1-P_e)
+```
+
+In this case, the model's Kappa of 0.6191 hovers on the threshold between moderate and substantial agreement, according to [Landis & Koch (1977)](https://www.jstor.org/stable/2529310). This tells us that the model is performing meaningfully better than chance but there is still room for improvement, particularly in identifying higher-income donors.
+
+## Model Interpretation
+
+While overall accuracy and agreement metrics tell us how well the model performs, it is also important to understand *what the model is learning*.
+
+Random Forest models provide a built-in measure of variable importance, which helps identify which features contribute most to the model’s predictions.
+
+### Understanding Variable Importance
+
+To better understand how the model is making predictions, we examine variable importance using two complementary measures provided by Random Forests: Mean Decrease in Accuracy and Mean Decrease in Gini. Each captures a different aspect of importance. The Mean Decrease in Accuracy measures how much the model's prediction accuracy drops when a variable's values are randomly permuted. In other words, it determines how much worse the model would perform if we scrambled each variable. Higher values indicate variables that are more critical to the model's predictive accuracy.
+
+From the results:
+
+-   `marital_status` shows the largest drop in accuracy, making it the most influential predictor under this metric.
+
+-   `capital_gain` is also highly influential, reinforcing its strong association with higher income.
+
+-   `education_level`, `occupation`, and `capital_loss` form a second tier of important predictors.
+
+-   Variables such as `race`, `native_country`, and `sex` contribute relatively little to overall accuracy.
+
+This suggests the model relies far more on economic and household characteristics than on demographic attributes.
+
+The Mean Decrease in Gini measure how much a variable improves node purity across all trees in the forest. Meaning, it reflects how often and how effectively a variable is used to split the data.
+
+In the Gini-based ranking:
+
+-   `marital_status` stands out dramatically, with the highest importance by a wide margin.
+
+-   `age`, `capital_gain`, and `education_level` also rank highly, indicating they are frequently used to create informative splits.
+
+-   Variables such as `race`, `sex`, and `native_country` again appear near the bottom.
+
+#### Interpreting the differences
+
+While both metrics identify similar top predictors, they emphasize slightly different aspects of importance:
+
+-   Mean Decrease in Accuracy highlights variables that are *essential for overall predictive performance*.
+
+-   Mean Decrease in Gini highlights variables that are *frequently useful for splitting the data*.
+
+For example, `age` ranks more highly under Gini than Accuracy, suggesting it is often used in tree splits but may be somewhat redundant once other variables are known.
+
+```{r}
+varImpPlot(model_rf)
+
+importance(model_rf, type = 1) %>%
+  as.data.frame() %>%
+  rownames_to_column("variable") %>%
+  arrange(desc(MeanDecreaseAccuracy))
+```
+
+Variables such as `marital_status`, `capital_gain`, and `education_level` rank highly in importance. This aligns with existing research on income prediction and gives us confidence that the model is leveraging meaningful socioeconomic signals rather than noise.
+
+Importantly, these importance measures are *descriptive*, not causal. They tell us which variables help the model distinguish income levels, not why those relationships exist.
+
+## From Classification to Targeting
+
+Rather than relying solely on predicted classes (`0` or `1`), we can extract predicted probabilities from the Random Forest. These probabilities allow us to rank individuals by estimated likelihood of earning more than \$50K, which is far more useful for fundraising strategy.
+
+Using these probabilities, we define donor tiers that translate model output into actionable segments. This approach mirrors how predictive models are typically deployed in real-world non-profit and marketing settings: not as binary classifiers, but as ranking tools.
+
+```{r}
+rf_probs <- predict(model_rf, newdata = test, type = "prob")
+
+test_scored <- test %>% 
+  mutate(prob_high_income = rf_probs[, "1"])
+
+test_scored <- test_scored %>% 
+  mutate(donor_tier = case_when(
+    prob_high_income >= 0.8 ~ "High Priority", 
+    prob_high_income >= 0.5 ~ "Medium Priority",
+    TRUE ~ "Low Priority"
+  ))
+```
+
+Before evaluating the value of the model, we need as baseline for comparison.
+
+```{r}
+# baseline rate
+mean(test$income==1) #25%
+# if contact at random, only 25% earn more than 50K
+```
+
+Only about 25% of individuals in the dataset earn \$50K or more. This means that if a nonprofit were to contact donors at random, roughly one in four would fall into the higher-income category.
+
+### Measuring Lift
+
+Lift compares the model's targeting performance against random outreach. It informs us of how much more likely we are to reach a high-income earner by using the model. We can summarize outcome by donor tier below.
+
+```{r}
+test_scored %>% 
+  group_by(donor_tier) %>% 
+  reframe(avg_prob = mean(prob_high_income),
+          actual_high_income_rate = mean(income==1),
+          n = n())
+
+# high priority tier
+0.886/0.248 
+
+# medium priority lift
+0.601/0.248 
+```
+
+Earners in the high priority tier are 3.5 times more likely to earn \$50K or more compared to random selection. Even the medium tier is 2.5 times more likely to include higher-income individuals.
+
+# Conclusion
+
+Overall, this project shows how machine learning can be used as a practical decision-support tool rather than a purely technical exercise. While the model’s 86% accuracy provides a helpful baseline, deeper evaluation using Cohen’s Kappa, probability estimates, and lift demonstrates that the model is learning meaningful patterns and performing well beyond chance. By shifting the focus from binary predictions to ranked probabilities, the model becomes far more useful for real-world fundraising decisions.
+
+Most importantly, the results translate cleanly into action. The donor tiering approach highlights how targeted outreach can dramatically outperform random contact, with high-priority donors being nearly four times more likely to have higher income than the baseline population. This framing aligns closely with how non-profits actually operate, where limited staff time and resources make prioritization essential rather than optional.
+
+To see this model in action, I have created a Shiny web application that can be found [here](https://4blh4z-alex-mcculloch.shinyapps.io/charityml/). You can calculate an individual's probability of being a \$50K+ earner by entering information in the right panel. You can also see an example of what it would look like if you were to upload a file containing potential donor information by selecting the "Load Sample Donor Data" button.
