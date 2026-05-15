@@ -12,8 +12,8 @@ website:
         href: nonprofits.qmd
       - text: "Portfolio"
         href: portfolio.qmd
-      - text: "Skills"
-        href: skills.qmd
+     # - text: "Skills"
+      #  href: skills.qmd
       - text: "Contact"
         href: contact.qmd
 

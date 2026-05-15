@@ -1,11 +1,60 @@
 ---
 title: "Portfolio"
 ---
-
 ::: {.callout-warning}
 # Page Under Construction
-
 This page is currently under construction. Check back soon!
 :::
+```{=html}
+<style>
+  .bar-wrap { background: #e0e0e0; border-radius: 10px; overflow: hidden; height: 18px; width: 100%; border: 1px solid #e0e0e0; }
+  .bar-fill { height: 100%; width: 0%; background: #378ADD; border-radius: 10px; transition: width 2.5s ease-in-out; }
+  .status { font-size: 14px; color: #666; min-height: 22px; margin-top: 10px; transition: opacity 0.4s; }
+  .pct { font-size: 13px; color: #999; margin-top: 4px; }
+</style>
+<div style="padding: 1.5rem 0 0.5rem; max-width: 500px;">
+  <div class="bar-wrap"><div class="bar-fill" id="bar"></div></div>
+  <p class="status" id="status-text">Data being cleaned...</p>
+  <p class="pct" id="pct-text">68% complete</p>
+</div>
+<script>
+const steps = [
+  { msg: "Data being cleaned...",              pct: 68,   label: "68% complete" },
+  { msg: "Training model...",                  pct: 74,   label: "74% complete" },
+  { msg: "Awaiting sufficient sample size...", pct: 74,   label: "74% complete" },
+  { msg: "p-value suspiciously low...",        pct: 4.9,  label: "p = 0.049" },
+  { msg: "Overfitting in progress...",         pct: 99,   label: "Training accuracy: 99%??" },
+  { msg: "Loading the tidyverse...",           pct: 47,   label: "Loaded 47 packages, 312 conflicts" }
+];
+let i = 0;
+const barEl = document.getElementById('bar');
+const statusEl = document.getElementById('status-text');
+const pctEl = document.getElementById('pct-text');
 
+function runStep() {
+  const step = steps[i];
+
+  // Fade out text
+  statusEl.style.opacity = 0;
+  pctEl.style.opacity = 0;
+
+  // Reset bar to 0 instantly (no transition), then animate to target
+  barEl.style.transition = 'none';
+  barEl.style.width = '0%';
+
+  setTimeout(() => {
+    barEl.style.transition = 'width 2.5s ease-in-out';
+    barEl.style.width = step.pct + '%';
+    statusEl.textContent = step.msg;
+    pctEl.textContent = step.label;
+    statusEl.style.opacity = 1;
+    pctEl.style.opacity = 1;
+    i = (i + 1) % steps.length;
+  }, 100);
+}
+
+runStep();
+setInterval(runStep, 4000);
+</script>
+```
 ![](images/under_construction1.png)
