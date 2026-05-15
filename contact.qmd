@@ -1,3 +1,387 @@
----
-title: "contact"
----
+
+
+```{=html}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+.cw {
+  font-family: 'DM Sans', sans-serif;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 0 2rem;
+}
+
+.cw-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.cw-header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+.cw-header h1 em {
+  font-style: italic;
+  color: #888;
+}
+
+.cw-header p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.7;
+  max-width: 400px;
+  margin: 0;
+  font-weight: 300;
+}
+
+.cw-rule {
+  width: 100%;
+  height: 1px;
+  background: #e5e5e5;
+  margin: 2rem 0;
+  border: none;
+}
+
+.cw-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .cw-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .cw-header h1 { font-size: 32px; }
+}
+
+.cw-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.info-block { display: flex; flex-direction: column; gap: 5px; }
+
+.info-lbl {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.info-val {
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  transition: color 0.15s;
+}
+
+.info-val:hover { color: #666; }
+
+.avail-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3B6D11;
+  display: inline-block;
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+.socials-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.social-row { display: flex; flex-direction: column; gap: 4px; }
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #666;
+  text-decoration: none;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  font-weight: 400;
+}
+
+.social-link:hover {
+  background: #f5f5f5;
+  border-color: #e5e5e5;
+  color: #333;
+  text-decoration: none;
+}
+
+.social-link svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #aaa;
+}
+
+.social-name {
+  font-size: 11px;
+  color: #bbb;
+  margin-left: auto;
+}
+
+.cw-form { display: flex; flex-direction: column; gap: 16px; }
+
+.field-group { display: flex; flex-direction: column; gap: 5px; }
+
+.field-group label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888;
+  font-weight: 500;
+}
+
+.cw-form input,
+.cw-form textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 9px 13px;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+  outline: none;
+}
+
+.cw-form input:focus,
+.cw-form textarea:focus { border-color: #bbb; }
+
+.cw-form textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.chip {
+  font-size: 12px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  border: 1px solid #ddd;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  font-weight: 400;
+}
+
+.chip:hover { background: #f5f5f5; }
+
+.chip.sel {
+  background: #fff;
+  border-color: #888;
+  color: #333;
+  font-weight: 500;
+}
+
+.submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.submit-note {
+  font-size: 11px;
+  color: #bbb;
+  font-weight: 300;
+}
+
+.btn-send {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 22px;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn-send:hover { opacity: 0.82; }
+.btn-send:active { transform: scale(0.98); }
+
+.success-msg {
+  display: none;
+  background: #eaf3de;
+  border: 1px solid #c0dd97;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #3B6D11;
+  gap: 9px;
+  align-items: center;
+}
+
+.success-msg.show { display: flex; }
+</style>
+
+<div class="cw">
+  <div class="cw-header">
+    <div class="cw-eyebrow">Get in touch</div>
+    <h1>Let's <em>Connect.</em></h1>
+    <p>Whether you have a project in mind, a question, or just want to connect — my inbox is open.</p>
+  </div>
+
+  <hr class="cw-rule">
+
+  <div class="cw-layout">
+    <div class="cw-left">
+
+      <div class="info-block">
+        <span class="info-lbl">Email</span>
+        <a href="mailto:asmcculloch46@gmail.com" class="info-val">
+          asmcculloch46@gmail.com
+        </a>
+      </div>
+
+      <div class="info-block">
+        <span class="info-lbl">Status</span>
+        <span class="info-val" style="cursor:default;">
+          <span class="avail-dot"></span>
+          Available for projects
+        </span>
+      </div>
+
+      <div>
+        <div class="socials-label">Find me online</div>
+        <div class="social-row">
+
+          <a href="https://github.com/alex-mcculloch" class="social-link" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <span>github.com/alex-mcculloch</span>
+            <span class="social-name">GitHub</span>
+          </a>
+
+          <a href="https://linkedin.com/in/amcculloch" class="social-link" target="_blank">
+            <img src="images/linkedin.png" alt="" aria-hidden="true" style="width:16px; height:16px; flex-shrink:0;">
+            <span>amcculloch</span>
+            <span class="social-name">LinkedIn</span>
+          </a>
+
+          <a href="https://bsky.app/profile/politicalexplorer.bsky.social" class="social-link" target="_blank">
+            <img src="images/bluesky.png" alt="" aria-hidden="true" style="width:16px; height:16px; flex-shrink:0;">
+            <span>@politicalexploerer</span>
+            <span class="social-name">Bluesky</span>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cw-form">
+      <div class="field-group">
+        <label for="cf-name">Name</label>
+        <input type="text" id="cf-name" placeholder="Your name" />
+      </div>
+
+      <div class="field-group">
+        <label for="cf-email">Email</label>
+        <input type="email" id="cf-email" placeholder="you@example.com" />
+      </div>
+
+      <div class="field-group">
+        <label>Topic</label>
+        <div class="chips">
+          <button class="chip" onclick="toggleChip(this)">Collaboration</button>
+          <button class="chip" onclick="toggleChip(this)">Consulting</button>
+          <button class="chip" onclick="toggleChip(this)">Speaking</button>
+          <button class="chip" onclick="toggleChip(this)">Question</button>
+          <button class="chip" onclick="toggleChip(this)">Other</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="cf-msg">Message</label>
+        <textarea id="cf-msg" placeholder="What's on your mind?"></textarea>
+      </div>
+
+      <div class="success-msg" id="success-banner">
+        ✓ Message sent — I'll be in touch soon.
+      </div>
+
+      <div class="submit-row">
+        <span class="submit-note">Replies within 1–2 business days.</span>
+        <button class="btn-send" onclick="handleSend()">
+          Send message →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleChip(el) { el.classList.toggle('sel'); }
+
+function handleSend() {
+  var name  = document.getElementById('cf-name').value.trim();
+  var email = document.getElementById('cf-email').value.trim();
+  var msg   = document.getElementById('cf-msg').value.trim();
+
+  if (!name || !email || !msg) {
+    var id = !name ? 'cf-name' : !email ? 'cf-email' : 'cf-msg';
+    document.getElementById(id).focus();
+    return;
+  }
+
+  fetch('https://formspree.io/f/xzdoneld', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, email: email, message: msg })
+  })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('success-banner').classList.add('show');
+      document.getElementById('cf-name').value  = '';
+      document.getElementById('cf-email').value = '';
+      document.getElementById('cf-msg').value   = '';
+      document.querySelectorAll('.chip.sel').forEach(function(c){ c.classList.remove('sel'); });
+    } else {
+      alert('Something went wrong — please try emailing me directly.');
+    }
+  })
+  .catch(function() {
+    alert('Could not send — please try emailing me directly.');
+  });
+}
+</script>
+```

@@ -22,7 +22,7 @@ format: html
     </p>
     <div class="hero-buttons">
       <a class="btn github-btn" href="https://github.com/alex-mcculloch" target="_blank">GitHub</a>
-      <a class="btn contact-btn" href="mailto:asmcculloch46@gmail.com">Contact</a>
+      <a class="btn contact-btn" href="contact.qmd">Contact</a>
     </div>
   </div>
 </section> 
