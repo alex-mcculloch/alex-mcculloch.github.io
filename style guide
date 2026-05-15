@@ -1,0 +1,33 @@
+Possible Color palettes:
+----------------
+#2c3e50 - navy blue
+#3ea291 - kepple green
+#f8f9fa/white
+
+---------------
+#3ea291 - kepple green
+#7d3c98 - purple
+white
+
+---------------
+#3ea291 - kepple green
+#e67e22 - warm orange
+#f8f9fa/white
+
+---------------
+/* Primary Colors */
+--navy: #2c3e50;          /* Main headers, body text */
+--teal: #3ea291;          /* Buttons, links, highlights */
+--purple: #9b59b6;        /* Special accents (Start Here, etc.) */
+
+/* Neutral Colors */
+--light-bg: #f8f9fa;      /* Main background */
+--light-teal-bg: #e8f5f2; /* Tinted sections (like intro) */
+--white: #ffffff;
+--text-dark: #333333;
+--text-medium: #666666;
+--text-light: #999999;
+
+/* Supporting Colors */
+--teal-dark: #2a7d6b;     /* Hover states */
+--navy-light: #34495e;    /* Lighter navy for variety */

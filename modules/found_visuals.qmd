@@ -16,29 +16,29 @@ This module will teach you the fundamental principles of effective data visualiz
 
 **Data visualizations help you:**
 
--   **Communicate impact quickly**: Donors and funders often have limited time—a well-designed chart can convey your impact in seconds
+- **Communicate impact quickly**: Donors and funders often have limited time—a well-designed chart can convey your impact in seconds
 
--   **Make data accessible**: Not everyone is comfortable with tables and statistics; visuals bridge that gap
+- **Make data accessible**: Not everyone is comfortable with tables and statistics; visuals bridge that gap
 
--   **Tell compelling stories**: Numbers become narratives when paired with effective visuals
+- **Tell compelling stories**: Numbers become narratives when paired with effective visuals
 
--   **Identify patterns and trends**: Visualizations help you and your team spot insights that might be hidden in spreadsheets
+- **Identify patterns and trends**: Visualizations help you and your team spot insights that might be hidden in spreadsheets
 
--   **Support decision-making**: Clear visuals help boards and leadership understand options and implications
+- **Support decision-making**: Clear visuals help boards and leadership understand options and implications
 
 **Common non-profit use cases:**
 
--   Annual reports and impact statements
+- Annual reports and impact statements
 
--   Grant proposals and funder reports
+- Grant proposals and funder reports
 
--   Board presentations
+- Board presentations
 
--   Social media and marketing materials
+- Social media and marketing materials
 
--   Program evaluation reports
+- Program evaluation reports
 
--   Internal dashboards for monitoring progress
+- Internal dashboards for monitoring progress
 
 # The Anatomy of Bad Visuals
 
@@ -48,7 +48,7 @@ The data visuals we may deem as "bad" typically have at least one of three thing
 2.  Substantive Problems: The visual has a problem due to the data presented
 3.  Perceptual: The visual is confusing or misleading
 
-## Commons Mistakes
+## Common Mistakes
 
 ### Using 3D
 
@@ -56,11 +56,11 @@ The data visuals we may deem as "bad" typically have at least one of three thing
 
 *Example of what NOT to do:*
 
--   Using 3D pie charts to show budget allocation
+- Using 3D pie charts to show budget allocation
 
--   Tilting charts at angles that distort perception
+- Tilting charts at angles that distort perception
 
--   Using explosion effects that separate slices
+- Using explosion effects that separate slices
 
 Below is an example of what not to do. Even with the ability to rotate the image, it is still extremely difficult to identify the value of a point on the third dimension, especially in relation to other points on the same scales.
 
@@ -76,7 +76,7 @@ plot_ly(mtcars, x = ~mpg, y = ~disp, z = ~hp, type = "scatter3d", mode = "marker
 
 *Why it's bad:* The human eye cannot accurately judge angles and depths in 3D space, especially on a 2D screen. A slice representing 25% might look larger or smaller depending on its position.
 
-**Better alternative:** Plot the points on a 2D plane, but adjust the size of the points to share the third variable. Now it is much easier to identify trends in the data. For example, we can see below that there is a positive correlation between horsepower and displacement, and the size of the points tells us that this correlation holds true for cylinders as well (lower cylinders correlate with lower displacement and horsepower).
+**Better alternative:** Plot the points on a 2D plane, but adjust the size of the points to share the third variable. Now it is much easier to identify trends in the data. For example, we can see below that there is a positive correlation between horsepower and displacement, and the size of the points tells us that this correlation holds true for cylinders as well (fewer cylinders correlate with lower displacement and horsepower).
 
 ✅
 
@@ -116,11 +116,11 @@ ggplot(mtcars, aes(x = disp, y = hp, size = mpg, color = factor(cyl))) +
 
 *Example of what NOT to do:*
 
--   A pie chart with 12 thin slices in different colors
+- A pie chart with 12 thin slices in different colors
 
--   Line graphs with 8+ overlapping lines
+- Line graphs with 8+ overlapping lines
 
--   Maps where every county is a different color
+- Maps where every county is a different color
 
 *Why it's bad:* Beyond 6-7 colors, the visualization becomes visually overwhelming and the audience spends more time decoding the legend than understanding the data.
 
@@ -132,11 +132,11 @@ ggplot(mtcars, aes(x = disp, y = hp, size = mpg, color = factor(cyl))) +
 
 *Example of what NOT to do:*
 
--   Starting a y-axis at 95 instead of 0 to make a 2% increase look dramatic
+- Starting a y-axis at 95 instead of 0 to make a 2% increase look dramatic
 
--   Using inconsistent intervals on axes
+- Using inconsistent intervals on axes
 
--   Truncating axes to make small changes appear large
+- Truncating axes to make small changes appear large
 
 ❌
 
@@ -148,7 +148,7 @@ ggplot(mtcars, aes(x = disp, y = hp, size = mpg, color = factor(cyl))) +
 
 ✅
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
 library(tidyverse)
 df <- data.frame(party = c("Conservative", "Labour"),
                  date = c("2023/24*", "2024/25"),
@@ -185,13 +185,13 @@ df %>%
 
 *Example of what NOT to do:*
 
--   Adding clip art or images to bars in a bar chart
+- Adding clip art or images to bars in a bar chart
 
--   Heavy gridlines on every axis
+- Heavy gridlines on every axis
 
--   Drop shadows, gradients, and textures
+- Drop shadows, gradients, and textures
 
--   Decorative backgrounds that compete with data
+- Decorative backgrounds that compete with data
 
 *Why it's bad:* Every non-essential element distracts from your message. The data should be the star, not the decoration.
 
@@ -203,11 +203,11 @@ df %>%
 
 *Examples of what NOT to do:*
 
--   Using a line chart for categorical data (like program types)
+- Using a line chart for categorical data (like program types)
 
--   Using a pie chart to show change over time
+- Using a pie chart to show change over time
 
--   Using a bar chart when the story is about trends over time
+- Using a bar chart when the story is about trends over time
 
 *Why it's bad:* Different chart types communicate different relationships. Using the wrong type makes patterns harder to see and can confuse your audience.
 
@@ -223,21 +223,21 @@ The CRAP principles (Contrast, Repetition, Alignment, Proximity) are fundamental
 
 **In data visualization:**
 
--   Use strong color contrast between data and background
+- Use strong color contrast between data and background
 
--   Make important numbers or insights visually prominent through size, color, or weight
+- Make important numbers or insights visually prominent through size, color, or weight
 
--   Ensure text is readable (dark text on light background, or vice versa)
+- Ensure text is readable (dark text on light background, or vice versa)
 
--   Differentiate between categories clearly
+- Differentiate between categories clearly
 
 **Good practices:**
 
--   Highlighting one data series in color while others are gray
+- Highlighting one data series in color while others are gray
 
--   Using bold, larger fonts for titles and key numbers
+- Using bold, larger fonts for titles and key numbers
 
--   Creating clear visual hierarchy (titles → subtitles → labels → annotations)
+- Creating clear visual hierarchy (titles → subtitles → labels → annotations)
 
 Below is an example of poor contrast. The graph displays the dropout rates for students who enrolled in different programs. The coloring of the text and columns make it difficult to know where first to look and how to scan the image. Because of this, the story is lost.
 
@@ -332,19 +332,19 @@ While CRAP principles help with layout and design, Gestalt principles explain ho
 
 Gestalt Rules:
 
--   Proximity: Things that are near to one another seem to be related
+- Proximity: Things that are near to one another seem to be related
 
--   Similarity: Things that look alike seem to be related
+- Similarity: Things that look alike seem to be related
 
--   Connections: Visually tied are related
+- Connections: Visually tied are related
 
--   Continuity: Partially hidden shapes are perceived as completed into familiar shapes
+- Continuity: Partially hidden shapes are perceived as completed into familiar shapes
 
--   Closure: incomplete shapes are perceived as complete
+- Closure: incomplete shapes are perceived as complete
 
--   Figure-Ground: People automatically separate a visual field into a "figure" (the main subject) and a "ground" (the background)
+- Figure-Ground: People automatically separate a visual field into a "figure" (the main subject) and a "ground" (the background)
 
--   Common Fate: Elements sharing a direction of movement are perceived as a unit
+- Common Fate: Elements sharing a direction of movement are perceived as a unit
 
 # Understand What You Share
 
@@ -402,25 +402,25 @@ ggplot(color_rule, aes(x = 1, y = percentage, fill = section)) +
 
 **Use Color Purposefully**
 
--   Every color should have a meaning
+- Every color should have a meaning
 
--   Don't add color just for decoration
+- Don't add color just for decoration
 
--   Limit your palette to 3-5 colors maximum
+- Limit your palette to 3-5 colors maximum
 
 **Choose Accessible Colors**
 
--   Ensure sufficient contrast (use online contrast checkers)
+- Ensure sufficient contrast (use online contrast checkers)
 
--   Avoid red-green combinations (colorblind-friendly)
+- Avoid red-green combinations (colorblind-friendly)
 
--   Test your visualizations in grayscale
+- Test your visualizations in grayscale
 
 **Use Sequential Colors for Ordered Data**
 
--   Light to dark for low to high values
+- Light to dark for low to high values
 
--   Single-hue gradients (light blue → dark blue)
+- Single-hue gradients (light blue → dark blue)
 
 # Typography
 
@@ -430,43 +430,43 @@ Text is often overlooked but critical to effective visualizations.
 
 **Choose Readable Fonts**
 
--   Sans-serif fonts (Arial, Helvetica, Calibri) for digital displays
+- Sans-serif fonts (Arial, Helvetica, Calibri) for digital displays
 
--   Avoid decorative or script fonts for data
+- Avoid decorative or script fonts for data
 
 **Create Hierarchy Through Size**
 
--   Chart title: Largest (18-24pt)
+- Chart title: Largest (18-24pt)
 
--   Axis titles: Medium (12-14pt)
+- Axis titles: Medium (12-14pt)
 
--   Axis labels: Smaller (10-12pt)
+- Axis labels: Smaller (10-12pt)
 
--   Annotations: Same as axis labels or slightly smaller
+- Annotations: Same as axis labels or slightly smaller
 
 **Use Font Weight Strategically**
 
--   Bold for titles and key numbers
+- Bold for titles and key numbers
 
--   Regular weight for most text
+- Regular weight for most text
 
--   Avoid italics (harder to read)
+- Avoid italics (harder to read)
 
 **Ensure Legibility**
 
--   Minimum font size: 10pt for print, 12pt for screens
+- Minimum font size: 10pt for print, 12pt for screens
 
--   Avoid all caps for body text
+- Avoid all caps for body text
 
--   Use sufficient line spacing
+- Use sufficient line spacing
 
 **Align Text Thoughtfully**
 
--   Left-align most text (easiest to read)
+- Left-align most text (easiest to read)
 
--   Center-align titles when appropriate
+- Center-align titles when appropriate
 
--   Right-align numbers in tables
+- Right-align numbers in tables
 
 # A Simple Visualization Checklist
 
@@ -474,70 +474,70 @@ Before sharing any visualization, ask yourself:
 
 **Clarity**
 
--   Can someone understand the main message in 5 seconds?
+- Can someone understand the main message in 5 seconds?
 
--   Is the chart type appropriate for the data?
+- Is the chart type appropriate for the data?
 
--   Are axes clearly labeled?
+- Are axes clearly labeled?
 
--   Is there a clear title that tells the story?
+- Is there a clear title that tells the story?
 
 **Design**
 
--   Is there sufficient contrast between elements?
+- Is there sufficient contrast between elements?
 
--   Are colors used purposefully and consistently?
+- Are colors used purposefully and consistently?
 
--   Is text readable (size, font, contrast)?
+- Is text readable (size, font, contrast)?
 
--   Have I removed all unnecessary elements (chartjunk)?
+- Have I removed all unnecessary elements (chartjunk)?
 
--   Is there adequate white space?
+- Is there adequate white space?
 
 **Accuracy**
 
--   Are axes scaled appropriately?
+- Are axes scaled appropriately?
 
--   Are data sources cited?
+- Are data sources cited?
 
--   Are numbers accurate and up-to-date?
+- Are numbers accurate and up-to-date?
 
--   Have I avoided misleading representations?
+- Have I avoided misleading representations?
 
 **Accessibility**
 
--   Is this colorblind-friendly?
+- Is this colorblind-friendly?
 
--   Can it be understood in grayscale?
+- Can it be understood in grayscale?
 
--   Is text large enough to read?
+- Is text large enough to read?
 
--   If digital, is it screen-reader compatible?
+- If digital, is it screen-reader compatible?
 
 **Context**
 
--   Is there enough context for the audience to understand?
+- Is there enough context for the audience to understand?
 
--   Have I explained any necessary terms or abbreviations?
+- Have I explained any necessary terms or abbreviations?
 
--   Does this visualization support my overall narrative?
+- Does this visualization support my overall narrative?
 
 # Tools
 
--   Datawrapper (Free for basic use)
+- Datawrapper (Free for basic use)
 
--   Flourish (Free for basic use)
+- Flourish (Free for basic use)
 
--   Tableau
+- Tableau
 
--   Power BI
+- Power BI
 
 ------------------------------------------------------------------------
 
 **Further Reading**
 
--   [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/introduction.html)
+- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/introduction.html)
 
--   [Contrast: One of the 3Cs for Better Charts](https://www.nngroup.com/articles/contrast-charts/)
+- [Contrast: One of the 3Cs for Better Charts](https://www.nngroup.com/articles/contrast-charts/)
 
 **Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](http://localhost:7548/modules/contact.qmd) me.

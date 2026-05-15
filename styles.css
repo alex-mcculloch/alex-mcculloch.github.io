@@ -4,7 +4,7 @@ body {
   padding: 0;
   background: #faf8f6;
   color: #000;
-  font-family: 'Inter', sans-serif; 
+  font-family: 'Inter', sans-serif;  
 } 
  
 h1, h2, h3 { 
@@ -284,7 +284,7 @@ h1, h2, h3 {
   font-size: 2.5rem;
   margin-bottom: 20px;
   font-weight: 700;
-}
+}   
 
 .nonprofit-intro {
   max-width: 800px;
@@ -298,6 +298,7 @@ h1, h2, h3 {
 .search-filter-section {
   padding: 40px 10%;
   background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .search-box {
@@ -464,6 +465,41 @@ h1, h2, h3 {
 /* All Modules Section */
 .all-modules-section {
   padding: 60px 10%;
+}
+
+/* Upcoming Modules Section */
+.upcoming-modules-section {
+  padding: 60px 10%;
+  background: #faf8f6;
+}
+
+.module-card.upcoming {
+  opacity: 0.65;
+  cursor: default;
+  border-left-color: #bbb;
+  background: #f9f9f9;
+}
+
+.module-card.upcoming:hover {
+  transform: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.module-card.upcoming h3 {
+  color: #777;
+}
+
+.module-card.upcoming .module-tag {
+  background: #999;
+}
+
+.module-card.upcoming .module-tag.upcoming-tag {
+  background: #2a7d6b; /*#e67e22;*/
+  color: white;
+}
+
+.module-card.upcoming .module-description {
+  color: #888;
 }
  
 /* Self-Assessment Styling */ 

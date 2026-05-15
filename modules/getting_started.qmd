@@ -86,7 +86,7 @@ This is where **logic models** can become invaluable. Logic models are a visual 
 Below is a simplified table to help build your first logic model.
 
 | Goal           | Activities  | Outcomes       | Indicators                       |
-|---------------|---------------|---------------|---------------------------|
+|----------------|----------------|----------------|------------------------|
 | *Your purpose* | *Your work* | *Achievements* | *How you know you found success* |
 
 Note, it's important to distinguish **outputs** from **outcomes**. **Outputs** are the direct, tangible, and immediate results of your program activities. **Outcomes** are the changes or benefits that occur because of those outputs - they answer the "so what?" question.
@@ -386,9 +386,13 @@ Protecting the data you collect is not just good practice–it's often legally r
 
 -   **State laws**: Many states have specific data privacy requirements
 
-Tip: create a field in your system that identifies all fields that may fall under the above categories. Systems such as Salesforce allows you to specify the level of sensitivity for any field you create.
+::: callout-note
+## Tip
+
+Create a field in your system that identifies all fields that may fall under the above categories. Systems such as Salesforce allows you to specify the level of sensitivity for any field you create.
 
 *Always consult legal counsel if you're unsure about compliance requirements.*
+:::
 
 # Creating a Data Collection Plan
 
@@ -605,4 +609,4 @@ function calculateScore() {
 
 [Logic Model Course (University of Wisconsin)](https://logicmodel.extension.wisc.edu/)
 
-**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](contact.qmd) me.
+**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](mailto:asmcculloch46@gmail.com) me.

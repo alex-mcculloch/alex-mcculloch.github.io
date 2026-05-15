@@ -87,6 +87,7 @@ format: html
 </div>
 
 <div class="column-screen">
+  <div class="column-screen">
   <!-- All Modules Section -->
   <section class="all-modules-section">
     <div class="section-header">
@@ -95,126 +96,189 @@ format: html
     </div>
     
     <div class="module-grid" id="allModulesGrid">
+      <div class="module-card" data-topics="data-basics tools">
+        <h3>Getting Started with Data</h3>
+        <div>
+          <span class="module-tag">Data Basics</span>
+          <span class="module-tag">Tools</span>
+        </div>
+        <p class="module-description">
+          Learn the fundamentals of data collection, organization, and storage. Perfect for organizations 
+          taking their first steps into data-driven decision making.
+        </p>
+        <a href="modules/getting_started.qmd" class="module-link">Start Module →</a>
+      </div>
+      
+      <div class="module-card" data-topics="data-basics">
+        <h3>Understanding Your Data</h3>
+        <div>
+          <span class="module-tag">Data Basics</span>
+        </div>
+        <p class="module-description">
+          Discover how to ask the right questions of your data and interpret basic statistics to 
+          understand trends and patterns in your programs.
+        </p>
+        <a href="modules/understand_data.qmd" class="module-link">Start Module →</a>
+      </div>
+      
+      <div class="module-card" data-topics="visualization data-basics">
+        <h3>Foundations of Data Visualization</h3>
+        <div>
+          <span class="module-tag">Visualization</span>
+          <span class="module-tag">Data Basics</span>
+        </div>
+        <p class="module-description">
+          Learn how to create compelling visualizations and narratives that communicate your 
+          organization's impact to stakeholders and funders.
+        </p>
+        <a href="modules/found_visuals.qmd" class="module-link">Start Module →</a>
+      </div>
+      
+    <div class="module-card", data-topics="fundraising machine learning">
+      <h3>Identifying Donors with Machine Learning</h3>
+      <div>
+        <span class="module-tag">Machine Learning</span>
+        <span class="module-tag">Fundraising</span>
+      </div>
+      <p class="module-description">
+        Use machine learning and Census data to identify high and low income donors.
+      </p>
+      <a href="projects/CharityML/DonorsML_portfolio.qmd" class="module-link">Start Module →</a>
+    </div>
+      
+    </div>
+    
+    <div class="no-results" id="noResults">
+      No modules found matching your search. Try different keywords or reset filters.
+    </div>
+  </section>
+</div>
+
+<div class="column-screen">
+  <!-- Upcoming Modules Section -->
+  <section class="upcoming-modules-section">
+    <div class="section-header">
+      <h2>Upcoming Modules</h2>
+      <p>New modules currently in development. Check back soon!</p>
+    </div>
+    
+    <div class="module-grid" id="upcomingModulesGrid">
       <!-- Impact Measurement -->
-      <div class="module-card" data-topics="impact">
+      <div class="module-card upcoming" data-topics="impact">
         <h3>Measuring Program Impact</h3>
         <div>
           <span class="module-tag">Impact Measurement</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Develop frameworks for measuring and evaluating the effectiveness of your programs 
           using quantitative and qualitative data.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
-      <div class="module-card" data-topics="impact data-basics">
+      <div class="module-card upcoming" data-topics="impact data-basics">
         <h3>Creating Evaluation Surveys</h3>
         <div>
           <span class="module-tag">Impact Measurement</span>
           <span class="module-tag">Data Basics</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Design effective surveys that capture meaningful feedback from beneficiaries, 
           volunteers, and stakeholders.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
       <!-- Fundraising -->
-      <div class="module-card" data-topics="fundraising">
+      <div class="module-card upcoming" data-topics="fundraising">
         <h3>Donor Data Analysis</h3>
         <div>
           <span class="module-tag">Fundraising</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Analyze donor patterns, retention rates, and giving trends to optimize your 
           fundraising strategies and strengthen relationships.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
-      <div class="module-card" data-topics="fundraising visualization">
+      <div class="module-card upcoming" data-topics="fundraising visualization">
         <h3>Grant Reporting Dashboards</h3>
         <div>
           <span class="module-tag">Fundraising</span>
           <span class="module-tag">Visualization</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Create compelling visual reports that demonstrate program outcomes and impact 
           to current and prospective funders.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
       <!-- Demographics -->
-      <div class="module-card" data-topics="demographics">
+      <div class="module-card upcoming" data-topics="demographics">
         <h3>Community Needs Assessment</h3>
         <div>
           <span class="module-tag">Demographics</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Use census data and local statistics to understand the demographics and needs 
           of the communities you serve.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
-      <div class="module-card" data-topics="demographics impact">
+      <div class="module-card upcoming" data-topics="demographics impact">
         <h3>Equity Analysis</h3>
         <div>
           <span class="module-tag">Demographics</span>
           <span class="module-tag">Impact Measurement</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Ensure your programs reach and serve all community members equitably by 
           analyzing participation and outcomes across demographic groups.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
       <!-- Visualization -->
-      <div class="module-card" data-topics="visualization">
+      <div class="module-card upcoming" data-topics="visualization">
         <h3>Dashboard Design for Non-Profits</h3>
         <div>
           <span class="module-tag">Visualization</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Build interactive dashboards that help your team track key metrics and 
           make data-driven decisions in real-time.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
       <!-- Tools -->
-      <div class="module-card" data-topics="tools">
+      <div class="module-card upcoming" data-topics="tools">
         <h3>Free Tools for Non-Profit Data</h3>
         <div>
           <span class="module-tag">Tools & Software</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Discover free and low-cost software tools perfect for non-profit organizations, 
           including spreadsheets, databases, and visualization platforms.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
       
-      <div class="module-card" data-topics="tools data-basics">
+      <div class="module-card upcoming" data-topics="tools data-basics">
         <h3>Data Security & Privacy</h3>
         <div>
           <span class="module-tag">Tools & Software</span>
           <span class="module-tag">Data Basics</span>
+          <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
           Protect sensitive beneficiary and donor information with best practices for 
           data security, privacy compliance, and ethical data use.
         </p>
-        <a href="#" class="module-link">View Module →</a>
       </div>
-    </div>
-    
-    <div class="no-results" id="noResults">
-      No modules found matching your search. Try different keywords or reset filters.
     </div>
   </section>
 </div>

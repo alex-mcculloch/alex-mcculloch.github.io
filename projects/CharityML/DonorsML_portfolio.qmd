@@ -49,9 +49,9 @@ donations <- donations %>%
 
 The outcome variable, `income`, is converted into a binary classification problem:
 
--   `1` → earns \$50,000 or more
+- `1` → earns \$50,000 or more
 
--   `0` → earns less than \$50,000
+- `0` → earns less than \$50,000
 
 We can also see that the dataset is imbalanced, with 75% of individuals earning less than \$50,000 annually. Remember this imbalance when we move onto evaluating the model.
 
@@ -61,15 +61,15 @@ We can also see that the dataset is imbalanced, with 75% of individuals earning 
 
 We'll be using Random Forest classifier, which is well-suited for this task because it:
 
--   Handles nonlinear relationships and interactions naturally
+- Handles nonlinear relationships and interactions naturally
 
--   Performs well with mixed numeric and categorical predictors
+- Performs well with mixed numeric and categorical predictors
 
--   Is robust to noise and missing information
+- Is robust to noise and missing information
 
 ## Train Model
 
-We split the data into training and testing sets, using 80% of the data for training and 20% for evaluation. This ensures the model is assessed on data it has not seen before.
+We split the data into training and testing sets, using 80% of the data for training and 20% for evaluation. This ensures the model is assessed on data it has not seen before. We'll also remove `education-num` and `relationship` since they are both correlated with other variables (`education_level` and `marital-status` respectively).
 
 ```{r train, message=FALSE}
 set.seed(123)
@@ -113,17 +113,17 @@ confusionMatrix(pred_rf, as.factor(test$income))
 
 We can see that this model achieves 86% overall accuracy, which may seem high at first glance. However, accuracy alone can be misleading, especially when the underlying data are imbalanced.
 
-In this dataset, the majority (75%) of individuals earn less than \$50,000, meaning a model could achieve relatively high accuracy simply by predicting the most common outcome. To account for this, we use Cohen’s Kappa, a statistic that measures how much better the model performs compared to random chance. Specifically, it measures agreement between two raters or classifiers correcting for agreement that would happen by chance. It ranges from -1 (complete disagreement) to 1 (perfect agreement) with 0 indicating agreement no better than random chance.
+In this dataset, the majority (75%) of individuals earn less than \$50,000, meaning a model could achieve relatively high accuracy simply by predicting the most common outcome. To account for this, we use Cohen’s Kappa, a statistic that measures how much better the model performs compared to random chance.
+
+In this context, agreement refers to how often the model’s predictions align with the true income labels—treating the model as one “rater” and the observed data as another. Cohen’s Kappa adjusts this agreement by subtracting the portion that would be expected simply due to the class imbalance in the data. The statistic ranges from −1 (perfect disagreement) to 1 (perfect agreement), with 0 indicating that the model’s predictions are no better than random guessing.
 
 This is calculated using the following formula:
 
-$$
-\begin{align*}
+$$\begin{align*}
 K &= \frac{P_o - P_e}{1 - P_e} \\[4mm]
 P_o &: \text{Observed Accuracy} \\
 P_e &: \text{Expected Accuracy}
-\end{align*}
-$$
+\end{align*}$$
 
 ```{r calc kappa}
 # True outcomes: 
@@ -165,13 +165,13 @@ To better understand how the model is making predictions, we examine variable im
 
 From the results:
 
--   `marital_status` shows the largest drop in accuracy, making it the most influential predictor under this metric.
+- `marital_status` shows the largest drop in accuracy, making it the most influential predictor under this metric.
 
--   `capital_gain` is also highly influential, reinforcing its strong association with higher income.
+- `capital_gain` is also highly influential, reinforcing its strong association with higher income.
 
--   `education_level`, `occupation`, and `capital_loss` form a second tier of important predictors.
+- `education_level`, `occupation`, and `capital_loss` form a second tier of important predictors.
 
--   Variables such as `race`, `native_country`, and `sex` contribute relatively little to overall accuracy.
+- Variables such as `race`, `native_country`, and `sex` contribute relatively little to overall accuracy.
 
 This suggests the model relies far more on economic and household characteristics than on demographic attributes.
 
@@ -179,19 +179,19 @@ The Mean Decrease in Gini measure how much a variable improves node purity acros
 
 In the Gini-based ranking:
 
--   `marital_status` stands out dramatically, with the highest importance by a wide margin.
+- `marital_status` stands out dramatically, with the highest importance by a wide margin.
 
--   `age`, `capital_gain`, and `education_level` also rank highly, indicating they are frequently used to create informative splits.
+- `age`, `capital_gain`, and `education_level` also rank highly, indicating they are frequently used to create informative splits.
 
--   Variables such as `race`, `sex`, and `native_country` again appear near the bottom.
+- Variables such as `race`, `sex`, and `native_country` again appear near the bottom.
 
 #### Interpreting the differences
 
 While both metrics identify similar top predictors, they emphasize slightly different aspects of importance:
 
--   Mean Decrease in Accuracy highlights variables that are *essential for overall predictive performance*.
+- Mean Decrease in Accuracy highlights variables that are *essential for overall predictive performance*.
 
--   Mean Decrease in Gini highlights variables that are *frequently useful for splitting the data*.
+- Mean Decrease in Gini highlights variables that are *frequently useful for splitting the data*.
 
 For example, `age` ranks more highly under Gini than Accuracy, suggesting it is often used in tree splits but may be somewhat redundant once other variables are known.
 
@@ -228,19 +228,16 @@ test_scored <- test_scored %>%
   ))
 ```
 
-Before evaluating the value of the model, we need as baseline for comparison.
+Before evaluating the value of the model, recall that 75% of respondents earned less than \$50K, thus making our baseline for comparison 25%. This means that if a nonprofit were to contact donors at random, roughly one in four would fall into the higher-income category.
 
 ```{r}
 # baseline rate
 mean(test$income==1) #25%
-# if contact at random, only 25% earn more than 50K
 ```
-
-Only about 25% of individuals in the dataset earn \$50K or more. This means that if a nonprofit were to contact donors at random, roughly one in four would fall into the higher-income category.
 
 ### Measuring Lift
 
-Lift compares the model's targeting performance against random outreach. It informs us of how much more likely we are to reach a high-income earner by using the model. We can summarize outcome by donor tier below.
+Lift compares the model’s targeting performance against what would be expected from random outreach. Rather than focusing on overall accuracy, lift quantifies the improvement gained by using model-driven targeting instead of contacting individuals without any prioritization. This makes it particularly useful in fundraising and outreach settings, where the goal is not just correct classification but more efficient allocation of limited resources.
 
 ```{r}
 test_scored %>% 
@@ -256,7 +253,9 @@ test_scored %>%
 0.601/0.248 
 ```
 
-Earners in the high priority tier are 3.5 times more likely to earn \$50K or more compared to random selection. Even the medium tier is 2.5 times more likely to include higher-income individuals.
+When outcomes are summarized by donor tier, the advantage of this approach becomes clear. Individuals in the high priority tier are approximately 3.5 times more likely to earn \$50,000 or more compared to random selection. The medium priority tier also performs well, with individuals about 2.5 times more likely to be high-income earners. These results indicate that the model successfully concentrates higher-value prospects into smaller, more actionable groups.
+
+Overall, these lift values demonstrate that the model provides meaningful practical value beyond baseline accuracy. By shifting outreach toward higher-probability donors, organizations can improve efficiency, reduce wasted effort, and make more informed decisions about how to deploy their fundraising strategies.
 
 # Conclusion
 
@@ -264,4 +263,8 @@ Overall, this project shows how machine learning can be used as a practical deci
 
 Most importantly, the results translate cleanly into action. The donor tiering approach highlights how targeted outreach can dramatically outperform random contact, with high-priority donors being nearly four times more likely to have higher income than the baseline population. This framing aligns closely with how non-profits actually operate, where limited staff time and resources make prioritization essential rather than optional.
 
-To see this model in action, I have created a Shiny web application that can be found [here](https://4blh4z-alex-mcculloch.shinyapps.io/charityml/). You can calculate an individual's probability of being a \$50K+ earner by entering information in the right panel. You can also see an example of what it would look like if you were to upload a file containing potential donor information by selecting the "Load Sample Donor Data" button.
+To see this model in action, I have created a Shiny web application that can be found [here](https://4blh4z-alex-mcculloch.shinyapps.io/charityml/). You can calculate an individual's probability of being a \$50K+ earner by entering information in the left panel. You can also see an example of what it would look like if you were to upload a file containing potential donor information by selecting the "Load Sample Donor Data" button.
+
+------------------------------------------------------------------------
+
+**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please contact me.

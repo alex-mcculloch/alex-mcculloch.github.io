@@ -6,7 +6,7 @@ toc: true
 
 # Introduction
 
-Many non-profits often feel overwhelmed with managing and making sense of data. The good news is that working with data doesn't require advanced statistical knowledge or expensive software. What matters most is to ask the right questions and developing a systemic to finding answers in your data.
+Many non-profits often feel overwhelmed with managing and making sense of data. The good news is that working with data doesn't require advanced statistical knowledge or expensive software. What matters most is to ask the right questions and developing a system to finding answers in your data.
 
 This module will help you build confidence in working with your organization's data. You'll learn how to formulate meaningful questions that align with your mission, understand basic statistical concepts that reveal patterns in your work, and develop practical skills for interpreting what your data tells you about your programs. Whether you're tracking client outcomes, volunteer hours, or program attendance, these foundational skills will help you transform raw numbers into actionable insights.
 

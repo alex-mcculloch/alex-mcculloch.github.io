@@ -22,7 +22,7 @@ format: html
     </p>
     <div class="hero-buttons">
       <a class="btn github-btn" href="https://github.com/alex-mcculloch" target="_blank">GitHub</a>
-      <a class="btn contact-btn" href="contact.qmd">Contact</a>
+      <a class="btn contact-btn" href="mailto:asmcculloch46@gmail.com">Contact</a>
     </div>
   </div>
 </section> 
@@ -48,19 +48,21 @@ format: html
   <h2 class="section-title">Selected Projects</h2>
   <div class="card-grid">
     <div class="card">
-      <h3>Congress Vote Alignment Tool</h3>
-      <p>An interactive Shiny app aligning users with House members based on bill preferences.</p>
-      <a class="card-link" href="project1.qmd">View Project →</a>
+      <h3>Congressional Exploerer Tool</h3>
+      <p>Explore the members of Congress, their biographies, and bills voted on.</p>
+      <a class="card-link" href=https://4blh4z-alex-mcculloch.shinyapps.io/MC_Match/>View Project →</a>
     </div>
     <div class="card">
+    <!--
       <h3>Veteran Needs Dashboard</h3>
       <p>ACS and Salesforce-based analysis of veteran needs for nonprofit program design.</p>
       <a class="card-link" href="project2.qmd">View Project →</a>
     </div>
+    -->
     <div class="card">
       <h3>Identifying Donors with Machine Learning</h3>
       <p>Use machine learning and Census data to identify high and low income donors.</p>
-      <a class="card-link" href="https://4blh4z-alex-mcculloch.shinyapps.io/charityml/">View Project →</a>
+      <a class="card-link" href="projects/CharityML/DonorsML_portfolio.qmd">View Project →</a>
     </div>
   </div>
 </section>
@@ -89,14 +91,14 @@ format: html
   <div class="bubble-container">
     <!-- Programming - top left cluster -->
     <div class="bubble" data-category="programming" style="--size:90px; --x:10%; --y:20px;">R</div>
-    <div class="bubble" data-category="programming" style="--size:75px; --x:25%; --y:80px;">Python</div>
+<!--    <div class="bubble" data-category="programming" style="--size:75px; --x:25%; --y:80px;">Python</div> -->
     
     <!-- Data Visualization - top right cluster -->
     <div class="bubble" data-category="vis" style="--size:85px; --x:60%; --y:10px;">ggplot2</div>
     <div class="bubble" data-category="vis" style="--size:70px; --x:75%; --y:65px;">D3.js</div>
     
     <!-- Statistics & ML - center cluster -->
-    <div class="bubble" data-category="ml" style="--size:95px; --x:35%; --y:140px;">Modeling</div>
+    <div class="bubble" data-category="ml" style="--size:95px; --x:35%; --y:140px;">Machine Learning</div>
     <div class="bubble" data-category="ml" style="--size:100px; --x:15%; --y:200px;">Forecasting</div>
     
     <!-- Communication - right side -->
@@ -104,7 +106,7 @@ format: html
     <div class="bubble" data-category="comm" style="--size:105px; --x:55%; --y:230px;">Data Stories</div>
     
     <!-- Research - bottom cluster -->
-    <div class="bubble" data-category="research" style="--size:110px; --x:25%; --y:290px;">Research Design</div>
+    <div class="bubble" data-category="research" style="--size:110px; --x:25%; --y:290px;">Survey Design</div>
     <div class="bubble" data-category="research" style="--size:95px; --x:60%; --y:320px;">Regression</div>
   </div>
 </section>
