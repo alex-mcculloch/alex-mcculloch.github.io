@@ -8,7 +8,7 @@ website:
     background: "transparent"
     foreground: "black"
     right:
-      - text: "For Non-Profits"
+      - text: "For Nonprofits"
         href: nonprofits.qmd
       - text: "Portfolio"
         href: portfolio.qmd

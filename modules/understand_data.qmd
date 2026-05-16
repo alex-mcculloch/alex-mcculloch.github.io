@@ -6,7 +6,7 @@ toc: true
 
 # Introduction
 
-Many non-profits often feel overwhelmed with managing and making sense of data. The good news is that working with data doesn't require advanced statistical knowledge or expensive software. What matters most is to ask the right questions and developing a system to finding answers in your data.
+Many nonprofits often feel overwhelmed with managing and making sense of data. The good news is that working with data doesn't require advanced statistical knowledge or expensive software. What matters most is to ask the right questions and developing a system to finding answers in your data.
 
 This module will help you build confidence in working with your organization's data. You'll learn how to formulate meaningful questions that align with your mission, understand basic statistical concepts that reveal patterns in your work, and develop practical skills for interpreting what your data tells you about your programs. Whether you're tracking client outcomes, volunteer hours, or program attendance, these foundational skills will help you transform raw numbers into actionable insights.
 
@@ -76,7 +76,7 @@ Different questions require different types of analysis. Understanding which typ
 
 # Understanding Your Data Landscape
 
-Before analyzing data, you need to understand what information you're actually working with. Every non-profit collects various types of data, from basic demographic information about the people you serve to detailed records of program activities and outcomes. Taking inventory of your data sources and understanding their strengths and limitations is a crucial first step.
+Before analyzing data, you need to understand what information you're actually working with. Every nonprofit collects various types of data, from basic demographic information about the people you serve to detailed records of program activities and outcomes. Taking inventory of your data sources and understanding their strengths and limitations is a crucial first step.
 
 ## Quantitative vs. Qualitative Data
 
@@ -93,7 +93,7 @@ You should also understand how your data was collected and any limitations this 
 Being aware of these limitations doesn't mean your data is useless, but it does mean you should interpret your findings with appropriate caution and look for ways to validate important insights through multiple sources. If your attendance data seems incomplete, you might cross-reference it with sign-in sheets or compare it to what staff members recall. If survey response rates are low, you might conduct a few follow-up phone interviews with non-respondents to see if their experiences differ.
 
 | Data Quality Issue | What It Looks Like | What You Can Do |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Missing data | Blank cells in your spreadsheet, incomplete surveys | Look for patterns in what's missing; consider whether missing data is random or systematic |
 | Inconsistent formats | Dates entered in different ways (3/15/24 vs March 15, 2024), inconsistent naming | Standardize formats moving forward; create data entry guidelines |
 | Outliers | One value dramatically different from others (e.g., one person attended 200 sessions while most attended 5-10) | Verify outliers are accurate; consider whether they should be analyzed separately |
@@ -138,6 +138,12 @@ participants <- data.frame(
   participant_id = 1:length(ages),
   age = ages
 )
+
+# --------------------------------------------
+# Summary stats
+# --------------------------------------------
+mean_age <- mean(participants$age)
+median_age <- median(participants$age)
 
 # --------------------------------------------
 # Visualization
@@ -195,7 +201,8 @@ annotate(
     y = "Number of Participants"
   ) +
   
-  theme_minimal(base_size = 14)
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(face = "bold"))
 
 ```
 
@@ -224,3 +231,674 @@ Understanding the typical value is important, but you also need to know how spre
 **Standard deviation** is a more sophisticated measure of spread that tells you, on average, how far individual values deviate from the mean. A small standard deviation means most values cluster close to the average, while a large standard deviation indicates wide variation. While calculating standard deviation requires a formula or software, understanding the concept helps you interpret variation in your data.
 
 Looking beyond summary statistics to understand how your data is distributed can reveal important patterns. Are most of your values clustered around the average with few extreme cases, or is there wide variation? Are there distinct groups within your data? You might discover that your job training program serves two distinct populations with different age ranges and needs, which could inform how you structure your services.
+
+```{r echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+
+# --------------------------------------------
+# Demonstrating spread / variability
+# Two distributions with the same center
+# but very different spread
+# --------------------------------------------
+
+set.seed(42)
+
+# Narrow distribution:
+# values tightly clustered around the mean
+tight <- rnorm(300, mean = 50, sd = 3)
+
+# Wide distribution:
+# values much more dispersed
+wide <- rnorm(300, mean = 50, sd = 15)
+
+# Combine into one data frame
+df <- data.frame(
+  value = c(tight, wide),
+  group = c(
+    rep("Tightly Clustered", length(tight)),
+    rep("Widely Dispersed", length(wide))
+  )
+)
+
+# --------------------------------------------
+# Visualization
+# --------------------------------------------
+
+library(ggplot2)
+
+ggplot(df, aes(x = value)) +
+  
+  geom_histogram(
+    binwidth = 3,
+    fill = "#2c3e50",
+    color = "black"
+  ) +
+  
+  facet_wrap(~group, ncol = 1) +
+  
+  geom_vline(
+    xintercept = 50,
+    color = "red",
+    linewidth = 1.2,
+    linetype = "dashed"
+  ) +
+  
+  labs(
+    title = "Two Distributions with Different Spread",
+    subtitle = "Both groups have the same average, but very different variability",
+    x = "Value",
+    y = "Count"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+# Identifying Trends and Patterns Over Time
+
+Many of the most important questions nonprofits ask involve change over time. Are we serving more people this year than last? Are participant outcomes improving? How have our funding sources shifted? Analyzing trends requires looking at data collected at multiple points and understanding what those changes might mean.
+
+## Creating and Reading Time Series
+
+When examining trends, start by creating a simple time series of your data. This might be a table showing key metrics month by month or year by year, or ideally a line graph that makes patterns easier to see visually. Look for overall direction first. Is the trend generally moving up, down, or staying relatively stable?
+
+**Example: Monthly Donations**
+
+```{r echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+# --------------------------------------------
+# Line graph showing trend vs monthly variation
+# --------------------------------------------
+
+library(ggplot2)
+
+set.seed(123)
+
+# Create monthly dates
+months <- seq.Date(
+  from = as.Date("2023-01-01"),
+  to = as.Date("2024-12-01"),
+  by = "month"
+)
+
+# Create upward trend + seasonal variation + noise
+donations <- 2000 +
+  seq(0, 1800, length.out = length(months)) +   # upward trend
+  250 * sin(seq(0, 4*pi, length.out = length(months))) +  # seasonality
+  rnorm(length(months), mean = 0, sd = 180)     # random variation
+
+# Build data frame
+df <- data.frame(
+  month = months,
+  donations = round(donations)
+)
+
+# --------------------------------------------
+# Visualization
+# --------------------------------------------
+
+ggplot(df, aes(x = month, y = donations)) +
+  
+  # Main line
+  geom_line(linewidth = 1) +
+  
+  # Points
+  geom_point(size = 2) +
+  
+  # Trend line
+  geom_smooth(
+    method = "lm",
+    se = FALSE,
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  
+  labs(
+    title = "Monthly Donations Show an Overall Upward Trend",
+    subtitle = "Short-term fluctuations occur even when the long-term pattern is positive",
+    x = "Month",
+    y = "Donations ($)"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(face = "bold"))
+
+```
+
+Looking at this data, you can see a general upward trend over the years, with individual months varying. The dips for the year typically occur during a summer month, possibly suggesting a seasonal pattern.
+
+## Recognizing Seasonal Patterns
+
+Seasonal patterns and cycles often appear in nonprofit data. Youth programs may see higher attendance during after-school hours but lower participation during summer months when families travel or children attend camps. Food banks often experience increased demand during winter holidays and reduced donations during summer. Fundraising often spikes at the end of the calendar year for tax-related reasons.
+
+Recognizing these regular patterns is important because it prevents you from mistaking predictable cycles for new trends. If attendance drops every summer, a decrease in June shouldn't cause alarm, but an unusually large drop compared to previous summers would warrant investigation. To identify seasonal patterns, compare the same time periods across multiple years. If June is consistently your lowest attendance month, that's a seasonal pattern. If June 2024 is much lower than June 2022 and 2023, that might indicate a new issue.
+
+### Making Fair Comparisons Across Time
+
+When comparing across time periods, make sure you're making fair comparisons. If your organization has grown significantly, comparing raw numbers from five years ago to today might be misleading. Instead, look at percentages or rates. Rather than just counting how many clients completed your program, calculate the completion rate by dividing completers by total enrollees. This allows you to compare program success across years even as your overall numbers change.
+
+Consider whether your measurement methods have remained consistent. If you changed how you track attendance, modified your outcome surveys, or updated your database system, apparent trends might actually reflect changes in measurement rather than changes in reality. Document any changes to data collection methods and note them when interpreting trends.
+
+Also think about external factors that might influence your data over time. Changes in the economy, new legislation, demographic shifts in your community, or emergence of competing programs can all affect your numbers. A decline in service utilization might reflect improved economic conditions in your community rather than problems with your program. An increase in client needs might reflect changes in eligibility requirements for government programs rather than changes in your effectiveness.
+
+### Making Meaningful Comparisons
+
+Comparison is at the heart of most data questions. You're rarely interested in a number in isolation; you want to know how it relates to something else. Is this outcome better than that one? Does one group differ from another? How do we compare to similar organizations?
+
+#### Comparing Groups Within Your Data
+
+When comparing groups within your data, start by clearly defining the groups you're examining. You might compare outcomes for participants who received different program models, demographic groups, or people who entered your program at different times. Calculate the same descriptive statistics for each group and look for differences.
+
+*Visual recommendation: Create a comparison table template that nonprofits can adapt.*
+
+**Example: Comparing Program Completion Rates by Age Group**
+
+| Age Group   | Total Enrolled | Completed Program | Completion Rate |
+|-------------|----------------|-------------------|-----------------|
+| 18-24       | 45             | 32                | 71%             |
+| 25-34       | 62             | 51                | 82%             |
+| 35-44       | 38             | 33                | 87%             |
+| 45+         | 28             | 25                | 89%             |
+| **Overall** | **173**        | **141**           | **82%**         |
+
+This table reveals that completion rates increase with age. While the overall completion rate is 82%, younger participants (18-24) complete at notably lower rates. This insight might prompt you to investigate why younger participants face more barriers to completion and whether additional supports could help.
+
+When you observe differences between groups, consider both the size of the difference and the size of your groups. A difference of 15 percentage points between groups of 50 people each is more meaningful than the same difference between groups of 5 people each. With very small groups, a single person's outcome can swing percentages dramatically.
+
+Also consider whether differences might be explained by other factors. If you notice that participants in your morning program sessions have better outcomes than those in evening sessions, this might mean morning timing is better, or it might mean that people who can attend morning sessions differ in other ways (perhaps they have more flexible jobs, better childcare arrangements, or different levels of motivation). Looking at multiple characteristics simultaneously can help you understand whether apparent differences hold up when you account for other factors.
+
+#### Benchmarking Against External Standards
+
+Benchmarking against external standards or other organizations can provide valuable context for your data. If your job training program has a 70% job placement rate, is that good? It depends on many factors: the population you serve, the local economy, the types of jobs you're targeting, and how other similar programs perform.
+
+Seek out data from comparable programs through industry associations, research publications, or networks of similar organizations. Government agencies often publish data on program outcomes in various sectors. Funders sometimes share aggregate data across their grantees. When making external comparisons, be careful to account for differences in context, population served, and how metrics are defined and measured. A program serving individuals with significant barriers to employment should not expect the same job placement rates as one serving job-ready candidates.
+
+Sometimes the best benchmark is your own past performance. If you served 500 families last year and set a goal to serve 600 this year, your past performance provides context for whether that goal is realistic and whether you're on track to achieve it.
+
+#### Comparing Actual Performance to Goals
+
+Comparing your data to your goals or targets is another crucial form of analysis. Most nonprofits set goals in their strategic plans, grant proposals, or annual work plans. Regularly comparing actual performance to these targets helps you gauge progress and identify when you need to adjust either your strategies or your expectations.
+
+Create a simple tracking table that shows your goal, your current performance, and the gap between them. This makes it immediately clear where you're on track and where you're falling short.
+
+**Example: Quarterly Goal Tracking**
+
+| Metric | Annual Goal | Q1 Actual | Q1 Target (25%) | Status |
+|---------------|---------------|---------------|---------------|---------------|
+| Clients served | 800 | 187 | 200 | Behind pace (94% of target) |
+| Program completions | 600 | 156 | 150 | Ahead of pace (104% of target) |
+| Volunteer hours | 5,000 | 1,410 | 1,250 | Ahead of pace (113% of target) |
+| Workshop sessions delivered | 120 | 32 | 30 | On pace (107% of target) |
+
+This table shows that while most metrics are on track, client recruitment is slightly behind pace. This early warning allows you to investigate barriers and adjust outreach strategies before the gap becomes larger. In this example, the clients served total is only 13 persons shy of the quarterly target. Depending on context, this may be nothing. If you are aware of seasonal patterns in your data and routinely serve much more than 200 clients in quarters 3 and 4, then being slightly below Q1's target is not something to be concerned with.
+
+If you're consistently missing goals, it's worth examining whether the goals were unrealistic, whether you've encountered unexpected obstacles, or whether your strategies need adjustment. Missing a goal isn't failure if you learn from the analysis and make informed adjustments.
+
+## Understanding Relationships in Your Data
+
+Beyond describing individual variables and comparing groups, you often want to understand whether different factors in your data relate to each other. Does attendance relate to outcomes? Do participants with certain characteristics tend to complete programs at higher rates? Understanding these relationships can help you identify what's working and why.
+
+### Exploring Correlation
+
+Correlation describes the relationship between two numerical variables. When two things are positively correlated, they tend to move in the same direction: as one increases, the other tends to increase as well. For example, you might find that the number of coaching sessions participants attend correlates positively with their employment outcomes. Negative correlation means variables move in opposite directions: as one increases, the other tends to decrease. You might find that the number of barriers clients face at intake correlates negatively with program completion (more barriers associated with lower completion).
+
+You can explore correlation by creating a simple scatterplot with one variable on each axis, or by calculating a correlation coefficient (a number between -1 and 1 that indicates the strength and direction of the relationship). Many spreadsheet programs can calculate this for you.
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+# --------------------------------------------
+# Scatterplot demonstrating positive correlation
+# Example: Tutoring Hours vs Grade Improvement
+# --------------------------------------------
+
+library(ggplot2)
+
+set.seed(42)
+
+# Generate tutoring hours
+tutoring_hours <- runif(60, min = 0, max = 20)
+
+# Generate grade improvement with positive relationship
+grade_improvement <- 2 +
+  1.5 * tutoring_hours +
+  rnorm(60, mean = 0, sd = 4)
+
+# Create data frame
+df <- data.frame(
+  tutoring_hours,
+  grade_improvement
+)
+
+# Calculate correlation
+correlation <- cor(
+  df$tutoring_hours,
+  df$grade_improvement
+)
+
+# --------------------------------------------
+# Visualization
+# --------------------------------------------
+
+ggplot(df, aes(x = tutoring_hours, y = grade_improvement)) +
+  
+  geom_point(size = 2, alpha = 0.8) +
+  
+  # Add trend line
+  geom_smooth(
+    method = "lm",
+    se = FALSE,
+    linewidth = 1
+  ) +
+  
+  labs(
+    title = "More Tutoring Hours Are Associated with Greater Grade\nImprovement",
+    subtitle = paste0(
+      "Correlation = ",
+      round(correlation, 2)
+    ),
+    x = "Tutoring Hours",
+    y = "Grade Improvement"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+However, a critical principle in data interpretation is that **correlation does not prove causation**. Just because two things move together doesn't mean one causes the other. There might be a third factor (confounding *variable*) influencing both, or the relationship might be coincidental (also known as a *spurious correlation*). If you notice that participants who attend more frequently have better outcomes, this could mean attendance causes improvement, but it could also mean that people who are more motivated both attend more and improve more regardless of attendance. Or perhaps those with fewer competing obligations can both attend regularly and focus more effectively on their goals.
+
+Understanding correlations is valuable for generating hypotheses about what matters in your programs, but testing those hypotheses rigorously often requires more careful program design, such as comparing groups who receive different levels of service while being otherwise similar, or tracking the same individuals before and after specific interventions.
+
+#### Cross-Tabulation: Looking at Multiple Factors
+
+Looking for patterns across multiple variables can reveal insights that single-variable analysis might miss. Cross-tabulation creates a table that shows how outcomes vary when you consider two or more characteristics simultaneously.
+
+**Example: Program Completion by Age and Education Level**
+
+|           | High School or Less | Some College | Bachelor's+ |
+|-----------|---------------------|--------------|-------------|
+| **18-24** | 65% (13/20)         | 75% (15/20)  | 83% (5/6)   |
+| **25-34** | 78% (18/23)         | 85% (22/26)  | 92% (12/13) |
+| **35+**   | 82% (23/28)         | 88% (22/25)  | 95% (19/20) |
+
+This cross-tabulation reveals several insights. First, both age and education level relate to completion rates, with older participants and those with more education completing at higher rates. Second, the relationship between education and completion is present across all age groups. Third, even among the youngest participants with the least education (the 65% completion group), nearly two-thirds complete successfully, suggesting the program works for diverse participants even if some groups face more challenges.
+
+This type of analysis helps you identify which combinations of characteristics might indicate that participants need additional support, and which groups consistently succeed regardless of other factors.
+
+### Common Pitfalls and How to Avoid Them
+
+Even experienced data analysts can fall into common traps that lead to misinterpretation. Being aware of these pitfalls will help you avoid them and interpret your data more accurately.
+
+#### 1. Over-Interpreting Small Numbers
+
+One frequent mistake is over-interpreting small differences or focusing too much on outliers. With small sample sizes, a few unusual cases can create the appearance of patterns that don't really exist. If you're comparing outcomes for 10 participants in one program to 10 in another and the first group's average is 3 points higher, this might simply reflect normal variation rather than a meaningful difference.
+
+**Rule of thumb:** Be cautious about drawing strong conclusions from groups smaller than 30 people. Look for patterns that persist across larger numbers or multiple time periods before concluding they're meaningful.
+
+#### 2. Confirmation Bias
+
+Another pitfall is confirmation bias, where you unconsciously focus on data that confirms what you already believe while discounting information that challenges your assumptions. If you're convinced that a particular program component is crucial, you might emphasize evidence supporting its importance while minimizing contradictory findings.
+
+**Strategies to counter this:** Actively look for evidence that challenges your hypotheses. Invite colleagues who weren't involved in program design to review your interpretations. Be transparent about findings that surprise or disappoint you. Ask yourself "What would the data look like if my assumption were wrong?" and genuinely look for that pattern.
+
+#### 3. Ignoring Distribution and Focusing Only on Averages
+
+Focusing exclusively on averages while ignoring variation can lead to misleading conclusions. Your program might show strong average outcomes while actually serving two distinct groups very differently: one group thriving and another struggling. Understanding the distribution of outcomes, not just the average, reveals these patterns.
+
+Similarly, aggregate data can hide important disparities. Overall program completion rates might look good while specific demographic groups face significant barriers. Breaking down your data by relevant characteristics helps ensure you're not missing important inequities or opportunities for improvement.
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+# --------------------------------------------
+# Same average, but hidden subgroup disparities
+# --------------------------------------------
+
+library(ggplot2)
+
+set.seed(123)
+
+# --------------------------------------------
+# Program A:
+# Outcomes are fairly consistent across everyone
+# --------------------------------------------
+
+program_a <- rnorm(120, mean = 75, sd = 6)
+
+program_a_df <- data.frame(
+  outcome = program_a,
+  program = "Program A",
+  group = "All Participants"
+)
+
+# --------------------------------------------
+# Program B:
+# Two demographic groups have very different outcomes
+# Example shown here: Age Groups
+# --------------------------------------------
+
+younger_group <- rnorm(60, mean = 55, sd = 5)
+older_group   <- rnorm(60, mean = 95, sd = 5)
+
+program_b_df <- data.frame(
+  outcome = c(younger_group, older_group),
+  program = "Program B",
+  group = c(
+    rep("Ages 18–24", length(younger_group)),
+    rep("Ages 45+", length(older_group))
+  )
+)
+
+# --------------------------------------------
+# Combine data
+# --------------------------------------------
+
+df <- rbind(program_a_df, program_b_df)
+
+# --------------------------------------------
+# Visualization
+# --------------------------------------------
+
+ggplot(df, aes(x = outcome, fill = group)) +
+  
+  geom_histogram(
+    binwidth = 5,
+    color = "black",
+    alpha = 0.8
+  ) +
+  
+  facet_wrap(~program, ncol = 2) +
+  
+  geom_vline(
+    xintercept = 75,
+    color = "red",
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  
+  scale_fill_manual(values = c(
+    "All Participants" = "#2c3e50",
+    "Ages 18–24" = "#2a7d6b",
+    "Ages 45+" = "orange"
+  )) +
+  
+  labs(
+    title = "Average Outcomes Can Hide Important Group Differences",
+    subtitle = "Both programs have similar averages, but Program B serves groups\nvery differently",
+    x = "Participant Outcome Score",
+    y = "Number of Participants",
+    fill = "Participant Group"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(face = "bold",size = 15))
+```
+
+#### 4. Mistaking Available Data for Important Data
+
+Finally, mistaking available data for relevant data is a common trap. Just because you can easily measure something doesn't mean it's what you should be measuring. Outputs like the number of workshops delivered or people served are easier to track than outcomes like changes in knowledge, behavior, or life circumstances, but outcomes are usually what matter most for understanding your impact.
+
+While you should use the data you have and work with what's practical to collect, also critically consider whether you're measuring what truly matters. If your data shows high attendance but you're not tracking whether participants are gaining skills or achieving their goals, you're only seeing part of the picture.
+
+# Putting It All Together: A Practical Workflow
+
+Effective data analysis in a nonprofit context isn't about sophisticated statistical techniques or expensive software. It's about approaching your data systematically with clear questions and an open mind. Here's a practical workflow you can apply to most data questions you'll encounter.
+
+## Step 1: Define Your Question
+
+Begin every analysis by articulating what you need to know and why. Write down your question explicitly, and clarify what a useful answer would look like. This might seem like unnecessary formality, but it focuses your analysis and helps you recognize when you've found an answer.
+
+::: callout-note
+# Tip
+
+Go beyond asking Yes/No questions. In doing so, you open yourself up to a deeper level of analysis.
+:::
+
+**Vague question:** "How are we doing with our literacy program?"
+
+**Better question:** "To what degree is our program impacting our students' reading levels? Specifically, what percentage are advancing at least one grade level over a six-month period?"
+
+## Step 2: Identify Relevant Data
+
+Identify what data you have or can collect that might address your question. Be honest about any limitations in that data. Do you have complete records or are some missing? Are you measuring exactly what you want to know or a proxy for it? How recent is the data?
+
+For the literacy question above, you'd need reading assessment scores at program entry and six months later. If you only have scores for some students, acknowledge that limitation. If your assessments measure decoding skills but not comprehension, note that distinction.
+
+## Step 3: Summarize and Visualize
+
+Calculate appropriate descriptive statistics that help characterize your data. Create simple tables or charts that let you see patterns visually. For the literacy program, you might calculate:
+
+- The percentage of students who advanced at least one grade level
+
+- The average improvement across all students
+
+- The range of improvement (from students who declined to those who advanced most)
+
+- Completion broken down by factors like attendance or initial reading level
+
+A simple bar chart showing the percentage of students in each category (declined, no change, improved 1 level, improved 2+ levels) makes the pattern immediately clear.
+
+## Step 4: Interpret in Context
+
+Consider what the patterns mean given what you know about your program, your students, and the educational research in this area. What explanations might account for what you're seeing? If 65% of students advanced at least one grade level, is that strong performance? It depends on factors like how intensive your program is, how far behind students were when they started, what gains similar programs achieve, and what's typical for students' natural development.
+
+What do you know from your programmatic experience that helps make sense of the numbers? Perhaps teachers have noticed that students who attend regularly make steady progress. Do the numbers confirm that observation? Are there patterns in the data that surprise experienced staff members? Those surprises often point to important insights worth exploring further.
+
+## Step 5: Draw Conclusions and Identify Next Steps
+
+What does this analysis tell you about your programs? Based on the literacy data, you might conclude that your program is effectively helping most students advance, but a meaningful minority aren't making expected progress. What decisions might this inform? Perhaps you need to investigate why some students aren't advancing and whether they need different supports. Maybe you want to examine whether attendance patterns or initial reading levels predict who advances most.
+
+What new questions has this analysis raised? You might now wonder whether the students who didn't advance have something in common, whether improvement persists after students leave the program, or whether certain tutoring approaches work better than others.
+
+```{r echo=FALSE, message=FALSE,warning=FALSE,error=FALSE}
+library(DiagrammeR)
+
+grViz("
+  digraph workflow {
+    
+    # Graph attributes
+    graph [layout = dot, 
+           rankdir = TB,
+           fontname = Helvetica,
+           bgcolor = '#FAFBFC',
+           nodesep = 0.8,
+           ranksep = 0.6,
+           labelloc = 't',
+           labeljust = 'c',
+           label = <<FONT POINT-SIZE='36'><B>Understanding Your Data: Workflow for Nonprofits</B></FONT><BR/><FONT POINT-SIZE='24' COLOR='#4A6B7C'>A systematic approach to understanding your program data</FONT><BR/><BR/>>,
+           fontsize = 18,
+           pad = 0.5]
+    
+    # Node defaults
+    node [shape = box,
+          style = 'rounded,filled',
+          fillcolor = '#E8F3F8',
+          color = '#2C5F7C',
+          penwidth = 3,
+          fontname = Helvetica,
+          fontsize = 18,
+          fontcolor = '#1A3A4A',
+          width = 5,
+          height = 1.3]
+    
+    # Edge defaults  
+    edge [color = '#2C5F7C',
+          penwidth = 3,
+          arrowsize = 1.0]
+    
+    # Define step number badges (small circular nodes)
+    badge1 [shape = circle,
+            style = filled,
+            fillcolor = '#2C5F7C',
+            color = '#2C5F7C',
+            fontcolor = white,
+            fontsize = 20,
+            label = '1',
+            width = 0.6,
+            height = 0.6,
+            fixedsize = true]
+    
+    badge2 [shape = circle,
+            style = filled,
+            fillcolor = '#2C5F7C',
+            color = '#2C5F7C',
+            fontcolor = white,
+            fontsize = 20,
+            label = '2',
+            width = 0.6,
+            height = 0.6,
+            fixedsize = true]
+    
+    badge3 [shape = circle,
+            style = filled,
+            fillcolor = '#2C5F7C',
+            color = '#2C5F7C',
+            fontcolor = white,
+            fontsize = 20,
+            label = '3',
+            width = 0.6,
+            height = 0.6,
+            fixedsize = true]
+    
+    badge4 [shape = circle,
+            style = filled,
+            fillcolor = '#2C5F7C',
+            color = '#2C5F7C',
+            fontcolor = white,
+            fontsize = 20,
+            label = '4',
+            width = 0.6,
+            height = 0.6,
+            fixedsize = true]
+    
+    badge5 [shape = circle,
+            style = filled,
+            fillcolor = '#2C5F7C',
+            color = '#2C5F7C',
+            fontcolor = white,
+            fontsize = 20,
+            label = '5',
+            width = 0.6,
+            height = 0.6,
+            fixedsize = true]
+    
+    # Define nodes with enhanced labels and icons
+    step1 [label = <<B>Define Your Question</B><BR/><BR/>❓ What do you need to know?<BR/>🎯 What would a useful<BR/>answer look like?>]
+    
+    step2 [label = <<B>Identify Relevant Data</B><BR/><BR/>📊 What data do you have?<BR/>⚠️ What are the limitations?<BR/>✓ Is it complete?>]
+    
+    step3 [label = <<B>Summarize and Visualize</B><BR/><BR/>📈 Calculate statistics<BR/>📉 Create tables and charts<BR/>🔍 Look for patterns>]
+    
+    step4 [label = <<B>Interpret in Context</B><BR/><BR/>💡 What do patterns mean?<BR/>🤔 What explains what you see?<BR/>🔄 Consider alternatives>]
+    
+    step5 [label = <<B>Draw Conclusions</B><BR/><BR/>📝 What did you learn?<BR/>✅ What decisions can you make?<BR/>❔ What questions remain?>]
+    
+    # Add contextual text nodes with decorative elements
+    note1 [shape = plaintext,
+           fontsize = 18,
+           fontcolor = '#4A6B7C',
+           label = <<FONT COLOR='#2C5F7C'>▶</FONT> <I>Start with mission-driven<BR/>   questions, not available data.<BR/>   Be specific and answerable.</I>>]
+    
+    note2 [shape = plaintext,
+           fontsize = 18,
+           fontcolor = '#4A6B7C',
+           label = <<FONT COLOR='#2C5F7C'>▶</FONT> <I>Understand collection methods,<BR/>   missing data, and measurement<BR/>   quality before analyzing.</I>>]
+    
+    note3 [shape = plaintext,
+           fontsize = 18,
+           fontcolor = '#4A6B7C',
+           label = <<FONT COLOR='#2C5F7C'>▶</FONT> <I>Use means, medians, ranges,<BR/>   and visualizations to reveal<BR/>   trends and distributions.</I>>]
+    
+    note4 [shape = plaintext,
+           fontsize = 18,
+           fontcolor = '#4A6B7C',
+           label = <<FONT COLOR='#2C5F7C'>▶</FONT> <I>Combine data insights with<BR/>   programmatic knowledge.<BR/>   Consider external factors.</I>>]
+    
+    note5 [shape = plaintext,
+           fontsize = 18,
+           fontcolor = '#4A6B7C',
+           label = <<FONT COLOR='#2C5F7C'>▶</FONT> <I>Share findings with your team.<BR/>   Use insights to improve programs<BR/>   and inform stakeholders.</I>>]
+    
+    # Add a footer note
+    footer [shape = plaintext,
+            fontsize = 16,
+            fontcolor = '#6B8E9F',
+            label = <<BR/><BR/>💡 <I>Remember: Data analysis is iterative. You may cycle back through steps as you learn more.</I>>]
+    
+    # Define main flow: arrows connect boxes directly
+    step1 -> step2 [arrowhead = vee]
+    step2 -> step3 [arrowhead = vee]
+    step3 -> step4 [arrowhead = vee]
+    step4 -> step5 [arrowhead = vee]
+    
+    # Add feedback loop (optional - shows iterative nature)
+    step5 -> step1 [style = dashed, 
+                    color = '#8BADC4', 
+                    penwidth = 2,
+                    constraint = false]
+    
+    # Position badges and notes next to steps (no visible connections)
+    badge1 -> step1 [style = invis]
+    step1 -> note1 [style = invis]
+    
+    badge2 -> step2 [style = invis]
+    step2 -> note2 [style = invis]
+    
+    badge3 -> step3 [style = invis]
+    step3 -> note3 [style = invis]
+    
+    badge4 -> step4 [style = invis]
+    step4 -> note4 [style = invis]
+    
+    badge5 -> step5 [style = invis]
+    step5 -> note5 [style = invis]
+    
+    step5 -> footer [style = invis]
+    
+    # Create subgraphs to align elements horizontally
+    {rank = same; badge1; step1; note1}
+    {rank = same; badge2; step2; note2}
+    {rank = same; badge3; step3; note3}
+    {rank = same; badge4; step4; note4}
+    {rank = same; badge5; step5; note5}
+  }
+")
+```
+
+# Moving Forward: Building a Data-Informed Culture
+
+Understanding your data is a skill that develops with practice. You don't need to become a statistician or data scientist to work effectively with your organization's information. What you do need is curiosity, a willingness to engage with numbers systematically, and the judgment to interpret findings in light of your programmatic knowledge and mission.
+
+## Start Small and Build
+
+Choose one straightforward question about your programs and work through the process of finding and interpreting relevant data. Perhaps start with something descriptive, like understanding the demographic characteristics of the people you serve or tracking participation rates over the past year. Share your findings with colleagues and discuss what they might mean. As you become more comfortable with basic analysis, you can tackle more complex questions and more sophisticated techniques.
+
+Create simple templates for common analyses you'll repeat regularly. A spreadsheet template for tracking monthly service numbers with automatic calculation of totals and averages saves time and ensures consistency. A standard format for comparing quarterly performance to goals makes it easy to spot trends and share updates with your board or funders.
+
+## Make Data Part of Regular Conversations
+
+Schedule regular time for data review in team meetings. This doesn't need to be formal or lengthy. Spending fifteen minutes each month reviewing key metrics helps everyone stay connected to your organization's progress and normalizes data as a tool for learning rather than judgment. When staff members see data used to improve programs rather than criticize people, they become more engaged with collection and analysis.
+
+Encourage questions and curiosity about your data. When someone wonders aloud whether a new outreach approach is working or which workshop topics participants find most valuable, treat that as an opportunity for inquiry. "That's a great question – let's look at the data and see what we can learn" builds a culture where evidence informs decisions.
+
+## Balance Data with Other Ways of Knowing
+
+Remember that data is a tool for understanding and improving your work, not an end in itself. The goal is never to produce impressive statistics or complex analyses. The goal is to better serve your mission by understanding your programs more clearly, identifying opportunities for improvement, and demonstrating your impact to stakeholders.
+
+Numbers provide one type of insight, but they should be combined with the qualitative understanding that comes from direct service delivery, participant feedback, staff expertise, and community knowledge. The literacy program data might show that students are advancing, but conversations with students and families reveal that growing confidence and enjoyment of reading are equally important outcomes that standardized assessments don't fully capture.
+
+When quantitative and qualitative insights align, you can have strong confidence in your conclusions. When they diverge, that's a signal to dig deeper and understand why different evidence sources are telling different stories. Perhaps the numbers show high program completion rates while exit interviews reveal that many completers didn't feel they achieved their goals, suggesting that completion alone isn't an adequate measure of success.
+
+## Invest in Your Data Infrastructure
+
+While you don't need expensive software to start working with data, some investment in your data systems pays dividends over time. This might mean adopting a simple client database that tracks participation and outcomes consistently, creating standardized data entry forms that reduce errors, or providing training so more staff members can conduct basic analyses.
+
+Document how you collect and define your data. A simple data dictionary that explains what each field means, how it should be recorded, and any relevant coding categories helps ensure consistency. When staff turnover occurs, good documentation prevents loss of institutional knowledge about your data systems.
+
+Regularly review what data you're collecting and why. If you're gathering information you never use, consider whether it's worth the staff time to collect it. If you regularly wish you had data you don't collect, think about feasible ways to add that information. Your data collection should evolve as your programs and information needs change.
+
+# Conclusion
+
+Your data contains stories about the people you serve, the challenges they face, and the changes your programs help create. Learning to read those stories through systematic analysis enables you to do your most important work more effectively. The numbers matter not for their own sake, but because they represent real people, real needs, and real opportunities to make a difference.
+
+The skills covered in this module – asking focused questions, understanding basic statistics, identifying patterns and trends, making fair comparisons, and interpreting findings thoughtfully – form a foundation you can build on throughout your career in the nonprofit sector. You don't need to master everything at once. Start with simple questions and basic analyses. Share what you learn. Ask for help when you need it. Over time, working with data will become a natural part of how you understand and improve your programs.
+
+Approaching your data with both analytical rigor and human understanding will help you translate information into insight and insight into action. Each time you examine your data with a clear question in mind, you're taking a step toward being more effective in your mission. That combination of curiosity, systematic thinking, and commitment to your community is what transforms numbers on a page into knowledge that changes lives.
+
+------------------------------------------------------------------------
+
+**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](/contact.qmd) me.

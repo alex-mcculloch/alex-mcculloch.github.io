@@ -6,7 +6,7 @@ toc: true
 
 # Introduction
 
-A picture is worth a thousand words—but only if it's the right picture, designed well. Data visualization is one of the most powerful tools non-profits have for communicating impact, telling compelling stories, and making complex information accessible to diverse audiences.
+A picture is worth a thousand words—but only if it's the right picture, designed well. Data visualization is one of the most powerful tools nonprofits have for communicating impact, telling compelling stories, and making complex information accessible to diverse audiences.
 
 Poor visualizations can confuse, mislead, or simply fail to communicate your message. Great visualizations can transform raw numbers into compelling narratives that inspire action, secure funding, and drive organizational decisions.
 
@@ -26,7 +26,7 @@ This module will teach you the fundamental principles of effective data visualiz
 
 - **Support decision-making**: Clear visuals help boards and leadership understand options and implications
 
-**Common non-profit use cases:**
+**Common nonprofit use cases:**
 
 - Annual reports and impact statements
 
@@ -275,7 +275,7 @@ The graph below does a much better job with managing contrast, which allows the 
 
 ✅
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE,error=FALSE}
 student %>%
   filter(target %in% c("Dropout", "Graduate")) %>%
   group_by(Course) %>%
@@ -366,26 +366,25 @@ Remember to consider accessibility of your audience. Choose colorblind-friendly 
 library(ggplot2)
 library(dplyr)
 
-# Create data for 60-30-10 rule visualization
 color_rule <- data.frame(
   section = factor(c("Dominant", "Secondary", "Accent"),
                    levels = c("Dominant", "Secondary", "Accent")),
   percentage = c(60, 30, 10),
-  color = c("#f8f9fa","#2c3e50","#3ea291")  # Light gray, your teal, complementary orange
+  color = c("#f8f9fa", "#2c3e50", "#3ea291")
 )
-
-#| fig-width: 20
-#| fig-height: 8
 
 ggplot(color_rule, aes(x = 1, y = percentage, fill = section)) +
   geom_col(width = 1, color = "white") +
-  geom_text(aes(label = paste0(section, "\n", percentage, "%")),
+  geom_text(aes(label = ifelse(section == "Accent",
+                               paste0(section, " ",percentage, "%"),
+                               paste0(section, "\n", percentage, "%"))),
             position = position_stack(vjust = 0.5),
             color = c("black", "white", "white"),
             size = 6,
             fontface = "bold",
-            lineheight = 0.9) +
-  labs(title = "The 60-30-10 Rule") + 
+            lineheight = 0.9,
+            angle = c(0, 0, 90)) +
+  labs(title = "The 60-30-10 Rule") +
   scale_fill_manual(values = color_rule$color) +
   scale_x_continuous(expand = expansion(mult = c(0.02, 0.1))) +
   coord_flip(clip = "off") +

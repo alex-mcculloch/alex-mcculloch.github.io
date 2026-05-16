@@ -9,13 +9,13 @@ module-type: "start-here"
 toc: true
 ---
 
-As a non-profit, you may be required to collect and disseminate data for a variety of reasons. You may be required to report specific metrics to funders or you simply want to track your progress in achieving your organizational goals. Data is one of the most powerful tools a non-profit organization can leverage to understand its impact, improve programs, and communicate value to stakeholders. Yet many organizations struggle with where to begin. This module will guide you through the fundamental concepts of working with data, from deciding what to collect to choosing the right tools for storage and analysis.
+As a nonprofit, you may be required to collect and disseminate data for a variety of reasons. You may be required to report specific metrics to funders or you simply want to track your progress in achieving your organizational goals. Data is one of the most powerful tools a nonprofit organization can leverage to understand its impact, improve programs, and communicate value to stakeholders. Yet many organizations struggle with where to begin. This module will guide you through the fundamental concepts of working with data, from deciding what to collect to choosing the right tools for storage and analysis.
 
 Whether you're tracking program participants, measuring outcomes, or analyzing donor patterns, the principles in this guide will help you build a solid data foundation for your organization.
 
 # What is Data and Why Does it Matter?
 
-Data is simply information that you collect systematically. For non-profits, this might include:
+Data is simply information that you collect systematically. For nonprofits, this might include:
 
 - Number of people served
 
@@ -29,7 +29,7 @@ Data is simply information that you collect systematically. For non-profits, thi
 
 - Program costs and outputs
 
-### Why data matters for non-profits
+### Why data matters for nonprofits
 
 - **Measure Impact**: Understand whether your programs are achieving their intended outcomes
 
@@ -86,7 +86,7 @@ This is where **logic models** can become invaluable. Logic models are a visual 
 Below is a simplified table to help build your first logic model.
 
 | Goal           | Activities  | Outcomes       | Indicators                       |
-|-----------------|-----------------|-----------------|---------------------|
+|-----------------|-----------------|-----------------|--------------------|
 | *Your purpose* | *Your work* | *Achievements* | *How you know you found success* |
 
 Note, it's important to distinguish **outputs** from **outcomes**. **Outputs** are the direct, tangible, and immediate results of your program activities. **Outcomes** are the changes or benefits that occur because of those outputs - they answer the "so what?" question.
@@ -111,7 +111,7 @@ The output tells you *what happened*. The outcomes tell you *what changed* as a 
 
 Consider what outcomes you ultimately want to see. This will be a great guide for you when determining what data you need to collect.
 
-## Essential Data Categories for Non-Profits
+## Essential Data Categories for Nonprofits
 
 **1. Participant/Beneficiary Data**
 
@@ -322,7 +322,7 @@ A **data dictionary** is a document that explains what each variable means. This
 
 **CiviCRM** (Free, open-source)
 
-- Built for non-profits
+- Built for nonprofits
 
 - Constituent management, event tracking, fundraising
 

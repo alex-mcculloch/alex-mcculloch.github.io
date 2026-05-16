@@ -73,11 +73,11 @@ format: html
   <!-- NON-PROFITS SECTION -->
   <section class="nonprofits-preview" id="nonprofits">
     <div class="nonprofits-content">
-      <h2 class="section-title">Resources for Non-Profits</h2>
+      <h2 class="section-title">Resources for Nonprofits</h2>
       <p class="nonprofits-description">
-        I'm passionate about helping non-profit organizations leverage data to maximize their impact. 
+        I'm passionate about helping nonprofit organizations leverage data to maximize their impact. 
         Explore free modules covering data collection, visualization, impact measurement, and more—designed 
-        specifically for non-profit teams.
+        specifically for nonprofit teams.
       </p>
       <a class="btn nonprofits-btn" href="nonprofits.qmd">Explore Modules →</a>
     </div>

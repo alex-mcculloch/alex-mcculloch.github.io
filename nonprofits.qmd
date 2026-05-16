@@ -7,12 +7,12 @@ format: html
 <div class="column-screen">
   <!-- Hero Section -->
   <section class="nonprofit-hero">
-    <div class="hero-title">Data Resources for Non-Profits</div>
+    <div class="hero-title">Data Resources for Nonprofits</div>
     <p class="nonprofit-intro">
-      Welcome! This resource hub is designed to help non-profit organizations harness the power of data 
+      Welcome! This resource hub is designed to help nonprofit organizations harness the power of data 
       to better understand their communities, measure impact, and make informed decisions. Whether you're 
       just starting with data analysis or looking to deepen your analytical capabilities, these modules 
-      will guide you through practical, actionable approaches to working with data in the non-profit sector.
+      will guide you through practical, actionable approaches to working with data in the nonprofit sector.
     </p>
   </section>
 </div>
@@ -243,7 +243,7 @@ format: html
       
       <!-- Visualization -->
       <div class="module-card upcoming" data-topics="visualization">
-        <h3>Dashboard Design for Non-Profits</h3>
+        <h3>Dashboard Design for Nonprofits</h3>
         <div>
           <span class="module-tag">Visualization</span>
           <span class="module-tag upcoming-tag">Coming Soon</span>
@@ -256,13 +256,13 @@ format: html
       
       <!-- Tools -->
       <div class="module-card upcoming" data-topics="tools">
-        <h3>Free Tools for Non-Profit Data</h3>
+        <h3>Free Tools for Nonprofit Data</h3>
         <div>
           <span class="module-tag">Tools & Software</span>
           <span class="module-tag upcoming-tag">Coming Soon</span>
         </div>
         <p class="module-description">
-          Discover free and low-cost software tools perfect for non-profit organizations, 
+          Discover free and low-cost software tools perfect for nonprofit organizations, 
           including spreadsheets, databases, and visualization platforms.
         </p>
       </div>
