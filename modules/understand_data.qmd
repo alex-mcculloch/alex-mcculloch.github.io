@@ -13,3 +13,214 @@ This module will help you build confidence in working with your organization's d
 # Starting with Questions, Not Numbers
 
 It is easy to approach data analysis backwards. Opening a spreadsheet and you're bombarded with columns of numbers, and wonder what you're supposed to see. This approach often leads to frustration and missed insights. Instead, effective data analysis always begins with clear questions rooted in what you need to know.
+
+Before you look at any number, consider what decision you're trying to make or what you need to understand about your programs. Are you wondering whether your after-school program is reaching the families who need it most? Do you need to know if participants are showing improvement over time. Are you trying to determine which of your services are most effective? These questions should emerge from real programmatic needs, strategic planning processes, or reporting requirements.
+
+**Good questions have several key characteristics.** They are specific enough to be answerable with the data you have or can reasonably collect. They connect directly to your **organizations' goals** or the decisions you need to make. They often focus on comparisons, changes over time, or relationships between different factors. Rather than asking a vague question like, "How is our youth program doing?" you might ask, "Are youth who attend our program at least twice a week showing greater improvements in school attendance than those who attend once a week or less?" This more specific question tells you exactly what data you need to examine and what kind of analysis will be helpful.
+
+For constructing sound analytical questions, following the **SMART** strategy:
+
+- **Specific**: Clearly defined so you know the exact data points to collect.
+
+- **Measurable**: It can be quantified and evaluated with the data you currently have or can realistically collect.
+
+- **Actionable:** The answer will directly drive decisions, change a process, or solve a specific problem.
+
+- **Relevant:** The question directly addresses a primary objective, goal, or core challenge.
+
+- **Time-bound:** It specifies a particular time-frame to focus you analysis, such as fiscal years, quarters, or months.
+
+## Fact vs Assumption
+
+Before diving into your analysis, it's important to question what you know and what you think you know. The SMART strategy is good for arriving at narrowed language to avoid ambiguity, but the questions asked represent what you've decided you don't know the answers to and the questions you do not ask represent answers you believe you already know. As you work your way through the SMART strategy, it is worth while to ask yourself, "What assumption am I making with this question?"
+
+These assumptions can manifest in different ways. Consider the list of examples below:
+
+- **Outputs equal Outcomes:** The assumption that counting the number of services provided (e.g., meals served, workshops held, or shelter beds filled) automatically equates to a positive change in a participant's life.
+
+- **The "Neutrality" of Numbers:** Treating quantitative data (like test scores or survey metrics) as purely objective facts, ignoring systemic inequities or cultural biases built into the data collection process itself.
+
+- **A "Standard" Participant Experience:** The assumption that all clients have equal access to technology, time, and language proficiency to complete standard digital surveys or intake processes.
+
+Let's take the example research question, "Are youth who attend our program at least twice a week showing greater improvements in school attendance than those who attend once a week or less?" What assumptions is the team making? One assumption may be that the program overall is effective, and by asking this question, you want to know if it's *more* impactful on those who frequent it often. Let's say that's true. Youth who attend twice a week show greater improvements in school compared to those who attend once per week. What does this improvement actually mean? Are their test scores better by 10 points or 2 points? More important, how do they compare to youth who do not attend the program? If outcomes of youth in the program are not cleanly differentiated from youth outside of the program, then this original question is moot.
+
+## Types of Questions Your Data Can Answer
+
+Different questions require different types of analysis. Understanding which type of question you're asking helps you choose the right approach.
+
+**Descriptive questions** help you understand what's happening in your programs right now. These include questions like
+
+- "How many clients did we serve last quarter?"
+
+- "What is the average age of program participants?"
+
+- "What percentage of workshop attendees completed the post-survey?"
+
+**Comparative questions** help you understand differences between groups or time periods. You might ask:
+
+- "Do clients who receive case management services have higher housing stability rates than those who don't?"
+
+- "How do our summer program outcomes compare to our school-year program outcomes?"
+
+**Trend questions** focus on changes over time.
+
+- "Are we serving more families this year than last year?"
+
+- "Have client satisfaction scores improved since we implemented our new intake process?"
+
+**Relationship questions** explore how different factors connect to each other.
+
+- "Does program attendance relate to outcome achievement?"
+
+- "Are participants with previous program experience more likely to complete the full program?"
+
+# Understanding Your Data Landscape
+
+Before analyzing data, you need to understand what information you're actually working with. Every non-profit collects various types of data, from basic demographic information about the people you serve to detailed records of program activities and outcomes. Taking inventory of your data sources and understanding their strengths and limitations is a crucial first step.
+
+## Quantitative vs. Qualitative Data
+
+**Quantitative data** consists of numbers that can be measured or counted: the number of clients served, ages of participants, attendance rates, test scores, or amounts donated. This type of data lends itself well to statistical analysis and can reveal patterns across large groups. You can calculate averages, track changes over time, and make comparisons between groups.
+
+**Qualitative data** captures experiences, perspectives, and nuances that numbers alone cannot convey: participant testimonials, case notes from social workers, or open-ended survey responses. While this module focuses primarily on quantitative analysis, remember that the richest understanding often comes from combining both types of information. Numbers might tell you that 75% of clients completed your program, but interviews might reveal why the other 25% didn't.
+
+## Common Data Quality Issues
+
+You should also understand how your data was collected and any limitations this might create. **Data collected through voluntary surveys** may not represent your entire client population, since those who respond might differ systematically from those who don't. People who had positive experiences may be more likely to complete feedback forms, or conversely, those with complaints may be more motivated to respond.
+
+**Attendance and participation records** are only as accurate as the staff members recording them. If tracking systems are cumbersome or if staff are busy, records may be incomplete. **Outcome measures** may capture some dimensions of change while missing others. A standardized test might measure academic knowledge but not capture growth in confidence or motivation.
+
+Being aware of these limitations doesn't mean your data is useless, but it does mean you should interpret your findings with appropriate caution and look for ways to validate important insights through multiple sources. If your attendance data seems incomplete, you might cross-reference it with sign-in sheets or compare it to what staff members recall. If survey response rates are low, you might conduct a few follow-up phone interviews with non-respondents to see if their experiences differ.
+
+| Data Quality Issue | What It Looks Like | What You Can Do |
+|----|----|----|
+| Missing data | Blank cells in your spreadsheet, incomplete surveys | Look for patterns in what's missing; consider whether missing data is random or systematic |
+| Inconsistent formats | Dates entered in different ways (3/15/24 vs March 15, 2024), inconsistent naming | Standardize formats moving forward; create data entry guidelines |
+| Outliers | One value dramatically different from others (e.g., one person attended 200 sessions while most attended 5-10) | Verify outliers are accurate; consider whether they should be analyzed separately |
+| Low response rates | Only 3% of clients completed the survey | Acknowledge limitations; try to understand if respondents differ from non-respondents. Response rates have been in decline for years. A 3-5% or even 10% response rate may be considered excellent depending on context and method |
+
+# Descriptive Statistics: Summarizing Your Data
+
+Once you have a clear question and understand your data sources, you can begin examining your information systematically. Descriptive statistics are tools that help you summarize and describe what's in your data. These basic measures form the foundation of nearly all data analysis and interpretation.
+
+## Measures of Central Tendency
+
+These statistics tell you what's "typical" or "central" in your data.
+
+**The mean (average)** is calculated by adding up all values and dividing by the number of values. The mean is useful for understanding the typical value in your data. For instance, if you want to know the average age of program participants, the average number of sessions clients attend, or the average donation amount, the mean provides a single number that represents your entire dataset. However, the mean can be misleading when your data includes extreme values. If most clients attend between 5 and 10 sessions but a few attend 50 sessions, the mean will be pulled upward and might not represent the typical experience.
+
+**The median** addresses this limitation by identifying the middle value when all your data points are arranged in order. Half of your values fall below the median and half fall above it. When your data includes outliers or is skewed in one direction, the median often provides a more accurate picture of what's typical. In a dataset of household incomes where a few very high earners could distort the mean, the median gives you a better sense of the middle-ground experience.
+
+**The mode** is simply the most frequently occurring value in your dataset. While less commonly used than the mean or median, the mode is particularly useful for categorical data. If you're looking at the most common reason people seek your services, the most popular workshop topic, or the most frequent funding source, you're identifying the mode.
+
+```{r echo=FALSE, message=FALSE,error=FALSE,warning=FALSE}
+# --------------------------------------------
+# Fake participant age data with outliers
+# Demonstrates mean vs. median
+# --------------------------------------------
+
+set.seed(123)
+
+# Most participants are between ~22 and 45
+typical_ages <- round(rnorm(120, mean = 32, sd = 6))
+
+# Keep values realistic
+typical_ages <- typical_ages[typical_ages >= 18 & typical_ages <= 50]
+
+# A few unusually older participants (outliers)
+outlier_ages <- c(72, 78, 81, 85, 69,80,80,80,80, 81,81,81,81,85, 89, 95,92,90)
+
+# Combine data
+ages <- c(typical_ages, outlier_ages)
+
+# Put into a data frame
+participants <- data.frame(
+  participant_id = 1:length(ages),
+  age = ages
+)
+
+# --------------------------------------------
+# Visualization
+# --------------------------------------------
+
+library(ggplot2)
+
+ggplot(participants, aes(x = age)) +
+  geom_histogram(
+    binwidth = 4,
+    fill = "#2c3e50",
+    color = "black"
+  ) +
+  
+  # Mean line
+  geom_vline(
+    xintercept = mean_age,
+    color = "red",
+    linewidth = 1.2,
+    linetype = "dashed"
+  ) +
+  
+  # Median line
+  geom_vline(
+    xintercept = median_age,
+    color = "#2a7d6b",
+    linewidth = 1.2,
+    linetype = "solid"
+  ) +
+  
+  # Mean label
+annotate(
+  "text",
+  x = mean_age,
+  y = 32,
+  label = paste0("Mean = ", round(mean_age, 1)),
+  color = "red",
+  hjust = -0.1
+) +
+
+# Median label
+annotate(
+  "text",
+  x = median_age-2.5,
+  y = 32,
+  label = paste0("Median = ", round(median_age, 1)),
+  color = "darkgreen",
+  hjust = 1.1
+) +
+  
+  labs(
+    title = "Participant Ages: Mean vs Median",
+    subtitle = "A few older outliers pull the average upward",
+    x = "Age",
+    y = "Number of Participants"
+  ) +
+  
+  theme_minimal(base_size = 14)
+
+```
+
+**Example: Understanding Session Attendance**
+
+Imagine you run a mentoring program and track how many sessions each participant attended over three months:
+
+Participant sessions: 4, 5, 5, 6, 6, 6, 7, 7, 8, 8, 9, 45
+
+- **Mean:** 9.7 sessions (seems high!)
+
+- **Median:** 6.5 sessions (more representative of typical experience)
+
+- **Mode:** 6 sessions (most common attendance level)
+
+In this case, one participant who attended 45 sessions (perhaps a peer mentor or someone with exceptional engagement) pulls the mean up significantly. The median and mode give you a better sense of what most participants experienced.
+
+## Measure of Spread
+
+Understanding the typical value is important, but you also need to know how spread out your data is.
+
+**Range** is the difference between your highest and lowest values, giving you a sense of the variability in your dataset. In the attendance example above, the range is 41 sessions (45 minus 4). A large range suggests substantial variation in participant experiences.
+
+**Percentiles** help you understand distribution by dividing your data into segments. The 25th percentile (first quartile) is the value below which 25% of your data falls. The 75th percentile (third quartile) is the value below which 75% of your data falls. The gap between these percentiles tells you where the middle 50% of your data lies, which can be very informative. If the 25th percentile for program completion time is 3 months and the 75th percentile is 4 months, you know that half of participants complete the program in a fairly narrow timeframe. But if the 25th percentile is 2 months and the 75th percentile is 9 months, there's much more variation in how long completion takes.
+
+**Standard deviation** is a more sophisticated measure of spread that tells you, on average, how far individual values deviate from the mean. A small standard deviation means most values cluster close to the average, while a large standard deviation indicates wide variation. While calculating standard deviation requires a formula or software, understanding the concept helps you interpret variation in your data.
+
+Looking beyond summary statistics to understand how your data is distributed can reveal important patterns. Are most of your values clustered around the average with few extreme cases, or is there wide variation? Are there distinct groups within your data? You might discover that your job training program serves two distinct populations with different age ranges and needs, which could inform how you structure your services.
