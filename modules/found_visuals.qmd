@@ -540,4 +540,4 @@ Before sharing any visualization, ask yourself:
 
 - [Contrast: One of the 3Cs for Better Charts](https://www.nngroup.com/articles/contrast-charts/)
 
-**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](http://localhost:7548/modules/contact.qmd) me.
+**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](/contact.qmd) me.

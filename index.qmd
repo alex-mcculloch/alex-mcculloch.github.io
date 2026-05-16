@@ -52,8 +52,8 @@ format: html
       <p>Explore the members of Congress, their biographies, and bills voted on.</p>
       <a class="card-link" href=https://4blh4z-alex-mcculloch.shinyapps.io/MC_Match/>View Project →</a>
     </div>
-    <div class="card">
     <!--
+    <div class="card">
       <h3>Veteran Needs Dashboard</h3>
       <p>ACS and Salesforce-based analysis of veteran needs for nonprofit program design.</p>
       <a class="card-link" href="project2.qmd">View Project →</a>

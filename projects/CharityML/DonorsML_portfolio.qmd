@@ -267,4 +267,4 @@ To see this model in action, I have created a Shiny web application that can be 
 
 ------------------------------------------------------------------------
 
-**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please contact me.
+**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact me](/contact.qmd).

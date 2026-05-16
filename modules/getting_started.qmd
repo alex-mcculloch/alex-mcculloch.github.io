@@ -17,33 +17,33 @@ Whether you're tracking program participants, measuring outcomes, or analyzing d
 
 Data is simply information that you collect systematically. For non-profits, this might include:
 
--   Number of people served
+- Number of people served
 
--   Demographics of program participants
+- Demographics of program participants
 
--   Survey Responses about program satisfaction
+- Survey Responses about program satisfaction
 
--   Donation amounts and frequency
+- Donation amounts and frequency
 
--   Volunteer hours
+- Volunteer hours
 
--   Program costs and outputs
+- Program costs and outputs
 
 ### Why data matters for non-profits
 
--   **Measure Impact**: Understand whether your programs are achieving their intended outcomes
+- **Measure Impact**: Understand whether your programs are achieving their intended outcomes
 
--   **Improve Programs**: Identify what's working and what needs adjustment
+- **Improve Programs**: Identify what's working and what needs adjustment
 
--   **Secure funding**: Demonstrate results to current and potential funders
-
-<!-- -->
-
--   **Make informed decisions**: Base strategic choices on evidence rather than assumptions
+- **Secure funding**: Demonstrate results to current and potential funders
 
 <!-- -->
 
--   **Tell your story**: Communicate your organization's value with compelling evidence
+- **Make informed decisions**: Base strategic choices on evidence rather than assumptions
+
+<!-- -->
+
+- **Tell your story**: Communicate your organization's value with compelling evidence
 
 # What Data Should You Collect?
 
@@ -55,27 +55,27 @@ Here's how to decide what to collect:
 
 Before collecting any data, ask yourself:
 
--   What do we need to know to improve our programs?
+- What do we need to know to improve our programs?
 
 <!-- -->
 
--   What outcomes are we trying to achieve?
+- What outcomes are we trying to achieve?
 
 <!-- -->
 
--   What information do funders require?
+- What information do funders require?
 
 <!-- -->
 
--   What decisions will this data help us make?
+- What decisions will this data help us make?
 
 ### Example Questions:
 
--   Are we reaching our target population?
--   Are participants satisfied with our services?
--   What percentage of participants complete our program?
--   How has participant knowledge/behavior changed after our intervention?
--   What is our cost per person served?
+- Are we reaching our target population?
+- Are participants satisfied with our services?
+- What percentage of participants complete our program?
+- How has participant knowledge/behavior changed after our intervention?
+- What is our cost per person served?
 
 ### Logic Models
 
@@ -86,7 +86,7 @@ This is where **logic models** can become invaluable. Logic models are a visual 
 Below is a simplified table to help build your first logic model.
 
 | Goal           | Activities  | Outcomes       | Indicators                       |
-|----------------|----------------|----------------|------------------------|
+|-----------------|-----------------|-----------------|---------------------|
 | *Your purpose* | *Your work* | *Achievements* | *How you know you found success* |
 
 Note, it's important to distinguish **outputs** from **outcomes**. **Outputs** are the direct, tangible, and immediate results of your program activities. **Outcomes** are the changes or benefits that occur because of those outputs - they answer the "so what?" question.
@@ -95,15 +95,15 @@ For example, your efforts to establish new youth sporting leagues may have resul
 
 **Output:**
 
--   130 youth participated in the sports league
+- 130 youth participated in the sports league
 
 **Outcomes:**
 
--   Short-term: 85% of participants reported increased physical activity levels
+- Short-term: 85% of participants reported increased physical activity levels
 
--   Medium-term: 70% of participants demonstrated improved teamwork skills
+- Medium-term: 70% of participants demonstrated improved teamwork skills
 
--   Long-term: Participants showed reduced rates of childhood obesity compared to baseline
+- Long-term: Participants showed reduced rates of childhood obesity compared to baseline
 
 The output tells you *what happened*. The outcomes tell you *what changed* as a result.
 
@@ -115,61 +115,61 @@ Consider what outcomes you ultimately want to see. This will be a great guide fo
 
 **1. Participant/Beneficiary Data**
 
--   Demographics (age, gender, location, income level, etc.)
+- Demographics (age, gender, location, income level, etc.)
 
--   Contact information
+- Contact information
 
--   Enrollment and attendance records
+- Enrollment and attendance records
 
--   Services received
+- Services received
 
 **2. Program Data**
 
--   Activities conducted
+- Activities conducted
 
--   Resources used
+- Resources used
 
--   Staff time allocated
+- Staff time allocated
 
--   Costs per program
+- Costs per program
 
 **3. Outcome Data**
 
--   Pre/post measurements (knowledge, skills, behaviors)
+- Pre/post measurements (knowledge, skills, behaviors)
 
--   Completion rates
+- Completion rates
 
--   Satisfaction surveys
+- Satisfaction surveys
 
--   Long-term follow-up data
+- Long-term follow-up data
 
 **4. Operational Data**
 
--   Volunteer hours
+- Volunteer hours
 
--   Staff capacity
+- Staff capacity
 
--   Budget allocation
+- Budget allocation
 
--   Partnership activities
+- Partnership activities
 
 **5. Fundraising Data**
 
--   Donor information
+- Donor information
 
--   Gift amounts and dates
+- Gift amounts and dates
 
--   Campaign performance
+- Campaign performance
 
--   Retention rates
+- Retention rates
 
 ## The "Need to Know" vs "Nice to Know" Test
 
 For each data point you're considering collecting, ask:
 
--   **Need to Know**: Is this essential for measuring our impact or meeting reporting requirements?
+- **Need to Know**: Is this essential for measuring our impact or meeting reporting requirements?
 
--   **Nice to Know**: Is this interesting but not critical for decision-making?
+- **Nice to Know**: Is this interesting but not critical for decision-making?
 
 Focus on need to know data first. You can always expand later.
 
@@ -179,79 +179,79 @@ Focus on need to know data first. You can always expand later.
 
 **1. Surveys and Questionnaires**
 
--   Best for: Gathering feedback, measuring satisfaction, assessing knowledge change
+- Best for: Gathering feedback, measuring satisfaction, assessing knowledge change
 
--   Tools: Google Forms, SurveyMonkey, Typeform, Microsoft Forms (all have free versions)
+- Tools: Google Forms, SurveyMonkey, Typeform, Microsoft Forms (all have free versions)
 
--   Tips: Keep surveys short (5-10 minutes max), use clear language, test before launching
+- Tips: Keep surveys short (5-10 minutes max), use clear language, test before launching
 
 **2. Intake Forms**
 
--   Best for: Collecting participant demographics and baseline information
+- Best for: Collecting participant demographics and baseline information
 
--   Tools: Google Forms, JotForm, Typeform
+- Tools: Google Forms, JotForm, Typeform
 
--   Tips: Only ask what you'll actually use, ensure privacy protection
+- Tips: Only ask what you'll actually use, ensure privacy protection
 
 **3. Attendance Tracking**
 
--   Best for: Monitoring program participation
+- Best for: Monitoring program participation
 
--   Tools: Sign-in sheets (paper or digital), QR codes, spreadsheets
+- Tools: Sign-in sheets (paper or digital), QR codes, spreadsheets
 
--   Tips: Make it easy for participants and staff to record attendance
+- Tips: Make it easy for participants and staff to record attendance
 
 **4. Observation and Assessment**
 
--   Best for: Skills demonstration, behavior change
+- Best for: Skills demonstration, behavior change
 
--   Tools: Standardized rubrics, checklists, rating scales
+- Tools: Standardized rubrics, checklists, rating scales
 
--   Tips: Train observers for consistency, use validated assessment tools when possible
+- Tips: Train observers for consistency, use validated assessment tools when possible
 
 **5. Administrative Records**
 
--   Best for: Financial data, service delivery logs
+- Best for: Financial data, service delivery logs
 
--   Tools: Accounting software (QuickBooks, Wave), CRM systems
+- Tools: Accounting software (QuickBooks, Wave), CRM systems
 
--   Tips: Establish consistent recording procedures
+- Tips: Establish consistent recording procedures
 
 ### Best Practices for Collection
 
 **Consistency is Key**
 
--   Use the same methods and questions over time to track trends
+- Use the same methods and questions over time to track trends
 
--   Train all staff on data collection procedures
+- Train all staff on data collection procedures
 
--   Create templates and standardized forms
+- Create templates and standardized forms
 
 **Ensure Data Quality**
 
--   Build in validation checks (e.g., dropdown menus instead of free text)
+- Build in validation checks (e.g., dropdown menus instead of free text)
 
--   Review data regularly for errors or missing values
+- Review data regularly for errors or missing values
 
--   **Designate someone responsible for data quality**
+- **Designate someone responsible for data quality**
 
 **Respect Privacy and Ethics**
 
--   Obtain informed consent for data collection
+- Obtain informed consent for data collection
 
--   Explain how data will be used
+- Explain how data will be used
 
--   Protect personally identifiable information (PII)
+- Protect personally identifiable information (PII)
 
--   Follow regulations like HIPAA (for health data) or FERPA (for educational data)
+- Follow regulations like HIPAA (for health data) or FERPA (for educational data)
 
 **Make It Easy**
 
--   Integrate data collection into existing workflows
+- Integrate data collection into existing workflows
 
--   Use mobile-friendly forms
+- Use mobile-friendly forms
 
--   Keep forms simple and user-friendly
+- Keep forms simple and user-friendly
 
 # Data Organization: Structuring Your Information
 
@@ -277,27 +277,27 @@ Once you've collected data, you need to organize it in a way that makes analysis
 
 **Multiple pieces of information in one cell**
 
--   Bad: "Maria Garcia, 34, Hartford"
+- Bad: "Maria Garcia, 34, Hartford"
 
--   Good: Separate columns for FirstName, LastName, Age, City
+- Good: Separate columns for FirstName, LastName, Age, City
 
 **Inconsistent formatting**
 
--   Bad: Mixing "Yes/No", "Y/N", "1/0" for the same type of question
+- Bad: Mixing "Yes/No", "Y/N", "1/0" for the same type of question
 
--   Good: Choose one format and stick with it
+- Good: Choose one format and stick with it
 
 **Merged cells or complex layouts**
 
--   Bad: Creating "pretty" tables with merged headers
+- Bad: Creating "pretty" tables with merged headers
 
--   Good: Simple, flat structure with clear column headers
+- Good: Simple, flat structure with clear column headers
 
 **Colors or formatting as data**
 
--   Bad: Using red text to indicate "needs follow-up"
+- Bad: Using red text to indicate "needs follow-up"
 
--   Good: Create a separate column called "FollowUpNeeded" with Yes/No values
+- Good: Create a separate column called "FollowUpNeeded" with Yes/No values
 
 ### Creating a Data Dictionary
 
@@ -316,17 +316,21 @@ A **data dictionary** is a document that explains what each variable means. This
 
 **Salesforce Nonprofit Cloud**
 
--   Full CRM system with donor management, program tracking, and reporting
+- Full CRM system with donor management, program tracking, and reporting
 
--   Steeper learning curve but very powerful
+- Steeper learning curve but very powerful
 
 **CiviCRM** (Free, open-source)
 
--   Built for non-profits
+- Built for non-profits
 
--   Constituent management, event tracking, fundraising
+- Constituent management, event tracking, fundraising
 
 **LiveImpact**
+
+- All in one platform (donor management, case tracking, volunteers, grants, events)
+
+- For non-technical staff
 
 # Data Security and Privacy
 
@@ -336,55 +340,55 @@ Protecting the data you collect is not just good practice–it's often legally r
 
 1.  Access Control
 
-    -   Limit who can view and edit data
-    -   Use password protection
-    -   Remove access when staff leave
+    - Limit who can view and edit data
+    - Use password protection
+    - Remove access when staff leave
 
 2.  Data Encryption
 
-    -   Use secure, encrypted storage (cloud services like Google Drive and Dropbox provide this)
-    -   Use HTTPS for any web-based forms
+    - Use secure, encrypted storage (cloud services like Google Drive and Dropbox provide this)
+    - Use HTTPS for any web-based forms
 
 3.  Regular Backups
 
-    -   Back up data at least weekly
-    -   Store backups in a separate location (cloud backup is ideal)
-    -   Test that backups can be restored
+    - Back up data at least weekly
+    - Store backups in a separate location (cloud backup is ideal)
+    - Test that backups can be restored
 
 4.  De-identification When Possible
 
-    -   For analysis and reporting, remove names and other identifying information
-    -   Use participant IDs instead of names when possible
+    - For analysis and reporting, remove names and other identifying information
+    - Use participant IDs instead of names when possible
 
 5.  Data Retention Policies
 
-    -   Decide how long you'll keep different types of data
-    -   Securely delete data when it's no longer needed
+    - Decide how long you'll keep different types of data
+    - Securely delete data when it's no longer needed
 
     <!-- -->
 
-    -   Document your policies in writing
+    - Document your policies in writing
 
 6.  Write Confidentiality Agreements
 
-    -   Have anyone working in the organization who has access to sensitive data sign an agreement indicating they will preserve the privacy and security of the data
-    -   If you hire consultants who will need access to your data, this is an important step
+    - Have anyone working in the organization who has access to sensitive data sign an agreement indicating they will preserve the privacy and security of the data
+    - If you hire consultants who will need access to your data, this is an important step
 
 ### Compliance Considerations
 
--   **HIPAA**: If you handle health information
+- **HIPAA**: If you handle health information
 
 <!-- -->
 
--   **FERPA**: If you handle educational records
+- **FERPA**: If you handle educational records
 
 <!-- -->
 
--   **GDPR**: If you serve individuals in the European Union
+- **GDPR**: If you serve individuals in the European Union
 
 <!-- -->
 
--   **State laws**: Many states have specific data privacy requirements
+- **State laws**: Many states have specific data privacy requirements
 
 ::: callout-note
 ## Tip
@@ -406,47 +410,47 @@ A **data collection plan** documents what data you'll collect, how, when, and wh
 
 ### Implementation Checklist
 
--   Identify key questions you need to answer
+- Identify key questions you need to answer
 
 <!-- -->
 
--   Determine what data is needed to answer those questions
+- Determine what data is needed to answer those questions
 
 <!-- -->
 
--   Choose collection methods and tools
+- Choose collection methods and tools
 
 <!-- -->
 
--   Create or customize forms and instruments
+- Create or customize forms and instruments
 
 <!-- -->
 
--   Test data collection process with a small group
+- Test data collection process with a small group
 
 <!-- -->
 
--   Train staff on procedures
+- Train staff on procedures
 
 <!-- -->
 
--   Set up data storage system
+- Set up data storage system
 
 <!-- -->
 
--   Establish data quality checks
+- Establish data quality checks
 
 <!-- -->
 
--   Create backup procedures
+- Create backup procedures
 
 <!-- -->
 
--   Document everything in a data collection plan
+- Document everything in a data collection plan
 
 <!-- -->
 
--   Schedule regular data reviews
+- Schedule regular data reviews
 
 # Next Steps
 
@@ -458,11 +462,11 @@ Now that you understand the fundamentals of data collection, organization, and s
 
 3.  **Explore my other modules:**
 
-    -   Understanding Your Data (analyzing and interpreting your data)
+    - Understanding Your Data (analyzing and interpreting your data)
 
-    -   Telling Stories with Data (visualization and communication)
+    - Telling Stories with Data (visualization and communication)
 
-    -   Measuring Program Impact (evaluation frameworks)
+    - Measuring Program Impact (evaluation frameworks)
 
 ## Self-Assessment: How Ready Is Your Organization?
 
@@ -597,16 +601,16 @@ function calculateScore() {
 
 **Free Tools**
 
--   Google Sheets
+- Google Sheets
 
--   Google Forms
+- Google Forms
 
--   Survey Monkey (Limited Free Version)
+- Survey Monkey (Limited Free Version)
 
--   Qualtrics (Limited Free Version)
+- Qualtrics (Limited Free Version)
 
 **Further Reading**
 
 [Logic Model Course (University of Wisconsin)](https://logicmodel.extension.wisc.edu/)
 
-**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](mailto:asmcculloch46@gmail.com) me.
+**Need Help?** If you have questions or would like personalized guidance on implementing these practices in your organization, please [contact](/contact.qmd) me.
