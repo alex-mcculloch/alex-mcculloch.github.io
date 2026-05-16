@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-05-16">
+
+<title>Understanding Your Data – Alex McCulloch</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2449654ede22c35c593d5409fb3b927c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="../site_libs/viz-1.8.2/viz.js"></script>
+
+<link href="../site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+
+<script src="../site_libs/grViz-binding-1.0.12/grViz.js"></script>
+
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Alex McCulloch</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../nonprofits.html"> 
+<span class="menu-text">For Nonprofits</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../portfolio.html"> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#starting-with-questions-not-numbers" id="toc-starting-with-questions-not-numbers" class="nav-link" data-scroll-target="#starting-with-questions-not-numbers">Starting with Questions, Not Numbers</a>
+  <ul class="collapse">
+  <li><a href="#fact-vs-assumption" id="toc-fact-vs-assumption" class="nav-link" data-scroll-target="#fact-vs-assumption">Fact vs Assumption</a></li>
+  <li><a href="#types-of-questions-your-data-can-answer" id="toc-types-of-questions-your-data-can-answer" class="nav-link" data-scroll-target="#types-of-questions-your-data-can-answer">Types of Questions Your Data Can Answer</a></li>
+  </ul></li>
+  <li><a href="#understanding-your-data-landscape" id="toc-understanding-your-data-landscape" class="nav-link" data-scroll-target="#understanding-your-data-landscape">Understanding Your Data Landscape</a>
+  <ul class="collapse">
+  <li><a href="#quantitative-vs.-qualitative-data" id="toc-quantitative-vs.-qualitative-data" class="nav-link" data-scroll-target="#quantitative-vs.-qualitative-data">Quantitative vs.&nbsp;Qualitative Data</a></li>
+  <li><a href="#common-data-quality-issues" id="toc-common-data-quality-issues" class="nav-link" data-scroll-target="#common-data-quality-issues">Common Data Quality Issues</a></li>
+  </ul></li>
+  <li><a href="#descriptive-statistics-summarizing-your-data" id="toc-descriptive-statistics-summarizing-your-data" class="nav-link" data-scroll-target="#descriptive-statistics-summarizing-your-data">Descriptive Statistics: Summarizing Your Data</a>
+  <ul class="collapse">
+  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency">Measures of Central Tendency</a></li>
+  <li><a href="#measure-of-spread" id="toc-measure-of-spread" class="nav-link" data-scroll-target="#measure-of-spread">Measure of Spread</a></li>
+  </ul></li>
+  <li><a href="#identifying-trends-and-patterns-over-time" id="toc-identifying-trends-and-patterns-over-time" class="nav-link" data-scroll-target="#identifying-trends-and-patterns-over-time">Identifying Trends and Patterns Over Time</a>
+  <ul class="collapse">
+  <li><a href="#creating-and-reading-time-series" id="toc-creating-and-reading-time-series" class="nav-link" data-scroll-target="#creating-and-reading-time-series">Creating and Reading Time Series</a></li>
+  <li><a href="#recognizing-seasonal-patterns" id="toc-recognizing-seasonal-patterns" class="nav-link" data-scroll-target="#recognizing-seasonal-patterns">Recognizing Seasonal Patterns</a>
+  <ul class="collapse">
+  <li><a href="#making-fair-comparisons-across-time" id="toc-making-fair-comparisons-across-time" class="nav-link" data-scroll-target="#making-fair-comparisons-across-time">Making Fair Comparisons Across Time</a></li>
+  <li><a href="#making-meaningful-comparisons" id="toc-making-meaningful-comparisons" class="nav-link" data-scroll-target="#making-meaningful-comparisons">Making Meaningful Comparisons</a></li>
+  </ul></li>
+  <li><a href="#understanding-relationships-in-your-data" id="toc-understanding-relationships-in-your-data" class="nav-link" data-scroll-target="#understanding-relationships-in-your-data">Understanding Relationships in Your Data</a>
+  <ul class="collapse">
+  <li><a href="#exploring-correlation" id="toc-exploring-correlation" class="nav-link" data-scroll-target="#exploring-correlation">Exploring Correlation</a></li>
+  <li><a href="#common-pitfalls-and-how-to-avoid-them" id="toc-common-pitfalls-and-how-to-avoid-them" class="nav-link" data-scroll-target="#common-pitfalls-and-how-to-avoid-them">Common Pitfalls and How to Avoid Them</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together-a-practical-workflow" id="toc-putting-it-all-together-a-practical-workflow" class="nav-link" data-scroll-target="#putting-it-all-together-a-practical-workflow">Putting It All Together: A Practical Workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1-define-your-question" id="toc-step-1-define-your-question" class="nav-link" data-scroll-target="#step-1-define-your-question">Step 1: Define Your Question</a></li>
+  <li><a href="#step-2-identify-relevant-data" id="toc-step-2-identify-relevant-data" class="nav-link" data-scroll-target="#step-2-identify-relevant-data">Step 2: Identify Relevant Data</a></li>
+  <li><a href="#step-3-summarize-and-visualize" id="toc-step-3-summarize-and-visualize" class="nav-link" data-scroll-target="#step-3-summarize-and-visualize">Step 3: Summarize and Visualize</a></li>
+  <li><a href="#step-4-interpret-in-context" id="toc-step-4-interpret-in-context" class="nav-link" data-scroll-target="#step-4-interpret-in-context">Step 4: Interpret in Context</a></li>
+  <li><a href="#step-5-draw-conclusions-and-identify-next-steps" id="toc-step-5-draw-conclusions-and-identify-next-steps" class="nav-link" data-scroll-target="#step-5-draw-conclusions-and-identify-next-steps">Step 5: Draw Conclusions and Identify Next Steps</a></li>
+  </ul></li>
+  <li><a href="#moving-forward-building-a-data-informed-culture" id="toc-moving-forward-building-a-data-informed-culture" class="nav-link" data-scroll-target="#moving-forward-building-a-data-informed-culture">Moving Forward: Building a Data-Informed Culture</a>
+  <ul class="collapse">
+  <li><a href="#start-small-and-build" id="toc-start-small-and-build" class="nav-link" data-scroll-target="#start-small-and-build">Start Small and Build</a></li>
+  <li><a href="#make-data-part-of-regular-conversations" id="toc-make-data-part-of-regular-conversations" class="nav-link" data-scroll-target="#make-data-part-of-regular-conversations">Make Data Part of Regular Conversations</a></li>
+  <li><a href="#balance-data-with-other-ways-of-knowing" id="toc-balance-data-with-other-ways-of-knowing" class="nav-link" data-scroll-target="#balance-data-with-other-ways-of-knowing">Balance Data with Other Ways of Knowing</a></li>
+  <li><a href="#invest-in-your-data-infrastructure" id="toc-invest-in-your-data-infrastructure" class="nav-link" data-scroll-target="#invest-in-your-data-infrastructure">Invest in Your Data Infrastructure</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Understanding Your Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 16, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Many nonprofits often feel overwhelmed with managing and making sense of data. The good news is that working with data doesn’t require advanced statistical knowledge or expensive software. What matters most is to ask the right questions and developing a system to finding answers in your data.</p>
+<p>This module will help you build confidence in working with your organization’s data. You’ll learn how to formulate meaningful questions that align with your mission, understand basic statistical concepts that reveal patterns in your work, and develop practical skills for interpreting what your data tells you about your programs. Whether you’re tracking client outcomes, volunteer hours, or program attendance, these foundational skills will help you transform raw numbers into actionable insights.</p>
+</section>
+<section id="starting-with-questions-not-numbers" class="level1">
+<h1>Starting with Questions, Not Numbers</h1>
+<p>It is easy to approach data analysis backwards. Opening a spreadsheet and you’re bombarded with columns of numbers, and wonder what you’re supposed to see. This approach often leads to frustration and missed insights. Instead, effective data analysis always begins with clear questions rooted in what you need to know.</p>
+<p>Before you look at any number, consider what decision you’re trying to make or what you need to understand about your programs. Are you wondering whether your after-school program is reaching the families who need it most? Do you need to know if participants are showing improvement over time. Are you trying to determine which of your services are most effective? These questions should emerge from real programmatic needs, strategic planning processes, or reporting requirements.</p>
+<p><strong>Good questions have several key characteristics.</strong> They are specific enough to be answerable with the data you have or can reasonably collect. They connect directly to your <strong>organizations’ goals</strong> or the decisions you need to make. They often focus on comparisons, changes over time, or relationships between different factors. Rather than asking a vague question like, “How is our youth program doing?” you might ask, “Are youth who attend our program at least twice a week showing greater improvements in school attendance than those who attend once a week or less?” This more specific question tells you exactly what data you need to examine and what kind of analysis will be helpful.</p>
+<p>For constructing sound analytical questions, following the <strong>SMART</strong> strategy:</p>
+<ul>
+<li><p><strong>Specific</strong>: Clearly defined so you know the exact data points to collect.</p></li>
+<li><p><strong>Measurable</strong>: It can be quantified and evaluated with the data you currently have or can realistically collect.</p></li>
+<li><p><strong>Actionable:</strong> The answer will directly drive decisions, change a process, or solve a specific problem.</p></li>
+<li><p><strong>Relevant:</strong> The question directly addresses a primary objective, goal, or core challenge.</p></li>
+<li><p><strong>Time-bound:</strong> It specifies a particular time-frame to focus you analysis, such as fiscal years, quarters, or months.</p></li>
+</ul>
+<section id="fact-vs-assumption" class="level2">
+<h2 class="anchored" data-anchor-id="fact-vs-assumption">Fact vs Assumption</h2>
+<p>Before diving into your analysis, it’s important to question what you know and what you think you know. The SMART strategy is good for arriving at narrowed language to avoid ambiguity, but the questions asked represent what you’ve decided you don’t know the answers to and the questions you do not ask represent answers you believe you already know. As you work your way through the SMART strategy, it is worth while to ask yourself, “What assumption am I making with this question?”</p>
+<p>These assumptions can manifest in different ways. Consider the list of examples below:</p>
+<ul>
+<li><p><strong>Outputs equal Outcomes:</strong> The assumption that counting the number of services provided (e.g., meals served, workshops held, or shelter beds filled) automatically equates to a positive change in a participant’s life.</p></li>
+<li><p><strong>The “Neutrality” of Numbers:</strong> Treating quantitative data (like test scores or survey metrics) as purely objective facts, ignoring systemic inequities or cultural biases built into the data collection process itself.</p></li>
+<li><p><strong>A “Standard” Participant Experience:</strong> The assumption that all clients have equal access to technology, time, and language proficiency to complete standard digital surveys or intake processes.</p></li>
+</ul>
+<p>Let’s take the example research question, “Are youth who attend our program at least twice a week showing greater improvements in school attendance than those who attend once a week or less?” What assumptions is the team making? One assumption may be that the program overall is effective, and by asking this question, you want to know if it’s <em>more</em> impactful on those who frequent it often. Let’s say that’s true. Youth who attend twice a week show greater improvements in school compared to those who attend once per week. What does this improvement actually mean? Are their test scores better by 10 points or 2 points? More important, how do they compare to youth who do not attend the program? If outcomes of youth in the program are not cleanly differentiated from youth outside of the program, then this original question is moot.</p>
+</section>
+<section id="types-of-questions-your-data-can-answer" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-questions-your-data-can-answer">Types of Questions Your Data Can Answer</h2>
+<p>Different questions require different types of analysis. Understanding which type of question you’re asking helps you choose the right approach.</p>
+<p><strong>Descriptive questions</strong> help you understand what’s happening in your programs right now. These include questions like</p>
+<ul>
+<li><p>“How many clients did we serve last quarter?”</p></li>
+<li><p>“What is the average age of program participants?”</p></li>
+<li><p>“What percentage of workshop attendees completed the post-survey?”</p></li>
+</ul>
+<p><strong>Comparative questions</strong> help you understand differences between groups or time periods. You might ask:</p>
+<ul>
+<li><p>“Do clients who receive case management services have higher housing stability rates than those who don’t?”</p></li>
+<li><p>“How do our summer program outcomes compare to our school-year program outcomes?”</p></li>
+</ul>
+<p><strong>Trend questions</strong> focus on changes over time.</p>
+<ul>
+<li><p>“Are we serving more families this year than last year?”</p></li>
+<li><p>“Have client satisfaction scores improved since we implemented our new intake process?”</p></li>
+</ul>
+<p><strong>Relationship questions</strong> explore how different factors connect to each other.</p>
+<ul>
+<li><p>“Does program attendance relate to outcome achievement?”</p></li>
+<li><p>“Are participants with previous program experience more likely to complete the full program?”</p></li>
+</ul>
+</section>
+</section>
+<section id="understanding-your-data-landscape" class="level1">
+<h1>Understanding Your Data Landscape</h1>
+<p>Before analyzing data, you need to understand what information you’re actually working with. Every nonprofit collects various types of data, from basic demographic information about the people you serve to detailed records of program activities and outcomes. Taking inventory of your data sources and understanding their strengths and limitations is a crucial first step.</p>
+<section id="quantitative-vs.-qualitative-data" class="level2">
+<h2 class="anchored" data-anchor-id="quantitative-vs.-qualitative-data">Quantitative vs.&nbsp;Qualitative Data</h2>
+<p><strong>Quantitative data</strong> consists of numbers that can be measured or counted: the number of clients served, ages of participants, attendance rates, test scores, or amounts donated. This type of data lends itself well to statistical analysis and can reveal patterns across large groups. You can calculate averages, track changes over time, and make comparisons between groups.</p>
+<p><strong>Qualitative data</strong> captures experiences, perspectives, and nuances that numbers alone cannot convey: participant testimonials, case notes from social workers, or open-ended survey responses. While this module focuses primarily on quantitative analysis, remember that the richest understanding often comes from combining both types of information. Numbers might tell you that 75% of clients completed your program, but interviews might reveal why the other 25% didn’t.</p>
+</section>
+<section id="common-data-quality-issues" class="level2">
+<h2 class="anchored" data-anchor-id="common-data-quality-issues">Common Data Quality Issues</h2>
+<p>You should also understand how your data was collected and any limitations this might create. <strong>Data collected through voluntary surveys</strong> may not represent your entire client population, since those who respond might differ systematically from those who don’t. People who had positive experiences may be more likely to complete feedback forms, or conversely, those with complaints may be more motivated to respond.</p>
+<p><strong>Attendance and participation records</strong> are only as accurate as the staff members recording them. If tracking systems are cumbersome or if staff are busy, records may be incomplete. <strong>Outcome measures</strong> may capture some dimensions of change while missing others. A standardized test might measure academic knowledge but not capture growth in confidence or motivation.</p>
+<p>Being aware of these limitations doesn’t mean your data is useless, but it does mean you should interpret your findings with appropriate caution and look for ways to validate important insights through multiple sources. If your attendance data seems incomplete, you might cross-reference it with sign-in sheets or compare it to what staff members recall. If survey response rates are low, you might conduct a few follow-up phone interviews with non-respondents to see if their experiences differ.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data Quality Issue</th>
+<th>What It Looks Like</th>
+<th>What You Can Do</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Missing data</td>
+<td>Blank cells in your spreadsheet, incomplete surveys</td>
+<td>Look for patterns in what’s missing; consider whether missing data is random or systematic</td>
+</tr>
+<tr class="even">
+<td>Inconsistent formats</td>
+<td>Dates entered in different ways (3/15/24 vs March 15, 2024), inconsistent naming</td>
+<td>Standardize formats moving forward; create data entry guidelines</td>
+</tr>
+<tr class="odd">
+<td>Outliers</td>
+<td>One value dramatically different from others (e.g., one person attended 200 sessions while most attended 5-10)</td>
+<td>Verify outliers are accurate; consider whether they should be analyzed separately</td>
+</tr>
+<tr class="even">
+<td>Low response rates</td>
+<td>Only 3% of clients completed the survey</td>
+<td>Acknowledge limitations; try to understand if respondents differ from non-respondents. Response rates have been in decline for years. A 3-5% or even 10% response rate may be considered excellent depending on context and method</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="descriptive-statistics-summarizing-your-data" class="level1">
+<h1>Descriptive Statistics: Summarizing Your Data</h1>
+<p>Once you have a clear question and understand your data sources, you can begin examining your information systematically. Descriptive statistics are tools that help you summarize and describe what’s in your data. These basic measures form the foundation of nearly all data analysis and interpretation.</p>
+<section id="measures-of-central-tendency" class="level2">
+<h2 class="anchored" data-anchor-id="measures-of-central-tendency">Measures of Central Tendency</h2>
+<p>These statistics tell you what’s “typical” or “central” in your data.</p>
+<p><strong>The mean (average)</strong> is calculated by adding up all values and dividing by the number of values. The mean is useful for understanding the typical value in your data. For instance, if you want to know the average age of program participants, the average number of sessions clients attend, or the average donation amount, the mean provides a single number that represents your entire dataset. However, the mean can be misleading when your data includes extreme values. If most clients attend between 5 and 10 sessions but a few attend 50 sessions, the mean will be pulled upward and might not represent the typical experience.</p>
+<p><strong>The median</strong> addresses this limitation by identifying the middle value when all your data points are arranged in order. Half of your values fall below the median and half fall above it. When your data includes outliers or is skewed in one direction, the median often provides a more accurate picture of what’s typical. In a dataset of household incomes where a few very high earners could distort the mean, the median gives you a better sense of the middle-ground experience.</p>
+<p><strong>The mode</strong> is simply the most frequently occurring value in your dataset. While less commonly used than the mean or median, the mode is particularly useful for categorical data. If you’re looking at the most common reason people seek your services, the most popular workshop topic, or the most frequent funding source, you’re identifying the mode.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="understand_data_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Example: Understanding Session Attendance</strong></p>
+<p>Imagine you run a mentoring program and track how many sessions each participant attended over three months:</p>
+<p>Participant sessions: 4, 5, 5, 6, 6, 6, 7, 7, 8, 8, 9, 45</p>
+<ul>
+<li><p><strong>Mean:</strong> 9.7 sessions (seems high!)</p></li>
+<li><p><strong>Median:</strong> 6.5 sessions (more representative of typical experience)</p></li>
+<li><p><strong>Mode:</strong> 6 sessions (most common attendance level)</p></li>
+</ul>
+<p>In this case, one participant who attended 45 sessions (perhaps a peer mentor or someone with exceptional engagement) pulls the mean up significantly. The median and mode give you a better sense of what most participants experienced.</p>
+</section>
+<section id="measure-of-spread" class="level2">
+<h2 class="anchored" data-anchor-id="measure-of-spread">Measure of Spread</h2>
+<p>Understanding the typical value is important, but you also need to know how spread out your data is.</p>
+<p><strong>Range</strong> is the difference between your highest and lowest values, giving you a sense of the variability in your dataset. In the attendance example above, the range is 41 sessions (45 minus 4). A large range suggests substantial variation in participant experiences.</p>
+<p><strong>Percentiles</strong> help you understand distribution by dividing your data into segments. The 25th percentile (first quartile) is the value below which 25% of your data falls. The 75th percentile (third quartile) is the value below which 75% of your data falls. The gap between these percentiles tells you where the middle 50% of your data lies, which can be very informative. If the 25th percentile for program completion time is 3 months and the 75th percentile is 4 months, you know that half of participants complete the program in a fairly narrow timeframe. But if the 25th percentile is 2 months and the 75th percentile is 9 months, there’s much more variation in how long completion takes.</p>
+<p><strong>Standard deviation</strong> is a more sophisticated measure of spread that tells you, on average, how far individual values deviate from the mean. A small standard deviation means most values cluster close to the average, while a large standard deviation indicates wide variation. While calculating standard deviation requires a formula or software, understanding the concept helps you interpret variation in your data.</p>
+<p>Looking beyond summary statistics to understand how your data is distributed can reveal important patterns. Are most of your values clustered around the average with few extreme cases, or is there wide variation? Are there distinct groups within your data? You might discover that your job training program serves two distinct populations with different age ranges and needs, which could inform how you structure your services.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="understand_data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="identifying-trends-and-patterns-over-time" class="level1">
+<h1>Identifying Trends and Patterns Over Time</h1>
+<p>Many of the most important questions nonprofits ask involve change over time. Are we serving more people this year than last? Are participant outcomes improving? How have our funding sources shifted? Analyzing trends requires looking at data collected at multiple points and understanding what those changes might mean.</p>
+<section id="creating-and-reading-time-series" class="level2">
+<h2 class="anchored" data-anchor-id="creating-and-reading-time-series">Creating and Reading Time Series</h2>
+<p>When examining trends, start by creating a simple time series of your data. This might be a table showing key metrics month by month or year by year, or ideally a line graph that makes patterns easier to see visually. Look for overall direction first. Is the trend generally moving up, down, or staying relatively stable?</p>
+<p><strong>Example: Monthly Donations</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="understand_data_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at this data, you can see a general upward trend over the years, with individual months varying. The dips for the year typically occur during a summer month, possibly suggesting a seasonal pattern.</p>
+</section>
+<section id="recognizing-seasonal-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="recognizing-seasonal-patterns">Recognizing Seasonal Patterns</h2>
+<p>Seasonal patterns and cycles often appear in nonprofit data. Youth programs may see higher attendance during after-school hours but lower participation during summer months when families travel or children attend camps. Food banks often experience increased demand during winter holidays and reduced donations during summer. Fundraising often spikes at the end of the calendar year for tax-related reasons.</p>
+<p>Recognizing these regular patterns is important because it prevents you from mistaking predictable cycles for new trends. If attendance drops every summer, a decrease in June shouldn’t cause alarm, but an unusually large drop compared to previous summers would warrant investigation. To identify seasonal patterns, compare the same time periods across multiple years. If June is consistently your lowest attendance month, that’s a seasonal pattern. If June 2024 is much lower than June 2022 and 2023, that might indicate a new issue.</p>
+<section id="making-fair-comparisons-across-time" class="level3">
+<h3 class="anchored" data-anchor-id="making-fair-comparisons-across-time">Making Fair Comparisons Across Time</h3>
+<p>When comparing across time periods, make sure you’re making fair comparisons. If your organization has grown significantly, comparing raw numbers from five years ago to today might be misleading. Instead, look at percentages or rates. Rather than just counting how many clients completed your program, calculate the completion rate by dividing completers by total enrollees. This allows you to compare program success across years even as your overall numbers change.</p>
+<p>Consider whether your measurement methods have remained consistent. If you changed how you track attendance, modified your outcome surveys, or updated your database system, apparent trends might actually reflect changes in measurement rather than changes in reality. Document any changes to data collection methods and note them when interpreting trends.</p>
+<p>Also think about external factors that might influence your data over time. Changes in the economy, new legislation, demographic shifts in your community, or emergence of competing programs can all affect your numbers. A decline in service utilization might reflect improved economic conditions in your community rather than problems with your program. An increase in client needs might reflect changes in eligibility requirements for government programs rather than changes in your effectiveness.</p>
+</section>
+<section id="making-meaningful-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="making-meaningful-comparisons">Making Meaningful Comparisons</h3>
+<p>Comparison is at the heart of most data questions. You’re rarely interested in a number in isolation; you want to know how it relates to something else. Is this outcome better than that one? Does one group differ from another? How do we compare to similar organizations?</p>
+<section id="comparing-groups-within-your-data" class="level4">
+<h4 class="anchored" data-anchor-id="comparing-groups-within-your-data">Comparing Groups Within Your Data</h4>
+<p>When comparing groups within your data, start by clearly defining the groups you’re examining. You might compare outcomes for participants who received different program models, demographic groups, or people who entered your program at different times. Calculate the same descriptive statistics for each group and look for differences.</p>
+<p><em>Visual recommendation: Create a comparison table template that nonprofits can adapt.</em></p>
+<p><strong>Example: Comparing Program Completion Rates by Age Group</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age Group</th>
+<th>Total Enrolled</th>
+<th>Completed Program</th>
+<th>Completion Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>18-24</td>
+<td>45</td>
+<td>32</td>
+<td>71%</td>
+</tr>
+<tr class="even">
+<td>25-34</td>
+<td>62</td>
+<td>51</td>
+<td>82%</td>
+</tr>
+<tr class="odd">
+<td>35-44</td>
+<td>38</td>
+<td>33</td>
+<td>87%</td>
+</tr>
+<tr class="even">
+<td>45+</td>
+<td>28</td>
+<td>25</td>
+<td>89%</td>
+</tr>
+<tr class="odd">
+<td><strong>Overall</strong></td>
+<td><strong>173</strong></td>
+<td><strong>141</strong></td>
+<td><strong>82%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>This table reveals that completion rates increase with age. While the overall completion rate is 82%, younger participants (18-24) complete at notably lower rates. This insight might prompt you to investigate why younger participants face more barriers to completion and whether additional supports could help.</p>
+<p>When you observe differences between groups, consider both the size of the difference and the size of your groups. A difference of 15 percentage points between groups of 50 people each is more meaningful than the same difference between groups of 5 people each. With very small groups, a single person’s outcome can swing percentages dramatically.</p>
+<p>Also consider whether differences might be explained by other factors. If you notice that participants in your morning program sessions have better outcomes than those in evening sessions, this might mean morning timing is better, or it might mean that people who can attend morning sessions differ in other ways (perhaps they have more flexible jobs, better childcare arrangements, or different levels of motivation). Looking at multiple characteristics simultaneously can help you understand whether apparent differences hold up when you account for other factors.</p>
+</section>
+<section id="benchmarking-against-external-standards" class="level4">
+<h4 class="anchored" data-anchor-id="benchmarking-against-external-standards">Benchmarking Against External Standards</h4>
+<p>Benchmarking against external standards or other organizations can provide valuable context for your data. If your job training program has a 70% job placement rate, is that good? It depends on many factors: the population you serve, the local economy, the types of jobs you’re targeting, and how other similar programs perform.</p>
+<p>Seek out data from comparable programs through industry associations, research publications, or networks of similar organizations. Government agencies often publish data on program outcomes in various sectors. Funders sometimes share aggregate data across their grantees. When making external comparisons, be careful to account for differences in context, population served, and how metrics are defined and measured. A program serving individuals with significant barriers to employment should not expect the same job placement rates as one serving job-ready candidates.</p>
+<p>Sometimes the best benchmark is your own past performance. If you served 500 families last year and set a goal to serve 600 this year, your past performance provides context for whether that goal is realistic and whether you’re on track to achieve it.</p>
+</section>
+<section id="comparing-actual-performance-to-goals" class="level4">
+<h4 class="anchored" data-anchor-id="comparing-actual-performance-to-goals">Comparing Actual Performance to Goals</h4>
+<p>Comparing your data to your goals or targets is another crucial form of analysis. Most nonprofits set goals in their strategic plans, grant proposals, or annual work plans. Regularly comparing actual performance to these targets helps you gauge progress and identify when you need to adjust either your strategies or your expectations.</p>
+<p>Create a simple tracking table that shows your goal, your current performance, and the gap between them. This makes it immediately clear where you’re on track and where you’re falling short.</p>
+<p><strong>Example: Quarterly Goal Tracking</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Annual Goal</th>
+<th>Q1 Actual</th>
+<th>Q1 Target (25%)</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clients served</td>
+<td>800</td>
+<td>187</td>
+<td>200</td>
+<td>Behind pace (94% of target)</td>
+</tr>
+<tr class="even">
+<td>Program completions</td>
+<td>600</td>
+<td>156</td>
+<td>150</td>
+<td>Ahead of pace (104% of target)</td>
+</tr>
+<tr class="odd">
+<td>Volunteer hours</td>
+<td>5,000</td>
+<td>1,410</td>
+<td>1,250</td>
+<td>Ahead of pace (113% of target)</td>
+</tr>
+<tr class="even">
+<td>Workshop sessions delivered</td>
+<td>120</td>
+<td>32</td>
+<td>30</td>
+<td>On pace (107% of target)</td>
+</tr>
+</tbody>
+</table>
+<p>This table shows that while most metrics are on track, client recruitment is slightly behind pace. This early warning allows you to investigate barriers and adjust outreach strategies before the gap becomes larger. In this example, the clients served total is only 13 persons shy of the quarterly target. Depending on context, this may be nothing. If you are aware of seasonal patterns in your data and routinely serve much more than 200 clients in quarters 3 and 4, then being slightly below Q1’s target is not something to be concerned with.</p>
+<p>If you’re consistently missing goals, it’s worth examining whether the goals were unrealistic, whether you’ve encountered unexpected obstacles, or whether your strategies need adjustment. Missing a goal isn’t failure if you learn from the analysis and make informed adjustments.</p>
+</section>
+</section>
+</section>
+<section id="understanding-relationships-in-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-relationships-in-your-data">Understanding Relationships in Your Data</h2>
+<p>Beyond describing individual variables and comparing groups, you often want to understand whether different factors in your data relate to each other. Does attendance relate to outcomes? Do participants with certain characteristics tend to complete programs at higher rates? Understanding these relationships can help you identify what’s working and why.</p>
+<section id="exploring-correlation" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-correlation">Exploring Correlation</h3>
+<p>Correlation describes the relationship between two numerical variables. When two things are positively correlated, they tend to move in the same direction: as one increases, the other tends to increase as well. For example, you might find that the number of coaching sessions participants attend correlates positively with their employment outcomes. Negative correlation means variables move in opposite directions: as one increases, the other tends to decrease. You might find that the number of barriers clients face at intake correlates negatively with program completion (more barriers associated with lower completion).</p>
+<p>You can explore correlation by creating a simple scatterplot with one variable on each axis, or by calculating a correlation coefficient (a number between -1 and 1 that indicates the strength and direction of the relationship). Many spreadsheet programs can calculate this for you.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="understand_data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>However, a critical principle in data interpretation is that <strong>correlation does not prove causation</strong>. Just because two things move together doesn’t mean one causes the other. There might be a third factor (confounding <em>variable</em>) influencing both, or the relationship might be coincidental (also known as a <em>spurious correlation</em>). If you notice that participants who attend more frequently have better outcomes, this could mean attendance causes improvement, but it could also mean that people who are more motivated both attend more and improve more regardless of attendance. Or perhaps those with fewer competing obligations can both attend regularly and focus more effectively on their goals.</p>
+<p>Understanding correlations is valuable for generating hypotheses about what matters in your programs, but testing those hypotheses rigorously often requires more careful program design, such as comparing groups who receive different levels of service while being otherwise similar, or tracking the same individuals before and after specific interventions.</p>
+<section id="cross-tabulation-looking-at-multiple-factors" class="level4">
+<h4 class="anchored" data-anchor-id="cross-tabulation-looking-at-multiple-factors">Cross-Tabulation: Looking at Multiple Factors</h4>
+<p>Looking for patterns across multiple variables can reveal insights that single-variable analysis might miss. Cross-tabulation creates a table that shows how outcomes vary when you consider two or more characteristics simultaneously.</p>
+<p><strong>Example: Program Completion by Age and Education Level</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>High School or Less</th>
+<th>Some College</th>
+<th>Bachelor’s+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>18-24</strong></td>
+<td>65% (13/20)</td>
+<td>75% (15/20)</td>
+<td>83% (5/6)</td>
+</tr>
+<tr class="even">
+<td><strong>25-34</strong></td>
+<td>78% (18/23)</td>
+<td>85% (22/26)</td>
+<td>92% (12/13)</td>
+</tr>
+<tr class="odd">
+<td><strong>35+</strong></td>
+<td>82% (23/28)</td>
+<td>88% (22/25)</td>
+<td>95% (19/20)</td>
+</tr>
+</tbody>
+</table>
+<p>This cross-tabulation reveals several insights. First, both age and education level relate to completion rates, with older participants and those with more education completing at higher rates. Second, the relationship between education and completion is present across all age groups. Third, even among the youngest participants with the least education (the 65% completion group), nearly two-thirds complete successfully, suggesting the program works for diverse participants even if some groups face more challenges.</p>
+<p>This type of analysis helps you identify which combinations of characteristics might indicate that participants need additional support, and which groups consistently succeed regardless of other factors.</p>
+</section>
+</section>
+<section id="common-pitfalls-and-how-to-avoid-them" class="level3">
+<h3 class="anchored" data-anchor-id="common-pitfalls-and-how-to-avoid-them">Common Pitfalls and How to Avoid Them</h3>
+<p>Even experienced data analysts can fall into common traps that lead to misinterpretation. Being aware of these pitfalls will help you avoid them and interpret your data more accurately.</p>
+<section id="over-interpreting-small-numbers" class="level4">
+<h4 class="anchored" data-anchor-id="over-interpreting-small-numbers">1. Over-Interpreting Small Numbers</h4>
+<p>One frequent mistake is over-interpreting small differences or focusing too much on outliers. With small sample sizes, a few unusual cases can create the appearance of patterns that don’t really exist. If you’re comparing outcomes for 10 participants in one program to 10 in another and the first group’s average is 3 points higher, this might simply reflect normal variation rather than a meaningful difference.</p>
+<p><strong>Rule of thumb:</strong> Be cautious about drawing strong conclusions from groups smaller than 30 people. Look for patterns that persist across larger numbers or multiple time periods before concluding they’re meaningful.</p>
+</section>
+<section id="confirmation-bias" class="level4">
+<h4 class="anchored" data-anchor-id="confirmation-bias">2. Confirmation Bias</h4>
+<p>Another pitfall is confirmation bias, where you unconsciously focus on data that confirms what you already believe while discounting information that challenges your assumptions. If you’re convinced that a particular program component is crucial, you might emphasize evidence supporting its importance while minimizing contradictory findings.</p>
+<p><strong>Strategies to counter this:</strong> Actively look for evidence that challenges your hypotheses. Invite colleagues who weren’t involved in program design to review your interpretations. Be transparent about findings that surprise or disappoint you. Ask yourself “What would the data look like if my assumption were wrong?” and genuinely look for that pattern.</p>
+</section>
+<section id="ignoring-distribution-and-focusing-only-on-averages" class="level4">
+<h4 class="anchored" data-anchor-id="ignoring-distribution-and-focusing-only-on-averages">3. Ignoring Distribution and Focusing Only on Averages</h4>
+<p>Focusing exclusively on averages while ignoring variation can lead to misleading conclusions. Your program might show strong average outcomes while actually serving two distinct groups very differently: one group thriving and another struggling. Understanding the distribution of outcomes, not just the average, reveals these patterns.</p>
+<p>Similarly, aggregate data can hide important disparities. Overall program completion rates might look good while specific demographic groups face significant barriers. Breaking down your data by relevant characteristics helps ensure you’re not missing important inequities or opportunities for improvement.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="understand_data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mistaking-available-data-for-important-data" class="level4">
+<h4 class="anchored" data-anchor-id="mistaking-available-data-for-important-data">4. Mistaking Available Data for Important Data</h4>
+<p>Finally, mistaking available data for relevant data is a common trap. Just because you can easily measure something doesn’t mean it’s what you should be measuring. Outputs like the number of workshops delivered or people served are easier to track than outcomes like changes in knowledge, behavior, or life circumstances, but outcomes are usually what matter most for understanding your impact.</p>
+<p>While you should use the data you have and work with what’s practical to collect, also critically consider whether you’re measuring what truly matters. If your data shows high attendance but you’re not tracking whether participants are gaining skills or achieving their goals, you’re only seeing part of the picture.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="putting-it-all-together-a-practical-workflow" class="level1">
+<h1>Putting It All Together: A Practical Workflow</h1>
+<p>Effective data analysis in a nonprofit context isn’t about sophisticated statistical techniques or expensive software. It’s about approaching your data systematically with clear questions and an open mind. Here’s a practical workflow you can apply to most data questions you’ll encounter.</p>
+<section id="step-1-define-your-question" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-define-your-question">Step 1: Define Your Question</h2>
+<p>Begin every analysis by articulating what you need to know and why. Write down your question explicitly, and clarify what a useful answer would look like. This might seem like unnecessary formality, but it focuses your analysis and helps you recognize when you’ve found an answer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Go beyond asking Yes/No questions. In doing so, you open yourself up to a deeper level of analysis.</p>
+</div>
+</div>
+<p><strong>Vague question:</strong> “How are we doing with our literacy program?”</p>
+<p><strong>Better question:</strong> “To what degree is our program impacting our students’ reading levels? Specifically, what percentage are advancing at least one grade level over a six-month period?”</p>
+</section>
+<section id="step-2-identify-relevant-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-identify-relevant-data">Step 2: Identify Relevant Data</h2>
+<p>Identify what data you have or can collect that might address your question. Be honest about any limitations in that data. Do you have complete records or are some missing? Are you measuring exactly what you want to know or a proxy for it? How recent is the data?</p>
+<p>For the literacy question above, you’d need reading assessment scores at program entry and six months later. If you only have scores for some students, acknowledge that limitation. If your assessments measure decoding skills but not comprehension, note that distinction.</p>
+</section>
+<section id="step-3-summarize-and-visualize" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-summarize-and-visualize">Step 3: Summarize and Visualize</h2>
+<p>Calculate appropriate descriptive statistics that help characterize your data. Create simple tables or charts that let you see patterns visually. For the literacy program, you might calculate:</p>
+<ul>
+<li><p>The percentage of students who advanced at least one grade level</p></li>
+<li><p>The average improvement across all students</p></li>
+<li><p>The range of improvement (from students who declined to those who advanced most)</p></li>
+<li><p>Completion broken down by factors like attendance or initial reading level</p></li>
+</ul>
+<p>A simple bar chart showing the percentage of students in each category (declined, no change, improved 1 level, improved 2+ levels) makes the pattern immediately clear.</p>
+</section>
+<section id="step-4-interpret-in-context" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-interpret-in-context">Step 4: Interpret in Context</h2>
+<p>Consider what the patterns mean given what you know about your program, your students, and the educational research in this area. What explanations might account for what you’re seeing? If 65% of students advanced at least one grade level, is that strong performance? It depends on factors like how intensive your program is, how far behind students were when they started, what gains similar programs achieve, and what’s typical for students’ natural development.</p>
+<p>What do you know from your programmatic experience that helps make sense of the numbers? Perhaps teachers have noticed that students who attend regularly make steady progress. Do the numbers confirm that observation? Are there patterns in the data that surprise experienced staff members? Those surprises often point to important insights worth exploring further.</p>
+</section>
+<section id="step-5-draw-conclusions-and-identify-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-draw-conclusions-and-identify-next-steps">Step 5: Draw Conclusions and Identify Next Steps</h2>
+<p>What does this analysis tell you about your programs? Based on the literacy data, you might conclude that your program is effectively helping most students advance, but a meaningful minority aren’t making expected progress. What decisions might this inform? Perhaps you need to investigate why some students aren’t advancing and whether they need different supports. Maybe you want to examine whether attendance patterns or initial reading levels predict who advances most.</p>
+<p>What new questions has this analysis raised? You might now wonder whether the students who didn’t advance have something in common, whether improvement persists after students leave the program, or whether certain tutoring approaches work better than others.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item" id="htmlwidget-155dc90fc4a3b1a0cf9b" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-155dc90fc4a3b1a0cf9b">{"x":{"diagram":"\n  digraph workflow {\n    \n    # Graph attributes\n    graph [layout = dot, \n           rankdir = TB,\n           fontname = Helvetica,\n           bgcolor = \"#FAFBFC\",\n           nodesep = 0.8,\n           ranksep = 0.6,\n           labelloc = \"t\",\n           labeljust = \"c\",\n           label = <<FONT POINT-SIZE=\"36\"><B>Understanding Your Data: Workflow for Nonprofits<\/B><\/FONT><BR/><FONT POINT-SIZE=\"24\" COLOR=\"#4A6B7C\">A systematic approach to understanding your program data<\/FONT><BR/><BR/>>,\n           fontsize = 18,\n           pad = 0.5]\n    \n    # Node defaults\n    node [shape = box,\n          style = \"rounded,filled\",\n          fillcolor = \"#E8F3F8\",\n          color = \"#2C5F7C\",\n          penwidth = 3,\n          fontname = Helvetica,\n          fontsize = 18,\n          fontcolor = \"#1A3A4A\",\n          width = 5,\n          height = 1.3]\n    \n    # Edge defaults  \n    edge [color = \"#2C5F7C\",\n          penwidth = 3,\n          arrowsize = 1.0]\n    \n    # Define step number badges (small circular nodes)\n    badge1 [shape = circle,\n            style = filled,\n            fillcolor = \"#2C5F7C\",\n            color = \"#2C5F7C\",\n            fontcolor = white,\n            fontsize = 20,\n            label = \"1\",\n            width = 0.6,\n            height = 0.6,\n            fixedsize = true]\n    \n    badge2 [shape = circle,\n            style = filled,\n            fillcolor = \"#2C5F7C\",\n            color = \"#2C5F7C\",\n            fontcolor = white,\n            fontsize = 20,\n            label = \"2\",\n            width = 0.6,\n            height = 0.6,\n            fixedsize = true]\n    \n    badge3 [shape = circle,\n            style = filled,\n            fillcolor = \"#2C5F7C\",\n            color = \"#2C5F7C\",\n            fontcolor = white,\n            fontsize = 20,\n            label = \"3\",\n            width = 0.6,\n            height = 0.6,\n            fixedsize = true]\n    \n    badge4 [shape = circle,\n            style = filled,\n            fillcolor = \"#2C5F7C\",\n            color = \"#2C5F7C\",\n            fontcolor = white,\n            fontsize = 20,\n            label = \"4\",\n            width = 0.6,\n            height = 0.6,\n            fixedsize = true]\n    \n    badge5 [shape = circle,\n            style = filled,\n            fillcolor = \"#2C5F7C\",\n            color = \"#2C5F7C\",\n            fontcolor = white,\n            fontsize = 20,\n            label = \"5\",\n            width = 0.6,\n            height = 0.6,\n            fixedsize = true]\n    \n    # Define nodes with enhanced labels and icons\n    step1 [label = <<B>Define Your Question<\/B><BR/><BR/>❓ What do you need to know?<BR/>🎯 What would a useful<BR/>answer look like?>]\n    \n    step2 [label = <<B>Identify Relevant Data<\/B><BR/><BR/>📊 What data do you have?<BR/>⚠️ What are the limitations?<BR/>✓ Is it complete?>]\n    \n    step3 [label = <<B>Summarize and Visualize<\/B><BR/><BR/>📈 Calculate statistics<BR/>📉 Create tables and charts<BR/>🔍 Look for patterns>]\n    \n    step4 [label = <<B>Interpret in Context<\/B><BR/><BR/>💡 What do patterns mean?<BR/>🤔 What explains what you see?<BR/>🔄 Consider alternatives>]\n    \n    step5 [label = <<B>Draw Conclusions<\/B><BR/><BR/>📝 What did you learn?<BR/>✅ What decisions can you make?<BR/>❔ What questions remain?>]\n    \n    # Add contextual text nodes with decorative elements\n    note1 [shape = plaintext,\n           fontsize = 18,\n           fontcolor = \"#4A6B7C\",\n           label = <<FONT COLOR=\"#2C5F7C\">▶<\/FONT> <I>Start with mission-driven<BR/>   questions, not available data.<BR/>   Be specific and answerable.<\/I>>]\n    \n    note2 [shape = plaintext,\n           fontsize = 18,\n           fontcolor = \"#4A6B7C\",\n           label = <<FONT COLOR=\"#2C5F7C\">▶<\/FONT> <I>Understand collection methods,<BR/>   missing data, and measurement<BR/>   quality before analyzing.<\/I>>]\n    \n    note3 [shape = plaintext,\n           fontsize = 18,\n           fontcolor = \"#4A6B7C\",\n           label = <<FONT COLOR=\"#2C5F7C\">▶<\/FONT> <I>Use means, medians, ranges,<BR/>   and visualizations to reveal<BR/>   trends and distributions.<\/I>>]\n    \n    note4 [shape = plaintext,\n           fontsize = 18,\n           fontcolor = \"#4A6B7C\",\n           label = <<FONT COLOR=\"#2C5F7C\">▶<\/FONT> <I>Combine data insights with<BR/>   programmatic knowledge.<BR/>   Consider external factors.<\/I>>]\n    \n    note5 [shape = plaintext,\n           fontsize = 18,\n           fontcolor = \"#4A6B7C\",\n           label = <<FONT COLOR=\"#2C5F7C\">▶<\/FONT> <I>Share findings with your team.<BR/>   Use insights to improve programs<BR/>   and inform stakeholders.<\/I>>]\n    \n    # Add a footer note\n    footer [shape = plaintext,\n            fontsize = 16,\n            fontcolor = \"#6B8E9F\",\n            label = <<BR/><BR/>💡 <I>Remember: Data analysis is iterative. You may cycle back through steps as you learn more.<\/I>>]\n    \n    # Define main flow: arrows connect boxes directly\n    step1 -> step2 [arrowhead = vee]\n    step2 -> step3 [arrowhead = vee]\n    step3 -> step4 [arrowhead = vee]\n    step4 -> step5 [arrowhead = vee]\n    \n    # Add feedback loop (optional - shows iterative nature)\n    step5 -> step1 [style = dashed, \n                    color = \"#8BADC4\", \n                    penwidth = 2,\n                    constraint = false]\n    \n    # Position badges and notes next to steps (no visible connections)\n    badge1 -> step1 [style = invis]\n    step1 -> note1 [style = invis]\n    \n    badge2 -> step2 [style = invis]\n    step2 -> note2 [style = invis]\n    \n    badge3 -> step3 [style = invis]\n    step3 -> note3 [style = invis]\n    \n    badge4 -> step4 [style = invis]\n    step4 -> note4 [style = invis]\n    \n    badge5 -> step5 [style = invis]\n    step5 -> note5 [style = invis]\n    \n    step5 -> footer [style = invis]\n    \n    # Create subgraphs to align elements horizontally\n    {rank = same; badge1; step1; note1}\n    {rank = same; badge2; step2; note2}\n    {rank = same; badge3; step3; note3}\n    {rank = same; badge4; step4; note4}\n    {rank = same; badge5; step5; note5}\n  }\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="moving-forward-building-a-data-informed-culture" class="level1">
+<h1>Moving Forward: Building a Data-Informed Culture</h1>
+<p>Understanding your data is a skill that develops with practice. You don’t need to become a statistician or data scientist to work effectively with your organization’s information. What you do need is curiosity, a willingness to engage with numbers systematically, and the judgment to interpret findings in light of your programmatic knowledge and mission.</p>
+<section id="start-small-and-build" class="level2">
+<h2 class="anchored" data-anchor-id="start-small-and-build">Start Small and Build</h2>
+<p>Choose one straightforward question about your programs and work through the process of finding and interpreting relevant data. Perhaps start with something descriptive, like understanding the demographic characteristics of the people you serve or tracking participation rates over the past year. Share your findings with colleagues and discuss what they might mean. As you become more comfortable with basic analysis, you can tackle more complex questions and more sophisticated techniques.</p>
+<p>Create simple templates for common analyses you’ll repeat regularly. A spreadsheet template for tracking monthly service numbers with automatic calculation of totals and averages saves time and ensures consistency. A standard format for comparing quarterly performance to goals makes it easy to spot trends and share updates with your board or funders.</p>
+</section>
+<section id="make-data-part-of-regular-conversations" class="level2">
+<h2 class="anchored" data-anchor-id="make-data-part-of-regular-conversations">Make Data Part of Regular Conversations</h2>
+<p>Schedule regular time for data review in team meetings. This doesn’t need to be formal or lengthy. Spending fifteen minutes each month reviewing key metrics helps everyone stay connected to your organization’s progress and normalizes data as a tool for learning rather than judgment. When staff members see data used to improve programs rather than criticize people, they become more engaged with collection and analysis.</p>
+<p>Encourage questions and curiosity about your data. When someone wonders aloud whether a new outreach approach is working or which workshop topics participants find most valuable, treat that as an opportunity for inquiry. “That’s a great question – let’s look at the data and see what we can learn” builds a culture where evidence informs decisions.</p>
+</section>
+<section id="balance-data-with-other-ways-of-knowing" class="level2">
+<h2 class="anchored" data-anchor-id="balance-data-with-other-ways-of-knowing">Balance Data with Other Ways of Knowing</h2>
+<p>Remember that data is a tool for understanding and improving your work, not an end in itself. The goal is never to produce impressive statistics or complex analyses. The goal is to better serve your mission by understanding your programs more clearly, identifying opportunities for improvement, and demonstrating your impact to stakeholders.</p>
+<p>Numbers provide one type of insight, but they should be combined with the qualitative understanding that comes from direct service delivery, participant feedback, staff expertise, and community knowledge. The literacy program data might show that students are advancing, but conversations with students and families reveal that growing confidence and enjoyment of reading are equally important outcomes that standardized assessments don’t fully capture.</p>
+<p>When quantitative and qualitative insights align, you can have strong confidence in your conclusions. When they diverge, that’s a signal to dig deeper and understand why different evidence sources are telling different stories. Perhaps the numbers show high program completion rates while exit interviews reveal that many completers didn’t feel they achieved their goals, suggesting that completion alone isn’t an adequate measure of success.</p>
+</section>
+<section id="invest-in-your-data-infrastructure" class="level2">
+<h2 class="anchored" data-anchor-id="invest-in-your-data-infrastructure">Invest in Your Data Infrastructure</h2>
+<p>While you don’t need expensive software to start working with data, some investment in your data systems pays dividends over time. This might mean adopting a simple client database that tracks participation and outcomes consistently, creating standardized data entry forms that reduce errors, or providing training so more staff members can conduct basic analyses.</p>
+<p>Document how you collect and define your data. A simple data dictionary that explains what each field means, how it should be recorded, and any relevant coding categories helps ensure consistency. When staff turnover occurs, good documentation prevents loss of institutional knowledge about your data systems.</p>
+<p>Regularly review what data you’re collecting and why. If you’re gathering information you never use, consider whether it’s worth the staff time to collect it. If you regularly wish you had data you don’t collect, think about feasible ways to add that information. Your data collection should evolve as your programs and information needs change.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Your data contains stories about the people you serve, the challenges they face, and the changes your programs help create. Learning to read those stories through systematic analysis enables you to do your most important work more effectively. The numbers matter not for their own sake, but because they represent real people, real needs, and real opportunities to make a difference.</p>
+<p>The skills covered in this module – asking focused questions, understanding basic statistics, identifying patterns and trends, making fair comparisons, and interpreting findings thoughtfully – form a foundation you can build on throughout your career in the nonprofit sector. You don’t need to master everything at once. Start with simple questions and basic analyses. Share what you learn. Ask for help when you need it. Over time, working with data will become a natural part of how you understand and improve your programs.</p>
+<p>Approaching your data with both analytical rigor and human understanding will help you translate information into insight and insight into action. Each time you examine your data with a clear question in mind, you’re taking a step toward being more effective in your mission. That combination of curiosity, systematic thinking, and commitment to your community is what transforms numbers on a page into knowledge that changes lives.</p>
+<hr>
+<p><strong>Need Help?</strong> If you have questions or would like personalized guidance on implementing these practices in your organization, please <a href="../contact.html">contact</a> me.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script src="scripts.js"></script>
+
+
+
+
+</body></html>

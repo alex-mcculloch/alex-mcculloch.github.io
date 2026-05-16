@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-05-16">
+
+<title>Getting Started with Data – Alex McCulloch</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2449654ede22c35c593d5409fb3b927c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Alex McCulloch</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../nonprofits.html"> 
+<span class="menu-text">For Non-Profits</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../portfolio.html"> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-data-and-why-does-it-matter" id="toc-what-is-data-and-why-does-it-matter" class="nav-link active" data-scroll-target="#what-is-data-and-why-does-it-matter">What is Data and Why Does it Matter?</a>
+  <ul class="collapse">
+  <li><a href="#why-data-matters-for-nonprofits" id="toc-why-data-matters-for-nonprofits" class="nav-link" data-scroll-target="#why-data-matters-for-nonprofits">Why data matters for nonprofits</a></li>
+  </ul></li>
+  <li><a href="#what-data-should-you-collect" id="toc-what-data-should-you-collect" class="nav-link" data-scroll-target="#what-data-should-you-collect">What Data Should You Collect?</a>
+  <ul class="collapse">
+  <li><a href="#start-with-your-questions" id="toc-start-with-your-questions" class="nav-link" data-scroll-target="#start-with-your-questions">Start with Your Questions</a></li>
+  <li><a href="#example-questions" id="toc-example-questions" class="nav-link" data-scroll-target="#example-questions">Example Questions:</a></li>
+  <li><a href="#logic-models" id="toc-logic-models" class="nav-link" data-scroll-target="#logic-models">Logic Models</a></li>
+  <li><a href="#essential-data-categories-for-nonprofits" id="toc-essential-data-categories-for-nonprofits" class="nav-link" data-scroll-target="#essential-data-categories-for-nonprofits">Essential Data Categories for Nonprofits</a></li>
+  <li><a href="#the-need-to-know-vs-nice-to-know-test" id="toc-the-need-to-know-vs-nice-to-know-test" class="nav-link" data-scroll-target="#the-need-to-know-vs-nice-to-know-test">The “Need to Know” vs “Nice to Know” Test</a></li>
+  </ul></li>
+  <li><a href="#data-collection-methods-and-best-practices" id="toc-data-collection-methods-and-best-practices" class="nav-link" data-scroll-target="#data-collection-methods-and-best-practices">Data Collection: Methods and Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#collection-methods" id="toc-collection-methods" class="nav-link" data-scroll-target="#collection-methods">Collection Methods</a></li>
+  <li><a href="#best-practices-for-collection" id="toc-best-practices-for-collection" class="nav-link" data-scroll-target="#best-practices-for-collection">Best Practices for Collection</a></li>
+  </ul></li>
+  <li><a href="#data-organization-structuring-your-information" id="toc-data-organization-structuring-your-information" class="nav-link" data-scroll-target="#data-organization-structuring-your-information">Data Organization: Structuring Your Information</a>
+  <ul class="collapse">
+  <li><a href="#the-basic-data-structure" id="toc-the-basic-data-structure" class="nav-link" data-scroll-target="#the-basic-data-structure">The Basic Data Structure</a>
+  <ul class="collapse">
+  <li><a href="#tidy-data-principles" id="toc-tidy-data-principles" class="nav-link" data-scroll-target="#tidy-data-principles">Tidy Data Principles:</a></li>
+  <li><a href="#common-organizational-mistakes" id="toc-common-organizational-mistakes" class="nav-link" data-scroll-target="#common-organizational-mistakes">Common Organizational Mistakes</a></li>
+  <li><a href="#creating-a-data-dictionary" id="toc-creating-a-data-dictionary" class="nav-link" data-scroll-target="#creating-a-data-dictionary">Creating a Data Dictionary</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#data-storage-tools-and-solutions" id="toc-data-storage-tools-and-solutions" class="nav-link" data-scroll-target="#data-storage-tools-and-solutions">Data Storage: Tools and Solutions</a>
+  <ul class="collapse">
+  <li><a href="#database-solutions" id="toc-database-solutions" class="nav-link" data-scroll-target="#database-solutions">Database Solutions</a></li>
+  </ul></li>
+  <li><a href="#data-security-and-privacy" id="toc-data-security-and-privacy" class="nav-link" data-scroll-target="#data-security-and-privacy">Data Security and Privacy</a>
+  <ul class="collapse">
+  <li><a href="#essential-security-practices" id="toc-essential-security-practices" class="nav-link" data-scroll-target="#essential-security-practices">Essential Security Practices</a></li>
+  <li><a href="#compliance-considerations" id="toc-compliance-considerations" class="nav-link" data-scroll-target="#compliance-considerations">Compliance Considerations</a></li>
+  </ul></li>
+  <li><a href="#creating-a-data-collection-plan" id="toc-creating-a-data-collection-plan" class="nav-link" data-scroll-target="#creating-a-data-collection-plan">Creating a Data Collection Plan</a>
+  <ul class="collapse">
+  <li><a href="#example-of-data-collection-plan" id="toc-example-of-data-collection-plan" class="nav-link" data-scroll-target="#example-of-data-collection-plan">Example of Data Collection Plan</a></li>
+  <li><a href="#implementation-checklist" id="toc-implementation-checklist" class="nav-link" data-scroll-target="#implementation-checklist">Implementation Checklist</a></li>
+  </ul></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a>
+  <ul class="collapse">
+  <li><a href="#self-assessment-how-ready-is-your-organization" id="toc-self-assessment-how-ready-is-your-organization" class="nav-link" data-scroll-target="#self-assessment-how-ready-is-your-organization">Self-Assessment: How Ready Is Your Organization?</a></li>
+  </ul></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Getting Started with Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 16, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>As a nonprofit, you may be required to collect and disseminate data for a variety of reasons. You may be required to report specific metrics to funders or you simply want to track your progress in achieving your organizational goals. Data is one of the most powerful tools a nonprofit organization can leverage to understand its impact, improve programs, and communicate value to stakeholders. Yet many organizations struggle with where to begin. This module will guide you through the fundamental concepts of working with data, from deciding what to collect to choosing the right tools for storage and analysis.</p>
+<p>Whether you’re tracking program participants, measuring outcomes, or analyzing donor patterns, the principles in this guide will help you build a solid data foundation for your organization.</p>
+<section id="what-is-data-and-why-does-it-matter" class="level1">
+<h1>What is Data and Why Does it Matter?</h1>
+<p>Data is simply information that you collect systematically. For nonprofits, this might include:</p>
+<ul>
+<li><p>Number of people served</p></li>
+<li><p>Demographics of program participants</p></li>
+<li><p>Survey Responses about program satisfaction</p></li>
+<li><p>Donation amounts and frequency</p></li>
+<li><p>Volunteer hours</p></li>
+<li><p>Program costs and outputs</p></li>
+</ul>
+<section id="why-data-matters-for-nonprofits" class="level3">
+<h3 class="anchored" data-anchor-id="why-data-matters-for-nonprofits">Why data matters for nonprofits</h3>
+<ul>
+<li><p><strong>Measure Impact</strong>: Understand whether your programs are achieving their intended outcomes</p></li>
+<li><p><strong>Improve Programs</strong>: Identify what’s working and what needs adjustment</p></li>
+<li><p><strong>Secure funding</strong>: Demonstrate results to current and potential funders</p></li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>Make informed decisions</strong>: Base strategic choices on evidence rather than assumptions</li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>Tell your story</strong>: Communicate your organization’s value with compelling evidence</li>
+</ul>
+</section>
+</section>
+<section id="what-data-should-you-collect" class="level1">
+<h1>What Data Should You Collect?</h1>
+<p>The most common mistake organizations make is collecting either too much data without a clear purpose or too little to effectively answer important questions. As data gatekeepers, they bear the responsibility of balancing the necessity of data collection with its potential invasiveness. Individuals have a right to privacy and the right to control what information they feel comfortable sharing. An overzealous approach to data collection can unnecessarily infringe upon personal privacy, while an overly cautious approach can waste time and resources by producing insufficient or unusable data.</p>
+<p>Here’s how to decide what to collect:</p>
+<section id="start-with-your-questions" class="level3">
+<h3 class="anchored" data-anchor-id="start-with-your-questions">Start with Your Questions</h3>
+<p>Before collecting any data, ask yourself:</p>
+<ul>
+<li>What do we need to know to improve our programs?</li>
+</ul>
+<!-- -->
+<ul>
+<li>What outcomes are we trying to achieve?</li>
+</ul>
+<!-- -->
+<ul>
+<li>What information do funders require?</li>
+</ul>
+<!-- -->
+<ul>
+<li>What decisions will this data help us make?</li>
+</ul>
+</section>
+<section id="example-questions" class="level3">
+<h3 class="anchored" data-anchor-id="example-questions">Example Questions:</h3>
+<ul>
+<li>Are we reaching our target population?</li>
+<li>Are participants satisfied with our services?</li>
+<li>What percentage of participants complete our program?</li>
+<li>How has participant knowledge/behavior changed after our intervention?</li>
+<li>What is our cost per person served?</li>
+</ul>
+</section>
+<section id="logic-models" class="level3">
+<h3 class="anchored" data-anchor-id="logic-models">Logic Models</h3>
+<p>This is where <strong>logic models</strong> can become invaluable. Logic models are a visual way to show how a program is supposed to work and the relationships between resources, activities, and results. Importantly, it helps us identify the specific data needed to answer important questions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://logicmodel.extension.wisc.edu/"><img src="..\images/logic_model_wisco.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+<figcaption>Credit: University of Wisconsin-Madison</figcaption>
+</figure>
+</div>
+<p>Below is a simplified table to help build your first logic model.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Goal</th>
+<th>Activities</th>
+<th>Outcomes</th>
+<th>Indicators</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Your purpose</em></td>
+<td><em>Your work</em></td>
+<td><em>Achievements</em></td>
+<td><em>How you know you found success</em></td>
+</tr>
+</tbody>
+</table>
+<p>Note, it’s important to distinguish <strong>outputs</strong> from <strong>outcomes</strong>. <strong>Outputs</strong> are the direct, tangible, and immediate results of your program activities. <strong>Outcomes</strong> are the changes or benefits that occur because of those outputs - they answer the “so what?” question.</p>
+<p>For example, your efforts to establish new youth sporting leagues may have resulted in a total of 130 youth participating in sports. That’s an <strong>output</strong> - it’s what you directly produced. But the <strong>outcomes</strong> answer why that matters:</p>
+<p><strong>Output:</strong></p>
+<ul>
+<li>130 youth participated in the sports league</li>
+</ul>
+<p><strong>Outcomes:</strong></p>
+<ul>
+<li><p>Short-term: 85% of participants reported increased physical activity levels</p></li>
+<li><p>Medium-term: 70% of participants demonstrated improved teamwork skills</p></li>
+<li><p>Long-term: Participants showed reduced rates of childhood obesity compared to baseline</p></li>
+</ul>
+<p>The output tells you <em>what happened</em>. The outcomes tell you <em>what changed</em> as a result.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://logicmodel.extension.wisc.edu/introduction-overview/section-2-more-about-outcomes/2-4-outputs-vs-outcomes/"><img src="..\images/outputs_outcomes_wisco.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+<figcaption>Credit: University of Wisconsin-Madison</figcaption>
+</figure>
+</div>
+<p>Consider what outcomes you ultimately want to see. This will be a great guide for you when determining what data you need to collect.</p>
+</section>
+<section id="essential-data-categories-for-nonprofits" class="level2">
+<h2 class="anchored" data-anchor-id="essential-data-categories-for-nonprofits">Essential Data Categories for Nonprofits</h2>
+<p><strong>1. Participant/Beneficiary Data</strong></p>
+<ul>
+<li><p>Demographics (age, gender, location, income level, etc.)</p></li>
+<li><p>Contact information</p></li>
+<li><p>Enrollment and attendance records</p></li>
+<li><p>Services received</p></li>
+</ul>
+<p><strong>2. Program Data</strong></p>
+<ul>
+<li><p>Activities conducted</p></li>
+<li><p>Resources used</p></li>
+<li><p>Staff time allocated</p></li>
+<li><p>Costs per program</p></li>
+</ul>
+<p><strong>3. Outcome Data</strong></p>
+<ul>
+<li><p>Pre/post measurements (knowledge, skills, behaviors)</p></li>
+<li><p>Completion rates</p></li>
+<li><p>Satisfaction surveys</p></li>
+<li><p>Long-term follow-up data</p></li>
+</ul>
+<p><strong>4. Operational Data</strong></p>
+<ul>
+<li><p>Volunteer hours</p></li>
+<li><p>Staff capacity</p></li>
+<li><p>Budget allocation</p></li>
+<li><p>Partnership activities</p></li>
+</ul>
+<p><strong>5. Fundraising Data</strong></p>
+<ul>
+<li><p>Donor information</p></li>
+<li><p>Gift amounts and dates</p></li>
+<li><p>Campaign performance</p></li>
+<li><p>Retention rates</p></li>
+</ul>
+</section>
+<section id="the-need-to-know-vs-nice-to-know-test" class="level2">
+<h2 class="anchored" data-anchor-id="the-need-to-know-vs-nice-to-know-test">The “Need to Know” vs “Nice to Know” Test</h2>
+<p>For each data point you’re considering collecting, ask:</p>
+<ul>
+<li><p><strong>Need to Know</strong>: Is this essential for measuring our impact or meeting reporting requirements?</p></li>
+<li><p><strong>Nice to Know</strong>: Is this interesting but not critical for decision-making?</p></li>
+</ul>
+<p>Focus on need to know data first. You can always expand later.</p>
+</section>
+</section>
+<section id="data-collection-methods-and-best-practices" class="level1">
+<h1>Data Collection: Methods and Best Practices</h1>
+<section id="collection-methods" class="level3">
+<h3 class="anchored" data-anchor-id="collection-methods">Collection Methods</h3>
+<p><strong>1. Surveys and Questionnaires</strong></p>
+<ul>
+<li><p>Best for: Gathering feedback, measuring satisfaction, assessing knowledge change</p></li>
+<li><p>Tools: Google Forms, SurveyMonkey, Typeform, Microsoft Forms (all have free versions)</p></li>
+<li><p>Tips: Keep surveys short (5-10 minutes max), use clear language, test before launching</p></li>
+</ul>
+<p><strong>2. Intake Forms</strong></p>
+<ul>
+<li><p>Best for: Collecting participant demographics and baseline information</p></li>
+<li><p>Tools: Google Forms, JotForm, Typeform</p></li>
+<li><p>Tips: Only ask what you’ll actually use, ensure privacy protection</p></li>
+</ul>
+<p><strong>3. Attendance Tracking</strong></p>
+<ul>
+<li><p>Best for: Monitoring program participation</p></li>
+<li><p>Tools: Sign-in sheets (paper or digital), QR codes, spreadsheets</p></li>
+<li><p>Tips: Make it easy for participants and staff to record attendance</p></li>
+</ul>
+<p><strong>4. Observation and Assessment</strong></p>
+<ul>
+<li><p>Best for: Skills demonstration, behavior change</p></li>
+<li><p>Tools: Standardized rubrics, checklists, rating scales</p></li>
+<li><p>Tips: Train observers for consistency, use validated assessment tools when possible</p></li>
+</ul>
+<p><strong>5. Administrative Records</strong></p>
+<ul>
+<li><p>Best for: Financial data, service delivery logs</p></li>
+<li><p>Tools: Accounting software (QuickBooks, Wave), CRM systems</p></li>
+<li><p>Tips: Establish consistent recording procedures</p></li>
+</ul>
+</section>
+<section id="best-practices-for-collection" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices-for-collection">Best Practices for Collection</h3>
+<p><strong>Consistency is Key</strong></p>
+<ul>
+<li><p>Use the same methods and questions over time to track trends</p></li>
+<li><p>Train all staff on data collection procedures</p></li>
+<li><p>Create templates and standardized forms</p></li>
+</ul>
+<p><strong>Ensure Data Quality</strong></p>
+<ul>
+<li><p>Build in validation checks (e.g., dropdown menus instead of free text)</p></li>
+<li><p>Review data regularly for errors or missing values</p></li>
+<li><p><strong>Designate someone responsible for data quality</strong></p></li>
+</ul>
+<p><strong>Respect Privacy and Ethics</strong></p>
+<ul>
+<li><p>Obtain informed consent for data collection</p></li>
+<li><p>Explain how data will be used</p></li>
+<li><p>Protect personally identifiable information (PII)</p></li>
+<li><p>Follow regulations like HIPAA (for health data) or FERPA (for educational data)</p></li>
+</ul>
+<p><strong>Make It Easy</strong></p>
+<ul>
+<li><p>Integrate data collection into existing workflows</p></li>
+<li><p>Use mobile-friendly forms</p></li>
+<li><p>Keep forms simple and user-friendly</p></li>
+</ul>
+</section>
+</section>
+<section id="data-organization-structuring-your-information" class="level1">
+<h1>Data Organization: Structuring Your Information</h1>
+<p>Once you’ve collected data, you need to organize it in a way that makes analysis possible. Poor organization is one of the biggest barriers to using data effectively.</p>
+<section id="the-basic-data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="the-basic-data-structure">The Basic Data Structure</h2>
+<section id="tidy-data-principles" class="level3">
+<h3 class="anchored" data-anchor-id="tidy-data-principles">Tidy Data Principles:</h3>
+<ol type="1">
+<li>Each variable (type of information) should be in its own column</li>
+<li>Each observation (individual record) should be in its own row</li>
+<li>Each value should be in its own cell</li>
+</ol>
+<p><strong>Example:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 6%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ParticipantID</th>
+<th>FirstName</th>
+<th>LastName</th>
+<th>Age</th>
+<th>City</th>
+<th>StartDate</th>
+<th>EndDate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0001</td>
+<td>John</td>
+<td>Doe</td>
+<td>38</td>
+<td>New York</td>
+<td>2025-10-01</td>
+<td>2025-11-15</td>
+</tr>
+<tr class="even">
+<td>0002</td>
+<td>Jane</td>
+<td>Doe</td>
+<td>42</td>
+<td>New York</td>
+<td>2024-12-14</td>
+<td>2025-07-21</td>
+</tr>
+<tr class="odd">
+<td>0003</td>
+<td>Adam</td>
+<td>Smith</td>
+<td>68</td>
+<td>Albany</td>
+<td>2022-04-08</td>
+<td>2023-02-06</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="common-organizational-mistakes" class="level3">
+<h3 class="anchored" data-anchor-id="common-organizational-mistakes">Common Organizational Mistakes</h3>
+<p><strong>Multiple pieces of information in one cell</strong></p>
+<ul>
+<li><p>Bad: “Maria Garcia, 34, Hartford”</p></li>
+<li><p>Good: Separate columns for FirstName, LastName, Age, City</p></li>
+</ul>
+<p><strong>Inconsistent formatting</strong></p>
+<ul>
+<li><p>Bad: Mixing “Yes/No”, “Y/N”, “1/0” for the same type of question</p></li>
+<li><p>Good: Choose one format and stick with it</p></li>
+</ul>
+<p><strong>Merged cells or complex layouts</strong></p>
+<ul>
+<li><p>Bad: Creating “pretty” tables with merged headers</p></li>
+<li><p>Good: Simple, flat structure with clear column headers</p></li>
+</ul>
+<p><strong>Colors or formatting as data</strong></p>
+<ul>
+<li><p>Bad: Using red text to indicate “needs follow-up”</p></li>
+<li><p>Good: Create a separate column called “FollowUpNeeded” with Yes/No values</p></li>
+</ul>
+</section>
+<section id="creating-a-data-dictionary" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-data-dictionary">Creating a Data Dictionary</h3>
+<p>A <strong>data dictionary</strong> is a document that explains what each variable means. This is crucial for ensuring everyone understands the data the same way. An example of a data dictionary may look something like this:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>type</th>
+<th>values</th>
+<th>description</th>
+<th>sensitive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ParticipantID</td>
+<td>int</td>
+<td></td>
+<td>Unique identifier of program participant</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td>City</td>
+<td>character(50)</td>
+<td></td>
+<td>Home town of participant</td>
+<td>Y</td>
+</tr>
+<tr class="odd">
+<td>StartDate</td>
+<td>date</td>
+<td></td>
+<td>Date participant entered the program</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td>Gender</td>
+<td>char(1)</td>
+<td>M=Male, F=Female, N=Non-Binary, O=Other</td>
+<td>Participant gender</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="data-storage-tools-and-solutions" class="level1">
+<h1>Data Storage: Tools and Solutions</h1>
+<section id="database-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="database-solutions">Database Solutions</h2>
+<p><strong>Salesforce Nonprofit Cloud</strong></p>
+<ul>
+<li><p>Full CRM system with donor management, program tracking, and reporting</p></li>
+<li><p>Steeper learning curve but very powerful</p></li>
+</ul>
+<p><strong>CiviCRM</strong> (Free, open-source)</p>
+<ul>
+<li><p>Built for nonprofits</p></li>
+<li><p>Constituent management, event tracking, fundraising</p></li>
+</ul>
+<p><strong>LiveImpact</strong></p>
+<ul>
+<li><p>All in one platform (donor management, case tracking, volunteers, grants, events)</p></li>
+<li><p>For non-technical staff</p></li>
+</ul>
+</section>
+</section>
+<section id="data-security-and-privacy" class="level1">
+<h1>Data Security and Privacy</h1>
+<p>Protecting the data you collect is not just good practice–it’s often legally required.</p>
+<section id="essential-security-practices" class="level3">
+<h3 class="anchored" data-anchor-id="essential-security-practices">Essential Security Practices</h3>
+<ol type="1">
+<li><p>Access Control</p>
+<ul>
+<li>Limit who can view and edit data</li>
+<li>Use password protection</li>
+<li>Remove access when staff leave</li>
+</ul></li>
+<li><p>Data Encryption</p>
+<ul>
+<li>Use secure, encrypted storage (cloud services like Google Drive and Dropbox provide this)</li>
+<li>Use HTTPS for any web-based forms</li>
+</ul></li>
+<li><p>Regular Backups</p>
+<ul>
+<li>Back up data at least weekly</li>
+<li>Store backups in a separate location (cloud backup is ideal)</li>
+<li>Test that backups can be restored</li>
+</ul></li>
+<li><p>De-identification When Possible</p>
+<ul>
+<li>For analysis and reporting, remove names and other identifying information</li>
+<li>Use participant IDs instead of names when possible</li>
+</ul></li>
+<li><p>Data Retention Policies</p>
+<ul>
+<li>Decide how long you’ll keep different types of data</li>
+<li>Securely delete data when it’s no longer needed</li>
+</ul>
+<!-- -->
+<ul>
+<li>Document your policies in writing</li>
+</ul></li>
+<li><p>Write Confidentiality Agreements</p>
+<ul>
+<li>Have anyone working in the organization who has access to sensitive data sign an agreement indicating they will preserve the privacy and security of the data</li>
+<li>If you hire consultants who will need access to your data, this is an important step</li>
+</ul></li>
+</ol>
+</section>
+<section id="compliance-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="compliance-considerations">Compliance Considerations</h3>
+<ul>
+<li><strong>HIPAA</strong>: If you handle health information</li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>FERPA</strong>: If you handle educational records</li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>GDPR</strong>: If you serve individuals in the European Union</li>
+</ul>
+<!-- -->
+<ul>
+<li><strong>State laws</strong>: Many states have specific data privacy requirements</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a field in your system that identifies all fields that may fall under the above categories. Systems such as Salesforce allows you to specify the level of sensitivity for any field you create.</p>
+<p><em>Always consult legal counsel if you’re unsure about compliance requirements.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="creating-a-data-collection-plan" class="level1">
+<h1>Creating a Data Collection Plan</h1>
+<p>A <strong>data collection plan</strong> documents what data you’ll collect, how, when, and who’s responsible. This ensures consistency and accountability.</p>
+<section id="example-of-data-collection-plan" class="level3">
+<h3 class="anchored" data-anchor-id="example-of-data-collection-plan">Example of Data Collection Plan</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What Data</th>
+<th>Why (Purpose)</th>
+<th>How (Method)</th>
+<th>When</th>
+<th>Who is Responsible</th>
+<th>Where Stored</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Participant Age</td>
+<td>To track whether we’re reaching our target age group</td>
+<td>Intake form</td>
+<td>At enrollment</td>
+<td>Intake team member</td>
+<td>Salesforce/Copy of form saved to Dropbox</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="implementation-checklist" class="level3">
+<h3 class="anchored" data-anchor-id="implementation-checklist">Implementation Checklist</h3>
+<ul>
+<li>Identify key questions you need to answer</li>
+</ul>
+<!-- -->
+<ul>
+<li>Determine what data is needed to answer those questions</li>
+</ul>
+<!-- -->
+<ul>
+<li>Choose collection methods and tools</li>
+</ul>
+<!-- -->
+<ul>
+<li>Create or customize forms and instruments</li>
+</ul>
+<!-- -->
+<ul>
+<li>Test data collection process with a small group</li>
+</ul>
+<!-- -->
+<ul>
+<li>Train staff on procedures</li>
+</ul>
+<!-- -->
+<ul>
+<li>Set up data storage system</li>
+</ul>
+<!-- -->
+<ul>
+<li>Establish data quality checks</li>
+</ul>
+<!-- -->
+<ul>
+<li>Create backup procedures</li>
+</ul>
+<!-- -->
+<ul>
+<li>Document everything in a data collection plan</li>
+</ul>
+<!-- -->
+<ul>
+<li>Schedule regular data reviews</li>
+</ul>
+</section>
+</section>
+<section id="next-steps" class="level1">
+<h1>Next Steps</h1>
+<p>Now that you understand the fundamentals of data collection, organization, and storage, you’re ready to:</p>
+<ol type="1">
+<li><p><strong>Complete the self-assessment</strong> below to evaluate your organization’s current data practices</p></li>
+<li><p><strong>Create your first data collection plan</strong> using the template provided</p></li>
+<li><p><strong>Explore my other modules:</strong></p>
+<ul>
+<li><p>Understanding Your Data (analyzing and interpreting your data)</p></li>
+<li><p>Telling Stories with Data (visualization and communication)</p></li>
+<li><p>Measuring Program Impact (evaluation frameworks)</p></li>
+</ul></li>
+</ol>
+<section id="self-assessment-how-ready-is-your-organization" class="level2">
+<h2 class="anchored" data-anchor-id="self-assessment-how-ready-is-your-organization">Self-Assessment: How Ready Is Your Organization?</h2>
+<p>Rate your organization on each statement (1 = Strongly Disagree, 5 = Strongly Agree):</p>
+<div class="self-assessment">
+  <div class="assessment-question">
+    <p class="question-text">1. We have clearly defined what data we need to collect and why</p>
+    <div class="rating-scale">
+      <label><input type="radio" name="q1" value="1"> 1</label>
+      <label><input type="radio" name="q1" value="2"> 2</label>
+      <label><input type="radio" name="q1" value="3"> 3</label>
+      <label><input type="radio" name="q1" value="4"> 4</label>
+      <label><input type="radio" name="q1" value="5"> 5</label>
+    </div>
+  </div>
+
+  <div class="assessment-question">
+    <p class="question-text">2. We use consistent methods for collecting data</p>
+    <div class="rating-scale">
+      <label><input type="radio" name="q2" value="1"> 1</label>
+      <label><input type="radio" name="q2" value="2"> 2</label>
+      <label><input type="radio" name="q2" value="3"> 3</label>
+      <label><input type="radio" name="q2" value="4"> 4</label>
+      <label><input type="radio" name="q2" value="5"> 5</label>
+    </div>
+  </div>
+
+  <div class="assessment-question">
+    <p class="question-text">3. Our data is organized in a structured, usable format</p>
+    <div class="rating-scale">
+      <label><input type="radio" name="q3" value="1"> 1</label>
+      <label><input type="radio" name="q3" value="2"> 2</label>
+      <label><input type="radio" name="q3" value="3"> 3</label>
+      <label><input type="radio" name="q3" value="4"> 4</label>
+      <label><input type="radio" name="q3" value="5"> 5</label>
+    </div>
+  </div>
+
+  <div class="assessment-question">
+    <p class="question-text">4. We have secure storage for our data</p>
+    <div class="rating-scale">
+      <label><input type="radio" name="q4" value="1"> 1</label>
+      <label><input type="radio" name="q4" value="2"> 2</label>
+      <label><input type="radio" name="q4" value="3"> 3</label>
+      <label><input type="radio" name="q4" value="4"> 4</label>
+      <label><input type="radio" name="q4" value="5"> 5</label>
+    </div>
+  </div>
+
+  <div class="assessment-question">
+    <p class="question-text">5. Staff are trained on data collection procedures</p>
+    <div class="rating-scale">
+      <label><input type="radio" name="q5" value="1"> 1</label>
+      <label><input type="radio" name="q5" value="2"> 2</label>
+      <label><input type="radio" name="q5" value="3"> 3</label>
+      <label><input type="radio" name="q5" value="4"> 4</label>
+      <label><input type="radio" name="q5" value="5"> 5</label>
+    </div>
+  </div>
+
+  <div class="assessment-question">
+    <p class="question-text">6. We regularly review and use our data for decision-making</p>
+    <div class="rating-scale">
+      <label><input type="radio" name="q6" value="1"> 1</label>
+      <label><input type="radio" name="q6" value="2"> 2</label>
+      <label><input type="radio" name="q6" value="3"> 3</label>
+      <label><input type="radio" name="q6" value="4"> 4</label>
+      <label><input type="radio" name="q6" value="5"> 5</label>
+    </div>
+  </div>
+
+  <div class="assessment-question">
+    <p class="question-text">7. We have policies protecting participant privacy</p>
+    <div class="rating-scale">
+      <label><input type="radio" name="q7" value="1"> 1</label>
+      <label><input type="radio" name="q7" value="2"> 2</label>
+      <label><input type="radio" name="q7" value="3"> 3</label>
+      <label><input type="radio" name="q7" value="4"> 4</label>
+      <label><input type="radio" name="q7" value="5"> 5</label>
+    </div>
+  </div>
+
+  <button class="calculate-btn" onclick="calculateScore()">Calculate My Score</button>
+
+  <div id="result" class="result-box" style="display: none;">
+    <h3 class="anchored">Your Score: <span id="score"></span> out of 35</h3>
+    <p id="feedback"></p>
+  </div>
+</div>
+
+<script>
+function calculateScore() {
+  let total = 0;
+  let answered = 0;
+  
+  for (let i = 1; i <= 7; i++) {
+    const question = document.querySelector(`input[name="q${i}"]:checked`);
+    if (question) {
+      total += parseInt(question.value);
+      answered++;
+    }
+  }
+  
+  if (answered < 7) {
+    alert('Please answer all questions before calculating your score.');
+    return;
+  }
+  
+  document.getElementById('score').textContent = total;
+  
+  let feedback = '';
+  if (total >= 28) {
+    feedback = "🎉 <strong>Excellent!</strong> You're on the right track! Your organization has a strong data foundation. Focus on refining and documenting your processes to maintain this momentum.";
+  } else if (total >= 21) {
+    feedback = "👍 <strong>Good foundation.</strong> You have solid data practices in place. Identify 2-3 priority areas for improvement and create an action plan to address them.";
+  } else if (total >= 14) {
+    feedback = "📈 <strong>Significant room for growth.</strong> Your organization would benefit from establishing more structured data practices. Start with a simple data collection plan for one program and build from there.";
+  } else {
+    feedback = "🌱 <strong>Begin with the basics.</strong> Don't be discouraged—every organization starts somewhere! Focus on one program, establish clear data collection procedures, and use the resources in this module to guide you.";
+  }
+  
+  document.getElementById('feedback').innerHTML = feedback;
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+</section>
+</section>
+<section id="additional-resources" class="level1">
+<h1>Additional Resources</h1>
+<p><strong>Free Tools</strong></p>
+<ul>
+<li><p>Google Sheets</p></li>
+<li><p>Google Forms</p></li>
+<li><p>Survey Monkey (Limited Free Version)</p></li>
+<li><p>Qualtrics (Limited Free Version)</p></li>
+</ul>
+<p><strong>Further Reading</strong></p>
+<p><a href="https://logicmodel.extension.wisc.edu/">Logic Model Course (University of Wisconsin)</a></p>
+<p><strong>Need Help?</strong> If you have questions or would like personalized guidance on implementing these practices in your organization, please <a href="../contact.html">contact</a> me.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script src="scripts.js"></script>
+
+
+
+
+</body></html>
